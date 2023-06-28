@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import type { TProduct } from '@/types'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { addToCart } from '@/features/product/product.slice'
-import styles from './Header.module.scss'
+import styles from './header.module.scss'
 
 const Add = dynamic(() => import('@mui/icons-material/Add'))
 const Remove = dynamic(() => import('@mui/icons-material/Remove'))
