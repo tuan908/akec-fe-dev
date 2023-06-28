@@ -9,13 +9,8 @@ export const config = {
 
 export function middleware(request: NextRequest) {
   const currentUrl = request.nextUrl.clone()
-  const isLoggedIn = request.cookies.get(ACCESS_TOKEN)?.value
 
-  // Not Protected Pages
-  if (
-    isLoggedIn !== undefined &&
-    ['/', '/home'].indexOf(currentUrl.pathname) === -1
-  ) {
+  if ('/'.indexOf(currentUrl.pathname) !== -1) {
     return NextResponse.redirect(new URL('/home', request.url))
   }
   return NextResponse.next()
