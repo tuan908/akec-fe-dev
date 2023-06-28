@@ -1,14 +1,19 @@
 import dynamic from 'next/dynamic'
 import { ReactElement } from 'react'
 import productApi from '@/features/product/product.api'
-import BirdNestError from '@/component/shared/error'
 import { wrapper } from '@/app/store'
 import { useRouter } from 'next/router'
 
 const Layout = dynamic(() => import('@/component/shared/layout'))
-const ProductCard = dynamic(() =>
-  import('@/component/shared/product-card').then(module => module.ProductCard)
+const ProductCardV2 = dynamic(
+  () => import('@/component/shared/product-card-v2')
 )
+const BirdNestError = dynamic(() =>
+  import('@/component').then(m => m.BirdNestError)
+)
+const ProgressBar = dynamic(() => import('@/component/shared/progress-bar'), {
+  ssr: false
+})
 const Loading = dynamic(() => import('@/component/shared/loading'), {
   ssr: false
 })
@@ -28,9 +33,10 @@ export default function ProductsPage() {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className='w-11/12 h-full m-auto p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
+        <>
+          <ProgressBar />
           {data!?.map((product, index) => (
-            <ProductCard
+            <ProductCardV2
               key={index}
               name={product.name}
               price={product.price}
@@ -38,7 +44,7 @@ export default function ProductsPage() {
               onClick={() => router.push(`/product/${index}`)}
             />
           ))}
-        </div>
+        </>
       )}
     </div>
   )
