@@ -47,9 +47,9 @@ const CSRNavbarItem = () => {
       ) : (
         <button
           className='mx-auto text-center text-lg p-2 w-1/9 sm:w-full flex justify-center items-center'
-          onClick={() =>
-            router.push('http://localhost:8082/api/v1/auth/oauth2Login/google')
-          }
+          // onClick={() =>
+          //   router.push('http://localhost:8082/api/v1/auth/oauth2Login/google')
+          // }
         >
           Login
         </button>
