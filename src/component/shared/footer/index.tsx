@@ -14,7 +14,7 @@ const Link = dynamic(() => import('next/link'))
 const Footer: React.FC = () => {
   return (
     <footer
-      className='bg-footer text-white lg:p-4 w-full'
+      className='bg-footer text-white lg:p-4 w-full fixed bottom-0 left-0 right-0'
       style={{ gridArea: 'footer' }}
     >
       <ul className='w-4/5 grid grid-cols-2 m-auto p-4 place-items-start md:hidden'>
