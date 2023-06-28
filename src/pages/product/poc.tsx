@@ -39,7 +39,7 @@ export default function Poc() {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {
-    store.dispatch(productApi.endpoints.getById.initiate(`0`))
+    store.dispatch(productApi.endpoints.getProductById.initiate(`0`))
     await Promise.all(store.dispatch(productApi.util.getRunningQueriesThunk()))
 
     return { props: {} }

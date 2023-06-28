@@ -1,11 +1,12 @@
 import { z } from 'zod'
 
 const ProductSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   name: z.string(),
   price: z.number(),
-  previewImageUrls: z.string().array(),
-  userId: z.string()
+  preview_image_urls: z.string().array(),
+  created_time: z.date(),
+  updated_time: z.date()
 })
 
 const OrderSchema = ProductSchema.pick({

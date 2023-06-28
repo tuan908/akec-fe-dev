@@ -5,7 +5,9 @@ import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 
 const Layout = dynamic(() => import('@/component/shared/layout'))
-const Loading = dynamic(() => import('@/component/shared/loading'), { ssr: false })
+const Loading = dynamic(() => import('@/component/shared/loading'), {
+  ssr: false
+})
 const BirdNestError = dynamic(() => import('@/component/shared/error'), {
   ssr: false
 })
@@ -25,7 +27,9 @@ const ProductDetailPage = () => {
     id = _id as string
   }
 
-  const { data, isLoading, isError } = productApi.useGetByIdQuery(id)
+  const { data, isLoading, isError } = productApi.useGetProductByIdQuery(
+    Number.parseInt(id)
+  )
 
   if (isError) return <BirdNestError />
 
@@ -50,7 +54,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const id = ctx.params?.id
 
     if (typeof id === 'string') {
-      store.dispatch(productApi.endpoints.getById.initiate(id))
+      store.dispatch(
+        productApi.endpoints.getProductById.initiate(Number.parseInt(id))
+      )
     }
 
     await Promise.all(store.dispatch(productApi.util.getRunningQueriesThunk()))

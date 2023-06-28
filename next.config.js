@@ -22,10 +22,7 @@ const nextConfig = {
       }
     ]
   },
-  swcMinify: true,
-  env: {
-    NEXT_PUBLIC_BN_SPRING_API: 'http://localhost:8082/api/v1/'
-  }
+  swcMinify: true
 }
 
 module.exports = nextConfig

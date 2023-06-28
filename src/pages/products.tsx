@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic'
 import { ReactElement } from 'react'
 import productApi from '@/features/product/product.api'
 import BirdNestError from '@/component/shared/error'
-import { defaultParams } from '@/util'
 import { wrapper } from '@/app/store'
 import { useRouter } from 'next/router'
 
@@ -10,14 +9,16 @@ const Layout = dynamic(() => import('@/component/shared/layout'))
 const ProductCard = dynamic(() =>
   import('@/component/shared/product-card').then(module => module.ProductCard)
 )
-const Loading = dynamic(() => import('@/component/shared/loading'), { ssr: false })
+const Loading = dynamic(() => import('@/component/shared/loading'), {
+  ssr: false
+})
 
 /**
  *
  * @returns Product List
  */
 export default function ProductsPage() {
-  const { isLoading, isError, data } = productApi.useGetAllProductsQuery(defaultParams)
+  const { isLoading, isError, data } = productApi.useGetAllProductsQuery()
   const router = useRouter()
 
   if (isError) return <BirdNestError />
@@ -49,7 +50,7 @@ ProductsPage.getLayout = (page: ReactElement) => (
 
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {
-    store.dispatch(productApi.endpoints.getAllProducts.initiate(defaultParams))
+    store.dispatch(productApi.endpoints.getAllProducts.initiate())
     await Promise.all(store.dispatch(productApi.util.getRunningQueriesThunk()))
 
     return {

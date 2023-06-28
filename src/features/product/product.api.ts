@@ -1,41 +1,23 @@
-import type { TPaged, TProduct, TResponse } from '@/types'
+import type { TProduct } from '@/types'
 import api from '@/app/base.api'
 
 export default api.injectEndpoints({
   endpoints: builder => ({
-    getById: builder.query<TProduct, string>({
-      query: id => `products/${id}`,
+    getProductById: builder.query<TProduct, number>({
+      query: id => `/products/${id}`,
       transformResponse: (
-        baseQueryReturnValue: TResponse<TProduct>,
+        baseQueryReturnValue: { product: TProduct },
         _meta,
         _arg
-      ) => baseQueryReturnValue.data
+      ) => baseQueryReturnValue.product
     }),
-    getAllProducts: builder.query<TProduct[], Record<string, string>>({
-      query: (params: Record<string, string>) => {
-        return {
-          url: `products/async`,
-          params
-        }
-      },
+    getAllProducts: builder.query<TProduct[], void>({
+      query: () => `/products`,
       transformResponse: (
-        baseQueryReturnValue: TResponse<TPaged<TProduct>>,
+        baseQueryReturnValue: { products: TProduct[] },
         _meta,
         _arg
-      ) =>
-        baseQueryReturnValue.data === null
-          ? []
-          : baseQueryReturnValue.data.content
-    }),
-    create: builder.mutation<
-      void,
-      Pick<TProduct, 'name' | 'price' | 'previewImageUrls'>
-    >({
-      query: body => ({
-        url: `products`,
-        method: 'POST',
-        body
-      })
+      ) => baseQueryReturnValue.products
     })
   })
 })
