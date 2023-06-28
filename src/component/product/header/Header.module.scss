@@ -1,0 +1,83 @@
+@keyframes moveUp {
+  from {
+    top: 100px;
+  }
+
+  to {
+    top: 0px;
+  }
+}
+
+@keyframes moveDown {
+  from {
+    bottom: 100px;
+  }
+
+  to {
+    bottom: 0;
+  }
+}
+
+@keyframes moveLeft {
+  from {
+    left: 100px;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+@keyframes moveRight {
+  from {
+    right: 100px;
+  }
+
+  to {
+    right: 0;
+  }
+}
+
+@keyframes expandButton {
+  from {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  to {
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+  }
+}
+
+.animatedTextDown {
+  position: relative;
+
+  animation: moveDown 1.75s;
+  animation-fill-mode: backwards;
+}
+
+.animatedTextUp {
+  position: relative;
+
+  animation: moveUp 1.75s;
+  animation-fill-mode: backwards;
+}
+
+.animatedTextLeft {
+  position: relative;
+
+  animation: moveLeft 1.75s;
+  animation-fill-mode: backwards;
+}
+
+.animatedTextRight {
+  position: relative;
+
+  animation: moveRight 1.75s;
+  animation-fill-mode: backwards;
+}
+
+.expandedButton {
+  animation: expandButton 1.75s;
+}

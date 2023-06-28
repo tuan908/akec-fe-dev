@@ -1,0 +1,46 @@
+import {
+  PayloadAction,
+  createSlice,
+  prepareAutoBatched
+} from '@reduxjs/toolkit'
+import type { TAppState } from '@/app/store'
+import { HYDRATE_ACTION } from '../../hydrate/hydrate.action'
+
+type TCarouselIndex = {
+  value: number
+}
+
+const initialState: TCarouselIndex = {
+  value: 0
+}
+
+const carouselSlice = createSlice({
+  initialState,
+  name: 'carousel',
+  reducers: {
+    nextSlide: {
+      reducer: state => {
+        state.value === 0 ? state.value++ : state
+        return state
+      },
+      prepare: prepareAutoBatched<void>()
+    },
+    prevSlide: {
+      reducer: state => {
+        state.value === 1 ? state.value-- : state
+        return state
+      },
+      prepare: prepareAutoBatched<void>()
+    }
+  },
+  extraReducers(builder) {
+    builder.addCase(HYDRATE_ACTION, (state, action) => ({
+      ...state,
+      ...action.payload
+    }))
+  }
+})
+
+export default carouselSlice
+export const { nextSlide, prevSlide } = carouselSlice.actions
+export const carouselIndexSelector = (state: TAppState) => state.carousel.value
