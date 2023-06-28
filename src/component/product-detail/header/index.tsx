@@ -19,7 +19,7 @@ const urls = [
 const ProductHeader: FunctionComponent<Props> = props => {
   return (
     <div className='flex flex-row justify-evenly'>
-      <Carousel previewImageUrls={urls} />
+      <Carousel preview_image_urls={urls} />
       <ProductDetailText data={props.data} />
     </div>
   )

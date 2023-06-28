@@ -5,7 +5,7 @@ import { imgUrls } from '@/component/home/carouselV2'
 import { LoadingComponent as Loading } from '@/component/shared'
 
 export default function Poc() {
-  const { data, isLoading } = productApi.useGetByIdQuery(`0`)
+  const { data, isLoading } = productApi.useGetProductByIdQuery(0)
   Logger.info(`Data:`, data)
 
   return (
@@ -39,7 +39,7 @@ export default function Poc() {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {
-    store.dispatch(productApi.endpoints.getProductById.initiate(`0`))
+    store.dispatch(productApi.endpoints.getProductById.initiate(0))
     await Promise.all(store.dispatch(productApi.util.getRunningQueriesThunk()))
 
     return { props: {} }

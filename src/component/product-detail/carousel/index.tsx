@@ -7,13 +7,13 @@ const CarouselItem = dynamic(() => import('./CarouselItem'))
 const CarouselNavigation = dynamic(() => import('./CarouselNavigation'))
 
 export default function ProductCarousel({
-  previewImageUrls
-}: Pick<TProduct, 'previewImageUrls'>) {
+  preview_image_urls
+}: Pick<TProduct, 'preview_image_urls'>) {
   const currentSlideIndex = useAppSelector(carouselIndexSelector)
   return (
     <>
       <div className='relative flex-[0.45] w-full'>
-        {previewImageUrls.map((url, index) => (
+        {preview_image_urls.map((url, index) => (
           <CarouselItem
             key={url}
             imageUrl={url}
