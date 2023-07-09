@@ -1,9 +1,8 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import dynamic from 'next/dynamic'
+import { useAppSelector } from '@/app/hooks'
 import { Logger } from '@/util'
-import { z } from 'zod'
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
-import { TToBoolean } from '@/types/helper.types'
+import { z } from 'zod'
 
 const IconButton = dynamic(() => import('@mui/material/IconButton'))
 const CancelIcon = dynamic(() => import('@mui/icons-material/Cancel'))
@@ -25,14 +24,9 @@ export default function PostCreator({
   setOpen: () => void
 }) {
   const { _file, ready } = useAppSelector(state => state.post)
-  const dispatch = useAppDispatch()
   const [formDataText, setText] = useState<CreatePost>({
     title: '',
     content: ''
-  })
-  const [formDataTextError, setError] = useState<TToBoolean<CreatePost>>({
-    content: false,
-    title: false
   })
 
   function handleCreate() {
