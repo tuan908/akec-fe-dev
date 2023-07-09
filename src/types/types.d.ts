@@ -1,4 +1,4 @@
-export {}
+import '@total-typescript/ts-reset'
 
 declare global {
   namespace NodeJS {
@@ -11,3 +11,11 @@ declare global {
     }
   }
 }
+
+declare module '*.png'
+declare module '*.svg'
+declare module '*.jpeg'
+declare module '*.jpg'
+declare module '*.webp'
+
+export { }
