@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import { Roboto } from 'next/font/google'
-import { useRef, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import styles from './layout.module.scss'
 
 const Footer = dynamic(() => import('../footer'))
@@ -27,9 +27,6 @@ const roboto = Roboto({
 })
 
 export default function Layout({ children, pageTitle }: LayoutProps) {
-  const navbarRef = useRef(null)
-  const footerRef = useRef(null)
-
   return (
     <>
       <Head>

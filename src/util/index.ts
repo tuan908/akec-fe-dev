@@ -32,7 +32,7 @@ export function signOut() {
 }
 
 export function toBase64(blob: Blob) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, _) => {
     let fileReader = new FileReader()
     fileReader.readAsDataURL(blob)
     fileReader.onload = () => resolve(fileReader.result)

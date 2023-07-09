@@ -1,11 +1,11 @@
-import { ReactElement, useState } from 'react'
-import type { TAboutPost } from '@/types/about'
-import dynamic from 'next/dynamic'
 import { useAppDispatch } from '@/app/hooks'
-import { clearInput } from '@/features/post/post.slice'
 import { wrapper } from '@/app/store'
 import postApi from '@/features/post/post.api'
+import { clearInput } from '@/features/post/post.slice'
+import type { TAboutPost } from '@/types/about'
 import { defaultParams } from '@/util'
+import dynamic from 'next/dynamic'
+import { ReactElement, useState } from 'react'
 
 const PlusIcon = dynamic(() => import('@mui/icons-material/Add'))
 const IconButton = dynamic(() => import('@mui/material/IconButton'))
@@ -29,11 +29,7 @@ culpa qui officia deserunt mollit anim id est laborum.`
 
 export default function About() {
   const [open, setOpen] = useState(false)
-
   const dispatch = useAppDispatch()
-  const { data, isLoading, isError } =
-    postApi.useGetAllPostsQuery(defaultParams)
-  console.log(data)
 
   function handleCreate() {
     setOpen(false)

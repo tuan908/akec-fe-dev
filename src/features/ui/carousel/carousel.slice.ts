@@ -1,9 +1,5 @@
-import {
-  PayloadAction,
-  createSlice,
-  prepareAutoBatched
-} from '@reduxjs/toolkit'
 import type { TAppState } from '@/app/store'
+import { createSlice, prepareAutoBatched } from '@reduxjs/toolkit'
 import { HYDRATE_ACTION } from '../../hydrate/hydrate.action'
 
 type TCarouselIndex = {

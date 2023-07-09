@@ -1,5 +1,5 @@
-import dynamic from 'next/dynamic'
 import { Route } from '@/constant'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { MouseEventHandler, useState } from 'react'
 import styles from './navbar.module.scss'
@@ -22,9 +22,9 @@ export default function Navbar() {
     e.preventDefault()
     setClasses({
       ...animationClasses,
-      logoPart1: styles.moveInLeft,
-      logoPart2: styles.hideTxt,
-      logoPart3: styles.moveInRight
+      logoPart1: styles.moveInLeft!,
+      logoPart2: styles.hideTxt!,
+      logoPart3: styles.moveInRight!
     })
   }
 
@@ -32,9 +32,9 @@ export default function Navbar() {
     e.preventDefault()
     setClasses({
       ...animationClasses,
-      logoPart1: styles.moveOutLeft,
-      logoPart2: styles.showTxt,
-      logoPart3: styles.moveOutRight
+      logoPart1: styles.moveOutLeft!,
+      logoPart2: styles.showTxt!,
+      logoPart3: styles.moveOutRight!
     })
   }
 

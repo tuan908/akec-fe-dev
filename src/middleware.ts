@@ -1,8 +1,6 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-const ACCESS_TOKEN = 'access_token'
-
 export const config = {
   matcher: '/'
 }

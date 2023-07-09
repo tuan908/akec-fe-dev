@@ -1,18 +1,16 @@
-import React, { useEffect, useMemo, useState, useTransition } from 'react'
-import dynamic from 'next/dynamic'
-import { signOut } from '@/util'
 import { useAppSelector } from '@/app/hooks'
 import { ACCESS_TOKEN, Route } from '@/constant'
-import { useRouter } from 'next/router'
+import { signOut } from '@/util'
 import styled from '@emotion/styled'
 import Cookies from 'js-cookie'
+import dynamic from 'next/dynamic'
+import { useMemo } from 'react'
 
 const Badge = dynamic(() => import('@mui/material/Badge'))
 const Link = dynamic(() => import('next/link'))
 
 const CSRNavbarItem = () => {
   const items = useAppSelector(state => state.product).length
-  const router = useRouter()
 
   const isAuth = useMemo(
     () => Cookies.get(ACCESS_TOKEN) !== undefined,
