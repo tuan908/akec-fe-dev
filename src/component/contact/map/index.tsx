@@ -14,12 +14,7 @@ const Marker = dynamic(
     ssr: false
   }
 )
-const Popup = dynamic(
-  () => import('react-leaflet').then(module => module.Popup),
-  {
-    ssr: false
-  }
-)
+
 const TitleLayerWithoutSSR = dynamic(
   () => import('react-leaflet').then(module => module.TileLayer),
   {
