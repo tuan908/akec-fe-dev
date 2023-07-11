@@ -2,7 +2,7 @@ export default function HomeThumbnail() {
   return (
     <div className='relative w-full'>
       <img
-        src='https://images.unsplash.com/photo-1504860708171-19abd233ec3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+        src='/assets/image/background-home.webp'
         className='opacity-90 object-cover w-full sm:h-[20rem] md:h-[30rem]'
         alt=''
       />
