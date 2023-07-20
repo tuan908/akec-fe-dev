@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import { Roboto } from 'next/font/google'
 import { type ReactNode } from 'react'
 import styles from './layout.module.scss'
 
@@ -12,20 +11,6 @@ type LayoutProps = {
   pageTitle: string
 }
 
-const roboto = Roboto({
-  weight: '500',
-  adjustFontFallback: true,
-  subsets: [
-    'cyrillic',
-    'cyrillic-ext',
-    'greek',
-    'greek-ext',
-    'latin',
-    'latin-ext',
-    'vietnamese'
-  ]
-})
-
 export default function Layout({ children, pageTitle }: LayoutProps) {
   return (
     <>
@@ -36,7 +21,7 @@ export default function Layout({ children, pageTitle }: LayoutProps) {
         <link rel='icon' type='image/png' href='/assets/image/logo.jpg' />
       </Head>
       <main
-        className={`w-full max-w-screen h-full bg-[#f5ebc5] ${roboto.className} grid ${styles.layout}`}
+        className={`w-full max-w-screen h-full bg-[#f5ebc5] grid ${styles.layout}`}
       >
         <Navbar />
         <div

@@ -1,6 +1,5 @@
-import dynamic from 'next/dynamic'
 import { motion, useAnimate } from 'framer-motion'
-import { Logger } from '@/util'
+import dynamic from 'next/dynamic'
 import { MouseEventHandler, useEffect, useRef, useState } from 'react'
 
 const Image = dynamic(() => import('next/image'))
@@ -50,8 +49,6 @@ export default function CarouselV2() {
     )
   }, [carouselIndex])
 
-  Logger.info(`Current slide: ${carouselIndex}`)
-
   return (
     <div className='w-3/4 flex flex-row m-auto justify-center items-center'>
       <motion.button onClick={handleDecrement}>
@@ -64,7 +61,7 @@ export default function CarouselV2() {
         {imgUrls.map((url, urlIndex) => (
           <motion.div
             key={urlIndex}
-            className={`min-w-full p-4 rounded-lg pointer-events-none`}
+            className='min-w-1/3 p-4 rounded-lg pointer-events-none'
             ref={itemRef}
           >
             <Image

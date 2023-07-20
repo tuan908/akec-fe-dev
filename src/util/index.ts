@@ -1,5 +1,6 @@
 import { ACCESS_TOKEN, REFRESH_TOKEN, Route, USER_INFO } from '@/constant'
 import Cookies from 'js-cookie'
+import { Chonburi } from 'next/font/google'
 
 export const defaultParams: Record<string, string> = {
   page: '0',
@@ -38,3 +39,9 @@ export function toBase64(blob: Blob) {
     fileReader.onload = () => resolve(fileReader.result)
   })
 }
+
+export const chonburi = Chonburi({
+  weight: '400',
+  preload: true,
+  subsets: ['latin', 'latin-ext', 'thai', 'vietnamese']
+})

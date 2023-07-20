@@ -1,8 +1,9 @@
 import { useAppDispatch } from '@/app/hooks'
-import dynamic from 'next/dynamic'
-import type { TProduct } from '@/types'
-import { ChangeEvent, useEffect, useState } from 'react'
 import { addToCart } from '@/features/product/product.slice'
+import type { TProduct } from '@/types'
+import { chonburi } from '@/util'
+import dynamic from 'next/dynamic'
+import { ChangeEvent, useEffect, useState } from 'react'
 import styles from './header.module.scss'
 
 const Add = dynamic(() => import('@mui/icons-material/Add'))
@@ -56,18 +57,34 @@ export default function DetailText({ data }: Props) {
     <div className='flex-[0.45] relative mt-4'>
       <p className='mt-5'>Normal</p>
       <h1 className='text-5xl mt-6 transition-transform'>
-        <span className={state.position > 300 ? '' : styles.animatedTextRight}>
+        <span
+          className={`${state.position > 300 ? '' : styles.animatedTextRight} ${
+            chonburi.className
+          }`}
+        >
           124
         </span>
-        <span className={state.position > 300 ? '' : styles.animatedTextDown}>
+        <span
+          className={`${state.position > 300 ? '' : styles.animatedTextDown} ${
+            chonburi.className
+          }`}
+        >
           {data?.name}
         </span>
       </h1>
       <h1 className='text-5xl mt-6 transition-transform'>
-        <span className={state.position > 300 ? '' : styles.animatedTextUp}>
+        <span
+          className={`${state.position > 300 ? '' : styles.animatedTextUp} ${
+            chonburi.className
+          }`}
+        >
           {data?.name}
         </span>
-        <span className={state.position > 300 ? '' : styles.animatedTextLeft}>
+        <span
+          className={`${state.position > 300 ? '' : styles.animatedTextLeft} ${
+            chonburi.className
+          }`}
+        >
           124
         </span>
       </h1>

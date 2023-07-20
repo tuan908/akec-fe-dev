@@ -1,5 +1,6 @@
 import { Route } from '@/constant'
 import dynamic from 'next/dynamic'
+import { Yeseva_One } from 'next/font/google'
 import { useRouter } from 'next/router'
 import { MouseEventHandler, useState } from 'react'
 import styles from './navbar.module.scss'
@@ -9,6 +10,8 @@ const Sidebar = dynamic(() => import('./Sidebar'))
 const CSRNavbarItem = dynamic(() => import('./CSRNavbarItem'), {
   ssr: false
 })
+
+const yesevaOneLocal = Yeseva_One({ weight: '400', subsets: ['latin'] })
 
 export default function Navbar() {
   const router = useRouter()
@@ -91,7 +94,7 @@ export default function Navbar() {
         href={Route.Home}
         className={`w-7/9 flex justify-center items-center sm:w-fit cursor-pointer text-2xl ${
           Route.Home === router.pathname ? 'opacity-1' : 'opacity-60'
-        }`}
+        } ${yesevaOneLocal.className}`}
         onMouseEnter={e => handleOnMouseEnter(e)}
         onMouseLeave={e => handleOnMouseLeave(e)}
       >
