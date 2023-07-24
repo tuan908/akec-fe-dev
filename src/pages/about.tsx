@@ -5,6 +5,7 @@ import { clearInput } from '@/features/post/post.slice'
 import type { TAboutPost } from '@/types/about'
 import { defaultParams } from '@/util'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { ReactElement, useState } from 'react'
 
 const PlusIcon = dynamic(() => import('@mui/icons-material/Add'))
@@ -38,7 +39,94 @@ export default function About() {
 
   return (
     <>
-      <div className='w-4/5 mx-auto grid grid-cols-1 place-items-center'>
+      <div className='w-full mx-auto grid grid-cols-3 place-items-center'>
+        <nav className='lg:text-sm lg:leading-6 relative'>
+          <h5 className='mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200'>
+            Danh sách bài viết
+          </h5>
+          <ul className='space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800'>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/'
+                className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300'
+              >
+                Bài viết 1
+              </Link>
+            </li>
+          </ul>
+        </nav>
         {posts.map(post => (
           <PostCard key={post.id} {...post} />
         ))}
