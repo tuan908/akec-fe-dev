@@ -1,9 +1,8 @@
 import { useAppDispatch } from '@/app/hooks'
 import { wrapper } from '@/app/store'
+import { LoadingComponent } from '@/component'
 import postApi from '@/features/post/post.api'
 import { clearInput } from '@/features/post/post.slice'
-import type { TAboutPost } from '@/types/about'
-import { defaultParams } from '@/util'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { ReactElement, useState } from 'react'
@@ -14,23 +13,12 @@ const Layout = dynamic(() => import('@/component/shared/layout'))
 const PostCreator = dynamic(() => import('@/component/about/create-post'))
 const PostCard = dynamic(() => import('@/component/about/postcard'))
 
-const posts: TAboutPost[] = [
-  {
-    id: 1,
-    imgUrl: 'https://pbs.twimg.com/media/FhcJwmqUoAAJR1J?format=jpg&name=small',
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat. Duis aute irure dolor in
-reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-culpa qui officia deserunt mollit anim id est laborum.`
-  }
-]
-
 export default function About() {
   const [open, setOpen] = useState(false)
   const dispatch = useAppDispatch()
+  const { data, isLoading } = postApi.useGetAllPostsQuery()
+
+  if (isLoading) return <LoadingComponent />
 
   function handleCreate() {
     setOpen(false)
@@ -127,8 +115,8 @@ export default function About() {
             </li>
           </ul>
         </nav>
-        {posts.map(post => (
-          <PostCard key={post.id} {...post} />
+        {data!?.map(post => (
+          <PostCard key={post?.id} {...post} />
         ))}
       </div>
       {!open && (
@@ -150,7 +138,7 @@ About.getLayout = (page: ReactElement) => (
 
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {
-    store.dispatch(postApi.endpoints.getAllPosts.initiate(defaultParams))
+    store.dispatch(postApi.endpoints.getAllPosts.initiate())
     await Promise.all(store.dispatch(postApi.util.getRunningQueriesThunk()))
 
     return { props: {} }

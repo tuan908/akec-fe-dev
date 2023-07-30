@@ -1,14 +1,14 @@
-import type { TAboutPost } from '@/types/about'
+import { TPost } from '@/db/post.repository'
 
-export default function AboutPost({ imgUrl, text }: TAboutPost) {
+export default function AboutPost({ name, post_txt }: TPost) {
   return (
     <div className='flex my-8'>
       <div className='w-1/4 flex justify-center'>
-        <img srcSet={imgUrl} alt='' className='w-[9.5rem] h-[9.5rem]' />
+        <img srcSet='' alt='' className='w-[9.5rem] h-[9.5rem]' />
       </div>
       <section className='w-full flex flex-col my-auto'>
-        <h1 className='text-3xl'>Title</h1>
-        <p className=''>{text}</p>
+        <h1 className='text-3xl'>{name}</h1>
+        <p className=''>{post_txt}</p>
       </section>
     </div>
   )

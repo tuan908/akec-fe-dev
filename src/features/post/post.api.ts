@@ -1,5 +1,5 @@
 import baseApi from '@/app/base.api'
-import type { TPaged, TPost, TResponse } from '@/types'
+import type { TPost } from '@/db/post.repository'
 import { HttpMethod } from '../feature.constant'
 
 const postApi = baseApi.injectEndpoints({
@@ -12,24 +12,14 @@ const postApi = baseApi.injectEndpoints({
       })
     }),
     getById: build.query<TPost, string>({
-      query: id => `/posts/${id}`,
-      transformResponse: (
-        baseQueryReturnValue: TResponse<TPost>,
-        _meta,
-        _arg
-      ) => baseQueryReturnValue.data
+      query: id => `/posts/${id}`
     }),
 
-    getAllPosts: build.query<TPost[], Record<string, string>>({
-      query: params => ({ url: `/posts`, params }),
-      transformResponse: (
-        baseQueryReturnValue: TResponse<TPaged<TPost>>,
-        _meta,
-        _arg
-      ) =>
-        baseQueryReturnValue.data === null
-          ? []
-          : baseQueryReturnValue.data.content
+    getAllPosts: build.query<TPost[], void>({
+      query: () => `/posts`,
+      transformResponse(baseQueryReturnValue: { posts: TPost[] }, _meta, _arg) {
+        return baseQueryReturnValue.posts
+      }
     })
   })
 })
