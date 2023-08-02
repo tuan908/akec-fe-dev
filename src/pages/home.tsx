@@ -1,3 +1,5 @@
+import { wrapper } from '@/app/store'
+import postApi from '@/features/post/post.api'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 import { ReactElement } from 'react'
@@ -10,16 +12,18 @@ const ProductCards = dynamic(() => import('@/component/shared/product-card'))
 const Thumbnail = dynamic(() => import('@/component/home/thumbnail'))
 
 export default function Home() {
+  const { data } = postApi.useGetImagesQuery()
+
   return (
     <>
       <Thumbnail />
 
-      <ProductCards />
+      <ProductCards imgUrls={data!} />
 
       <Slogan>Chúng mình biết bạn có rất nhiều sự lựa chọn</Slogan>
       <Slogan>Cảm ơn bạn đã đặt niềm tin nơi AKEC</Slogan>
 
-      <CarouselV2 />
+      <CarouselV2 imgUrls={data!} />
     </>
   )
 }
@@ -39,3 +43,12 @@ const Slogan = styled.h1`
 
   font-family: 'Brush Script MT Italic';
 `
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  store => async () => {
+    store.dispatch(postApi.endpoints.getImages.initiate())
+    await Promise.all(store.dispatch(postApi.util.getRunningQueriesThunk()))
+
+    return { props: {} }
+  }
+)

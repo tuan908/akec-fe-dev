@@ -1,3 +1,4 @@
+import { TImage } from '@/db/image.repository'
 import { motion, useAnimate } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { MouseEventHandler, useEffect, useRef, useState } from 'react'
@@ -8,22 +9,7 @@ const ChevronRightIcon = dynamic(
   () => import('@mui/icons-material/ChevronRight')
 )
 
-export const imgUrls = [
-  'https://pbs.twimg.com/media/FT_xI0jVsAIhdF1?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FsYbq6nakAEJ17T?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FstHaoGaEAA0ZHd?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FtgmQz5agAEffJH?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FT_xI0jVsAIhdF1?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FsYbq6nakAEJ17T?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FstHaoGaEAA0ZHd?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FtgmQz5agAEffJH?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FT_xI0jVsAIhdF1?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FsYbq6nakAEJ17T?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FstHaoGaEAA0ZHd?format=jpg&name=4096x4096',
-  'https://pbs.twimg.com/media/FtgmQz5agAEffJH?format=jpg&name=4096x4096'
-]
-
-export default function CarouselV2() {
+export default function CarouselV2({ imgUrls }: { imgUrls: TImage[] }) {
   const [scope, animate] = useAnimate()
   const [carouselIndex, setIndex] = useState(0)
   const itemRef = useRef<HTMLDivElement>(null)
@@ -61,14 +47,16 @@ export default function CarouselV2() {
         {imgUrls.map((url, urlIndex) => (
           <motion.div
             key={urlIndex}
-            className='min-w-1/3 p-4 rounded-lg pointer-events-none'
+            className='min-w-full lg:min-w-1/3 p-4 rounded-lg pointer-events-none'
             ref={itemRef}
           >
             <Image
               className={`rounded-md shadow-lg h-full ${
-                urlIndex === carouselIndex + 1 ? `scale-105 ease-in-out duration-300` : `scale-95 ease-in-out duration-300`
+                urlIndex === carouselIndex + 1
+                  ? `scale-105 ease-in-out duration-300`
+                  : `scale-95 ease-in-out duration-300`
               }`}
-              src={url}
+              src={url.url}
               width={1920}
               height={3411}
               alt=''

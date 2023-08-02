@@ -1,6 +1,7 @@
 import baseApi from '@/app/base.api'
-import type { TPaged, TPost, TResponse } from '@/types'
+import type { TPost } from '@/db/post.repository'
 import { HttpMethod } from '../feature.constant'
+import { TImage } from '@/db/image.repository'
 
 const postApi = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -12,24 +13,22 @@ const postApi = baseApi.injectEndpoints({
       })
     }),
     getById: build.query<TPost, string>({
-      query: id => `/posts/${id}`,
-      transformResponse: (
-        baseQueryReturnValue: TResponse<TPost>,
-        _meta,
-        _arg
-      ) => baseQueryReturnValue.data
+      query: id => `/posts/${id}`
     }),
 
-    getAllPosts: build.query<TPost[], Record<string, string>>({
-      query: params => ({ url: `/posts`, params }),
+    getAllPosts: build.query<TPost[], void>({
+      query: () => `/posts`,
+      transformResponse(baseQueryReturnValue: { posts: TPost[] }, _meta, _arg) {
+        return baseQueryReturnValue.posts
+      }
+    }),
+    getImages: build.query<TImage[], void>({
+      query: () => `/image`,
       transformResponse: (
-        baseQueryReturnValue: TResponse<TPaged<TPost>>,
+        baseQueryReturnValue: { images: TImage[] },
         _meta,
         _arg
-      ) =>
-        baseQueryReturnValue.data === null
-          ? []
-          : baseQueryReturnValue.data.content
+      ) => baseQueryReturnValue.images
     })
   })
 })

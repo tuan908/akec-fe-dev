@@ -1,5 +1,6 @@
 import { wrapper } from '@/app/store'
 import { ProductCard } from '@/component'
+import postApi from '@/features/post/post.api'
 import productApi from '@/features/product/product.api'
 import dynamic from 'next/dynamic'
 import { ReactElement } from 'react'
@@ -21,6 +22,7 @@ const Loading = dynamic(() => import('@/component/shared/loading'), {
  */
 export default function ProductsPage() {
   const { isLoading, isError } = productApi.useGetAllProductsQuery()
+  const { data } = postApi.useGetImagesQuery()
 
   if (isError) return <BirdNestError />
 
@@ -40,7 +42,7 @@ export default function ProductsPage() {
               onClick={() => router.push(`/product/${index}`)}
             />
           ))} */}
-          <ProductCard />
+          <ProductCard imgUrls={data!} />
         </>
       )}
     </div>
@@ -54,8 +56,9 @@ ProductsPage.getLayout = (page: ReactElement) => (
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {
     store.dispatch(productApi.endpoints.getAllProducts.initiate())
+    store.dispatch(postApi.endpoints.getImages.initiate())
     await Promise.all(store.dispatch(productApi.util.getRunningQueriesThunk()))
-
+    await Promise.all(store.dispatch(postApi.util.getRunningQueriesThunk()))
     return {
       props: {}
     }

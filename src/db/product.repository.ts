@@ -1,11 +1,16 @@
 import db from './database'
 
-export const getProducts = async () =>
-  await db.selectFrom(`product`).selectAll().execute()
+const getAll = async () => await db.selectFrom(`product`).selectAll().execute()
 
-export const getProductById = async (id: number) =>
+const getById = async (id: number) =>
   await db
     .selectFrom(`product`)
     .selectAll()
     .where('product.id', '=', id)
     .executeTakeFirst()
+
+const productEndpoint = {
+  getAll,
+  getById
+}
+export default productEndpoint

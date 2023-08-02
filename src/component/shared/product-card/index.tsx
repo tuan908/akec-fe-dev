@@ -1,12 +1,9 @@
 import styled from '@emotion/styled'
-import dynamic from 'next/dynamic'
-
+import { For } from 'million/react'
 import { chonburi } from '@/util'
 import { useRouter } from 'next/router'
-import { imgUrls } from '../../home/carouselV2'
 import styles from './product-card.module.scss'
-
-const Image = dynamic(() => import('next/image'))
+import { type TImage } from '@/db/image.repository'
 
 type ProductCardProps = {
   previewImageUrl: string
@@ -33,12 +30,9 @@ export const ProductCard: React.FunctionComponent<ProductCardProps> = ({
   return (
     <figure className={styles.productCard} onClick={onClick}>
       <div className={styles.productCardImage}>
-        <Image
-          priority
+        <img
           className='w-full h-full rounded-md'
           src={previewImageUrl}
-          width={1920}
-          height={1080}
           alt=''
         />
       </div>
@@ -50,20 +44,22 @@ export const ProductCard: React.FunctionComponent<ProductCardProps> = ({
   )
 }
 
-export default function ProductCollection() {
+export default function ProductCollection({ imgUrls }: { imgUrls: TImage[] }) {
   const router = useRouter()
 
   return (
     <Wrapper className='grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {imgUrls.map((url, index) => (
-        <ProductCard
-          key={index}
-          name={`Product ${index}`}
-          price={1000}
-          previewImageUrl={url}
-          onClick={() => router.push(`/product/${index}`)}
-        />
-      ))}
+      <For each={imgUrls}>
+        {(url, index) => (
+          <ProductCard
+            key={index}
+            name={`Product ${index}`}
+            price={1000}
+            previewImageUrl={url.url}
+            onClick={() => router.push(`/product/${index}`)}
+          />
+        )}
+      </For>
     </Wrapper>
   )
 }

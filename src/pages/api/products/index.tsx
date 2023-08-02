@@ -1,11 +1,11 @@
 import { HttpStatus } from '@/constant'
-import { getProducts } from '@/db/product.repository'
-import { NextApiHandler } from 'next'
+import productEndpoint from '@/db/product.repository'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { kv } from '@vercel/kv'
 import { Logger } from '@/util'
-import { TProduct } from '@/types'
+import type { TProduct } from '@/types'
 
-const handler: NextApiHandler = async (_, res) => {
+export default async function handler(_: NextApiRequest, res: NextApiResponse) {
   try {
     let _products: TProduct[] | null = await kv.get<TProduct[]>(`PRODUCTS`)
     if (_products !== null && _products!?.length > 0) {
@@ -13,7 +13,7 @@ const handler: NextApiHandler = async (_, res) => {
         products: _products
       })
     } else {
-      const _products = await getProducts()
+      const _products = await productEndpoint.getAll()
       await kv.set<typeof _products>(`PRODUCTS`, _products, {
         ex: 300,
         nx: true
@@ -29,5 +29,3 @@ const handler: NextApiHandler = async (_, res) => {
     })
   }
 }
-
-export default handler

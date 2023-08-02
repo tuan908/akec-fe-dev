@@ -1,9 +1,10 @@
 import { createKysely } from '@vercel/postgres-kysely'
-import type { PostTable, ProductTable } from './tables'
+import type { ImageTable, PostTable, ProductTable } from './tables'
 
 interface Database {
   product: ProductTable
-  post: PostTable
+  post: PostTable,
+  image: ImageTable
 }
 
 export default createKysely<Database>()

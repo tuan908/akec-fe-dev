@@ -19,4 +19,11 @@ interface PostTable {
   updated_time: ColumnType<Date, Date, Date>
 }
 
-export type { PostTable, ProductTable }
+interface ImageTable {
+  id: Generated<number>
+  url: string
+  created_time: ColumnType<Date, Date, never>
+  updated_time: ColumnType<Date, Date, Date>
+}
+
+export type { PostTable, ProductTable,ImageTable }

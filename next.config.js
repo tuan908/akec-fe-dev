@@ -1,3 +1,5 @@
+const million = require('million/compiler')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -25,4 +27,4 @@ const nextConfig = {
   swcMinify: true
 }
 
-module.exports = nextConfig
+module.exports = million.next(nextConfig)
