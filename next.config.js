@@ -7,7 +7,8 @@ const nextConfig = {
     emotion: {
       autoLabel: 'dev-only',
       sourceMap: true
-    }
+    },
+    removeConsole: process.env.NODE_ENV === 'production'
   },
   optimizeFonts: true,
   images: {

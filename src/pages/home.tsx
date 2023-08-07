@@ -8,7 +8,6 @@ const CarouselV2 = dynamic(() => import('@/component/home/carouselV2'), {
   ssr: false
 })
 const Layout = dynamic(() => import('@/component/shared/layout'))
-const ProductCards = dynamic(() => import('@/component/shared/product-card'))
 const Thumbnail = dynamic(() => import('@/component/home/thumbnail'))
 
 export default function Home() {
@@ -17,8 +16,6 @@ export default function Home() {
   return (
     <>
       <Thumbnail />
-
-      <ProductCards imgUrls={data!} />
 
       <Slogan>Chúng mình biết bạn có rất nhiều sự lựa chọn</Slogan>
       <Slogan>Cảm ơn bạn đã đặt niềm tin nơi AKEC</Slogan>

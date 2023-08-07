@@ -3,10 +3,9 @@ import { wrapper } from '@/app/store'
 import { LoadingComponent } from '@/component'
 import postApi from '@/features/post/post.api'
 import { clearInput } from '@/features/post/post.slice'
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import { ReactElement, useState } from 'react'
 import { For } from 'million/react'
+import dynamic from 'next/dynamic'
+import { ReactElement, useState } from 'react'
 
 const PlusIcon = dynamic(() => import('@mui/icons-material/Add'))
 const IconButton = dynamic(() => import('@mui/material/IconButton'))
@@ -33,7 +32,7 @@ export default function About() {
           <h5 className='mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200'>
             Danh sách bài viết
           </h5>
-          <ul className='space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800'>
+          {/* <ul className='space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800'>
             <li>
               <Link
                 href='/'
@@ -114,7 +113,7 @@ export default function About() {
                 Bài viết 1
               </Link>
             </li>
-          </ul>
+          </ul> */}
         </nav>
         <For each={data!}>{post => <PostCard key={post?.id} {...post} />}</For>
       </div>

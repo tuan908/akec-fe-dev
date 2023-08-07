@@ -4,6 +4,9 @@ import postApi from '@/features/post/post.api'
 import productApi from '@/features/product/product.api'
 import dynamic from 'next/dynamic'
 import { ReactElement } from 'react'
+import styled from '@emotion/styled'
+import { For } from 'million/react'
+import { useRouter } from 'next/router'
 
 const Layout = dynamic(() => import('@/component/shared/layout'))
 const BirdNestError = dynamic(() =>
@@ -22,8 +25,8 @@ const Loading = dynamic(() => import('@/component/shared/loading'), {
  */
 export default function ProductsPage() {
   const { isLoading, isError } = productApi.useGetAllProductsQuery()
-  const { data } = postApi.useGetImagesQuery()
-
+  const { isLoading: isImageLoading, data } = postApi.useGetImagesQuery()
+  const router = useRouter()
   if (isError) return <BirdNestError />
 
   return (
@@ -31,19 +34,20 @@ export default function ProductsPage() {
       {isLoading ? (
         <Loading />
       ) : (
-        <>
-          {/* <ProgressBar /> */}
-          {/* {data!?.map((product, index) => (
-            <ProductCardV2
-              key={index}
-              name={product.name}
-              price={product.price}
-              previewImageUrl='https://pbs.twimg.com/media/FT_xI0jVsAIhdF1?format=jpg&name=4096x4096'
-              onClick={() => router.push(`/product/${index}`)}
-            />
-          ))} */}
-          <ProductCard imgUrls={data!} />
-        </>
+        <Wrapper className='grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+          <For each={data!}>
+            {(url, index) => (
+              <ProductCard
+                key={index}
+                name={`Product ${index}`}
+                price={1000}
+                previewImageUrl={url.url}
+                onClick={() => router.push(`/product/${index}`)}
+                isLoading={isImageLoading}
+              />
+            )}
+          </For>
+        </Wrapper>
       )}
     </div>
   )
@@ -64,3 +68,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
   }
 )
+
+const Wrapper = styled.div`
+  width: calc(100% / 12 * 11);
+  margin: auto;
+  padding: 2rem;
+  display: grid;
+  place-items: center;
+  gap: 1.25rem;
+`
