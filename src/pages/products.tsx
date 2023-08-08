@@ -3,7 +3,7 @@ import { ProductCard } from '@/component'
 import postApi from '@/features/post/post.api'
 import productApi from '@/features/product/product.api'
 import dynamic from 'next/dynamic'
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import styled from '@emotion/styled'
 import { For } from 'million/react'
 import { useRouter } from 'next/router'
@@ -19,6 +19,18 @@ const Loading = dynamic(() => import('@/component/shared/loading'), {
   ssr: false
 })
 
+const categories: Array<{
+  id: number
+  nameVi: string
+  nameEn: string
+}> = [
+  { id: 0, nameVi: `Tất cả`, nameEn: `All` },
+  { id: 1, nameVi: `Tổ yến`, nameEn: `Bird Nest` },
+  { id: 2, nameVi: `Hạt điều`, nameEn: `` },
+  { id: 3, nameVi: `Hoa quả sấy`, nameEn: `` },
+  { id: 4, nameVi: `Bánh kẹo`, nameEn: `` }
+]
+
 /**
  *
  * @returns Product List
@@ -27,6 +39,9 @@ export default function ProductsPage() {
   const { isLoading, isError } = productApi.useGetAllProductsQuery()
   const { isLoading: isImageLoading, data } = postApi.useGetImagesQuery()
   const router = useRouter()
+
+  const [currentCategoryIndex, setActive] = useState(0)
+
   if (isError) return <BirdNestError />
 
   return (
@@ -34,20 +49,41 @@ export default function ProductsPage() {
       {isLoading ? (
         <Loading />
       ) : (
-        <Wrapper className='grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          <For each={data!}>
-            {(url, index) => (
-              <ProductCard
-                key={index}
-                name={`Product ${index}`}
-                price={1000}
-                previewImageUrl={url.url}
-                onClick={() => router.push(`/product/${index}`)}
-                isLoading={isImageLoading}
-              />
-            )}
-          </For>
-        </Wrapper>
+        <>
+          <div className='w-5/6 m-auto'>
+            <ul className='w-2/3 flex gap-8'>
+              <For each={categories}>
+                {category => (
+                  <li
+                    key={category.id}
+                    className={`px-4 py-2 rounded-md font-bold hover:cursor-pointer ${
+                      currentCategoryIndex === category.id
+                        ? `bg-blue-500 text-white`
+                        : `bg-slate-50 text-black`
+                    }`}
+                    onClick={() => setActive(category.id)}
+                  >
+                    {category.nameVi}
+                  </li>
+                )}
+              </For>
+            </ul>
+          </div>
+          <Wrapper className='grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+            <For each={data!}>
+              {(url, index) => (
+                <ProductCard
+                  key={index}
+                  name={`Product ${index}`}
+                  price={1000}
+                  previewImageUrl={url.url}
+                  onClick={() => router.push(`/product/${index}`)}
+                  isLoading={isImageLoading}
+                />
+              )}
+            </For>
+          </Wrapper>
+        </>
       )}
     </div>
   )
