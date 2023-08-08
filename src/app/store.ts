@@ -47,5 +47,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >
 
 export const wrapper = createWrapper<TAppStore>(makeStore, {
-  debug: true
+  debug: process.env.NODE_ENV === `development`
 })

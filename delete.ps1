@@ -4,8 +4,22 @@ $pnpmLockYaml = "pnpm-lock.yaml"
 $yarnLock = "yarn.lock"
 $nextDebug = ".next"
 
-Remove-Item -Path $nodeModules -Force -Recurse
-Remove-Item -Path $nextDebug -Force -Recurse
-Remove-Item -Path $packageLockJson -Force
-Remove-Item -Path $pnpmLockYaml -Force
-Remove-Item -Path $yarnLock -Force
+If (Test-Path -Path $nodeModules) {
+    Remove-Item -Path $nodeModules -Force -Recurse
+}
+
+If (Test-Path -Path $packageLockJson) {
+    Remove-Item -Path $packageLockJson -Force -Recurse
+}
+
+If (Test-Path -Path $pnpmLockYaml) {
+    Remove-Item -Path $pnpmLockYaml -Force -Recurse
+}
+
+If (Test-Path -Path $yarnLock) {
+    Remove-Item -Path $yarnLock -Force -Recurse
+}
+
+If (Test-Path -Path $nextDebug) {
+    Remove-Item -Path $nextDebug -Force -Recurse
+}
