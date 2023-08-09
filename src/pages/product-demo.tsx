@@ -1,13 +1,11 @@
 import { Roboto } from 'next/font/google'
 
-type Props = {}
-
 const roboto = Roboto({
   weight: '400',
   subsets: ['cyrillic']
 })
 
-export default function ProductDemo(props: Props) {
+export default function ProductDemo() {
   return (
     <>
       <div
