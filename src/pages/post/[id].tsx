@@ -1,31 +1,53 @@
 import { wrapper } from '@/app/store'
 import postApi from '@/features/post/post.api'
-import useParallax from '@/hooks/useParallax'
-import { m, useScroll } from 'framer-motion'
+import { m, useAnimate, useScroll } from 'framer-motion'
 import { For } from 'million/react'
-import { useRef } from 'react'
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 import styles from './styles.module.scss'
 
 export default function PostDetailSample() {
   const { data } = postApi.useGetImagesQuery()
   const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref
-  })
-  const y = useParallax(scrollYProgress, 0)
+  const [scope, animate] = useAnimate()
+  const { scrollYProgress } = useScroll({ container: ref })
+  const [progress, setLatestProgressValue] = useState(0)
+
+  useEffect(() => {
+    scrollYProgress.on('change', latestValue => {
+      setLatestProgressValue(latestValue)
+      animate(
+        scope.current,
+        {
+          y: `-${
+            (scope.current as HTMLDivElement).scrollHeight * latestValue
+          }px`
+        },
+        {
+          ease: 'easeInOut',
+          type: 'tween'
+        }
+      )
+    })
+
+    return () => scrollYProgress.clearListeners()
+  }, [animate, scope, scrollYProgress])
+
+  const classes = `w-9/20 overflow-y-auto ${styles.styledScrollbar}`
 
   return (
     <div className='w-full h-full min-h-screen grid place-items-center'>
+      <h1>{Math.round(progress * 100) + '%'}</h1>
       <div className='w-4/5 m-auto h-[600px]'>
-        <div
-          className={`w-full h-full flex gap-20 overflow-y-scroll ${styles.styledScrollbar}`}
-        >
-          <m.div className='w-9/20' style={{ y }}>
+        <div className='w-full h-full flex gap-20'>
+          <m.div className='w-9/20' ref={scope}>
             <For each={data!}>
-              {src => <img src={src.url} alt='' key={src.id} />}
+              {d => (
+                <Image key={d.id} src={d.url} alt='' width={600} height={600} />
+              )}
             </For>
           </m.div>
-          <m.div className='w-9/20' ref={ref}>
+          <div className={classes} ref={ref}>
             <h1 className='text-2xl'>Big data, Personal Food</h1>
             <p className='my-4 w-9/10'>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
@@ -250,7 +272,7 @@ export default function PostDetailSample() {
               obcaecati blanditiis. Enim necessitatibus a eligendi et, harum
               ipsa saepe repellendus.
             </p>
-          </m.div>
+          </div>
         </div>
       </div>
     </div>
