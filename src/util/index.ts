@@ -45,3 +45,5 @@ export const chonburi = Chonburi({
   preload: true,
   subsets: ['latin', 'latin-ext', 'thai', 'vietnamese']
 })
+
+export const currentEnvironment = process.env.NODE_ENV

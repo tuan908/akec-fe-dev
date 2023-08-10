@@ -11,6 +11,7 @@ import carouselSlice from '@/features/ui/carousel/carousel.slice'
 import productSlice from '@/features/product/product.slice'
 import postSlice from '@/features/post/post.slice'
 import api from './base.api'
+import { currentEnvironment } from '@/util'
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
@@ -47,5 +48,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >
 
 export const wrapper = createWrapper<TAppStore>(makeStore, {
-  debug: true
+  debug: currentEnvironment === `development` || currentEnvironment === `test`
 })

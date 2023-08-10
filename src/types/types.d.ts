@@ -8,6 +8,8 @@ declare global {
       KV_REST_API_URL: string
       KV_REST_API_TOKEN: string
       KV_REST_API_READ_ONLY_TOKEN: string
+      DEV_API_ENDPOINT: string
+      PROD_API_ENDPOINT: string
     }
   }
 }
@@ -18,4 +20,4 @@ declare module '*.jpeg'
 declare module '*.jpg'
 declare module '*.webp'
 
-export { }
+export {}
