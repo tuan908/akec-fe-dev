@@ -1,15 +1,25 @@
-import type { NextRequest } from 'next/server'
+import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
 
 export const config = {
-  matcher: '/'
+  matcher: ['/', '/admin']
 }
 
-export function middleware(request: NextRequest) {
-  const currentUrl = request.nextUrl.clone()
+export default withAuth(
+  function middleware(req) {
+    const currentUrl = req.nextUrl.clone()
 
-  if ('/'.indexOf(currentUrl.pathname) !== -1) {
-    return NextResponse.redirect(new URL('/home', request.url))
+    if (
+      '/'.indexOf(currentUrl.pathname) !== -1 &&
+      req.nextauth.token !== null
+    ) {
+      return NextResponse.redirect(new URL('/home', req.url))
+    }
+    return NextResponse.next()
+  },
+  {
+    callbacks: {
+      authorized: params => !!params.token
+    }
   }
-  return NextResponse.next()
-}
+)

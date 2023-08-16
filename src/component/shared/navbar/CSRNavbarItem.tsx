@@ -1,58 +1,52 @@
 import { useAppSelector } from '@/app/hooks'
-import { ACCESS_TOKEN, Route } from '@/constant'
-import { signOut } from '@/util'
+import { Route } from '@/constant'
 import styled from '@emotion/styled'
-import Cookies from 'js-cookie'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import dynamic from 'next/dynamic'
-import { useMemo } from 'react'
 
 const Badge = dynamic(() => import('@mui/material/Badge'))
 const Link = dynamic(() => import('next/link'))
+const NextImage = dynamic(() => import('next/image'))
 
 const CSRNavbarItem = () => {
   const items = useAppSelector(state => state.product).length
+  const { data } = useSession()
 
-  const isAuth = useMemo(
-    () => Cookies.get(ACCESS_TOKEN) !== undefined,
-    [Cookies.get(ACCESS_TOKEN)]
-  )
+  if (data)
+    return (
+      <Badge
+        className='cursor-pointer w-1/9 sm:w-full flex items-center justify-center p-2 sm:justify-center'
+        color='error'
+        variant={`${items > 0 ? 'dot' : 'standard'}`}
+      >
+        <Wrapper>
+          <NextImage
+            className='w-auto h-auto sm:w-9 sm:h-9 rounded-full hover:cursor-pointer'
+            src={data!?.user!?.image!}
+            alt=''
+            width={60}
+            height={60}
+          />
+          <ul>
+            <li>
+              <Link href={Route.Account}>Tài khoản</Link>
+            </li>
+            <li>
+              <Link href={Route.Cart}>Đơn mua</Link>
+            </li>
+            <li onClick={() => signOut()}>Đăng xuất</li>
+          </ul>
+        </Wrapper>
+      </Badge>
+    )
 
   return (
-    <>
-      {isAuth ? (
-        <Badge
-          className='cursor-pointer w-1/9 sm:w-full flex items-center justify-center p-2 sm:justify-center'
-          color='error'
-          variant={`${items > 0 ? 'dot' : 'standard'}`}
-        >
-          <Wrapper>
-            <img
-              className='w-8 h-8 sm:w-9 sm:h-9 rounded-full hover:cursor-pointer'
-              src='/assets/image/logo.jpg'
-              alt=''
-            />
-            <ul>
-              <li>
-                <Link href={Route.Account}>Tài khoản của tôi</Link>
-              </li>
-              <li>
-                <Link href={Route.Cart}>Đơn mua</Link>
-              </li>
-              <li onClick={() => signOut()}>Đăng xuất</li>
-            </ul>
-          </Wrapper>
-        </Badge>
-      ) : (
-        <button
-          className='mx-auto text-center text-lg p-2 w-1/9 sm:w-full flex justify-center items-center'
-          // onClick={() =>
-          //   router.push('http://localhost:8082/api/v1/auth/oauth2Login/google')
-          // }
-        >
-          Login
-        </button>
-      )}
-    </>
+    <button
+      className='mx-auto text-center text-lg p-2 w-1/9 sm:w-full flex justify-center items-center'
+      onClick={() => signIn('google', { redirect: true })}
+    >
+      Login
+    </button>
   )
 }
 

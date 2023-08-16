@@ -10,6 +10,8 @@ declare global {
       KV_REST_API_READ_ONLY_TOKEN: string
       DEV_API_ENDPOINT: string
       PROD_API_ENDPOINT: string
+      GOOGLE_ID: string
+      GOOGLE_SECRET: string
     }
   }
 }
