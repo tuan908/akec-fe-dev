@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@/app/hooks'
-import { addToCart } from '@/features/product/product.slice'
+import { addToCart } from '@/features/order/order.slice'
 import type { TProduct } from '@/types'
 import { chonburi } from '@/util'
 import dynamic from 'next/dynamic'

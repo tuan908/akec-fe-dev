@@ -6,7 +6,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: baseApiUrl
 })
 
-export default createApi({
+const api = createApi({
   reducerPath: 'baseApi',
   baseQuery,
   refetchOnMountOrArgChange: 900,
@@ -17,3 +17,6 @@ export default createApi({
   },
   endpoints: () => ({})
 })
+
+export default api
+export const apiMiddleware = api.middleware

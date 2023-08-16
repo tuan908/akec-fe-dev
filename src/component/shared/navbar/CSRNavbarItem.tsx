@@ -9,7 +9,7 @@ const Link = dynamic(() => import('next/link'))
 const NextImage = dynamic(() => import('next/image'))
 
 const CSRNavbarItem = () => {
-  const items = useAppSelector(state => state.product).length
+  const items = useAppSelector(state => state.order).length
   const { data } = useSession()
 
   if (data)

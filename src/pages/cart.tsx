@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import { removeFromCart } from '@/features/product/product.slice'
+import { removeFromCart } from '@/features/order/order.slice'
 import type { TOrder } from '@/types'
 import { formatMoney } from '@/util'
 import dynamic from 'next/dynamic'
@@ -29,7 +29,7 @@ const style = {
 }
 
 const CartPage = () => {
-  const data = useAppSelector(state => state.product)
+  const data = useAppSelector(state => state.order)
   const dispatch = useAppDispatch()
 
   const [open, setOpen] = useState(false)

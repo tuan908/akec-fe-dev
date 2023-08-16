@@ -1,4 +1,4 @@
-import type { TAppState } from '@/app/store'
+import { type TAppState } from '@/app/types'
 import { createSlice, prepareAutoBatched } from '@reduxjs/toolkit'
 import { HYDRATE_ACTION } from '../../hydrate/hydrate.action'
 
@@ -32,7 +32,7 @@ const carouselSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(HYDRATE_ACTION, (state, action) => ({
       ...state,
-      ...action.payload
+      value: action.payload.carousel.value
     }))
   }
 })

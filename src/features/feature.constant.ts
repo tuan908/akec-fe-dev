@@ -12,6 +12,6 @@ export enum HttpMethod {
 export enum SliceName {
   Auth = `auth`,
   Carousel = `carousel`,
-  Product = `product`,
+  Order = `order`,
   Post = `post`
 }

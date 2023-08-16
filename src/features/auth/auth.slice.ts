@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { TLogin } from '@/types'
-import { HYDRATE_ACTION } from '../hydrate/hydrate.action'
-import Cookies from 'js-cookie'
-import { TRefreshTokenResponse } from '@/types/auth'
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constant'
+import type { TLogin } from '@/types'
+import { type TRefreshTokenResponse } from '@/types/auth'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import Cookies from 'js-cookie'
 import { SliceName } from '../feature.constant'
+import { HYDRATE_ACTION } from '../hydrate/hydrate.action'
 
 const initialState: TLogin = {
   accessToken: '',
@@ -31,7 +31,7 @@ const authSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(HYDRATE_ACTION, (state, action) => ({
       ...state,
-      ...action.payload
+      auth: action.payload.auth
     }))
   }
 })
