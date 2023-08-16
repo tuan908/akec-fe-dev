@@ -1,14 +1,16 @@
-import { ACCESS_TOKEN } from '@/constant'
-import Cookies from 'js-cookie'
-import { useMemo } from 'react'
+import { type Session } from 'next-auth'
+import { useSession } from 'next-auth/react'
+import { startTransition, useEffect, useState } from 'react'
 
 export function useAuth() {
-  const isAuth = useMemo(
-    () => Cookies.get(ACCESS_TOKEN) !== undefined,
-    [Cookies.get(ACCESS_TOKEN)]
-  )
+  const { data } = useSession()
+  const [session, setSession] = useState<Session | null>()
 
-  return {
-    isAuth
-  }
+  useEffect(() => {
+    startTransition(() => {
+      setSession(data)
+    })
+  }, [data])
+
+  return [session]
 }

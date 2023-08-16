@@ -1,52 +1,49 @@
 import { useAppSelector } from '@/app/hooks'
 import { Route } from '@/constant'
+import { useAuth } from '@/hooks/useAuth'
 import styled from '@emotion/styled'
-import { signIn, signOut, useSession } from 'next-auth/react'
+
+import { signIn, signOut } from 'next-auth/react'
 import dynamic from 'next/dynamic'
 
 const Badge = dynamic(() => import('@mui/material/Badge'))
-const Link = dynamic(() => import('next/link'))
+const NextLink = dynamic(() => import('next/link'))
 const NextImage = dynamic(() => import('next/image'))
 
 const CSRNavbarItem = () => {
   const items = useAppSelector(state => state.product).length
-  const { data } = useSession()
+  const [session] = useAuth()
 
-  if (data)
-    return (
-      <Badge
-        className='cursor-pointer w-1/9 sm:w-full flex items-center justify-center p-2 sm:justify-center'
-        color='error'
-        variant={`${items > 0 ? 'dot' : 'standard'}`}
-      >
+  return (
+    <Badge
+      className='cursor-pointer w-1/9 sm:w-full flex items-center justify-center p-2 sm:justify-center'
+      color='error'
+      variant={`${items > 0 ? 'dot' : 'standard'}`}
+    >
+      {!session ? (
+        <span onClick={() => signIn('google', { redirect: true })}>Login</span>
+      ) : (
         <Wrapper>
           <NextImage
             className='w-auto h-auto sm:w-9 sm:h-9 rounded-full hover:cursor-pointer'
-            src={data!?.user!?.image!}
+            src={session!?.user!?.image!}
             alt=''
             width={60}
             height={60}
           />
           <ul>
+            {session!?.user!?.email}
             <li>
-              <Link href={Route.Account}>Tài khoản</Link>
+              <NextLink href={Route.Account}>Tài khoản</NextLink>
             </li>
             <li>
-              <Link href={Route.Cart}>Đơn mua</Link>
+              <NextLink href={Route.Cart}>Đơn mua</NextLink>
             </li>
             <li onClick={() => signOut()}>Đăng xuất</li>
           </ul>
         </Wrapper>
-      </Badge>
-    )
-
-  return (
-    <button
-      className='mx-auto text-center text-lg p-2 w-1/9 sm:w-full flex justify-center items-center'
-      onClick={() => signIn('google', { redirect: true })}
-    >
-      Login
-    </button>
+      )}
+    </Badge>
   )
 }
 
