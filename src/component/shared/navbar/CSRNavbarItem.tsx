@@ -14,15 +14,14 @@ const CSRNavbarItem = () => {
   const [session] = useAuth()
 
   return (
-    <Badge
-      className='cursor-pointer w-1/9 sm:w-full flex items-center justify-center p-2 sm:justify-center'
-      color='error'
-      variant={`${items > 0 ? 'dot' : 'standard'}`}
-    >
+    <Wrapper>
       {!session ? (
         <span onClick={() => signIn('google', { redirect: true })}>Login</span>
       ) : (
-        <Wrapper>
+        <Badge
+          color='error'
+          variant={`${items > 0 ? 'dot' : 'standard'}`}
+        >
           <NextImage
             className='w-auto h-auto sm:w-9 sm:h-9 rounded-full hover:cursor-pointer'
             src={session!?.user!?.image!}
@@ -40,9 +39,9 @@ const CSRNavbarItem = () => {
             </li>
             <li onClick={() => signOut()}>Đăng xuất</li>
           </ul>
-        </Wrapper>
+        </Badge>
       )}
-    </Badge>
+    </Wrapper>
   )
 }
 
@@ -57,7 +56,7 @@ const Wrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    :hover > ul {
+    :hover ul {
       display: block;
       position: absolute;
 
@@ -71,6 +70,7 @@ const Wrapper = styled.div`
 
     background-color: #333;
     left: 0;
+    top: 2rem;
   }
 
   li {

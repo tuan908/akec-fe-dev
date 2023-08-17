@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        footer: '#00130F'
+        footer: '#00130F',
+        backgroundDark: '#333'
       },
       minWidth: { '1/3': 'calc(100% / 3)' },
       width: {

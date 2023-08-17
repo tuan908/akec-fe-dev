@@ -1,11 +1,12 @@
 import { Roboto } from 'next/font/google'
+import { type NextPageWithLayout } from './_app'
 
 const roboto = Roboto({
   weight: '400',
   subsets: ['cyrillic']
 })
 
-export default function ProductDemo() {
+const Page: NextPageWithLayout = () =>  {
   return (
     <>
       <div
@@ -74,3 +75,5 @@ export default function ProductDemo() {
     </>
   )
 }
+
+export default Page

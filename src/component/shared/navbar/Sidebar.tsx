@@ -65,7 +65,7 @@ export default function Sidebar() {
           >
             <Link href={Route.Home}>HOME</Link>
           </li>
-          {[Route.About, Route.Products, Route.Contact, Route.Cart].map(
+          {[Route.Post, Route.Products, Route.Contact, Route.Cart].map(
             (route, index) => (
               <li
                 key={index}

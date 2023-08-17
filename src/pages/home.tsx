@@ -3,6 +3,7 @@ import postApi from '@/features/post/post.api'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 import { ReactElement } from 'react'
+import { type NextPageWithLayout } from './_app'
 
 const CarouselV2 = dynamic(() => import('@/component/home/carouselV2'), {
   ssr: false
@@ -11,7 +12,7 @@ const Layout = dynamic(() => import('@/component/shared/layout'))
 const ProductCards = dynamic(() => import('@/component/shared/product-card'))
 const Thumbnail = dynamic(() => import('@/component/home/thumbnail'))
 
-export default function Home() {
+const Page: NextPageWithLayout = () => {
   const { data } = postApi.useGetImagesQuery()
 
   return (
@@ -28,7 +29,9 @@ export default function Home() {
   )
 }
 
-Home.getLayout = (page: ReactElement) => (
+export default Page
+
+Page.getLayout = (page: ReactElement) => (
   <Layout pageTitle='Trang chủ'>{page}</Layout>
 )
 

@@ -8,12 +8,12 @@ export const LOGO_ABSOLUTE_PATH = '/assets/image/logo.jpg'
 
 export enum Route {
   Home = '/home',
-  Products = '/products',
+  Products = '/product',
   Contact = '/contact',
   Cart = '/cart',
   Introduce = '/home',
   Login = '/auth/login',
-  About = '/about',
+  Post = '/post',
   Account = '/account'
 }
 

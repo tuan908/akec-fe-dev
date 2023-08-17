@@ -1,12 +1,12 @@
-import { ReactElement } from 'react'
 import dynamic from 'next/dynamic'
+import { ReactElement } from 'react'
 
 const Layout = dynamic(() => import('@/component/shared/layout'))
 
-export default function Account() {
+export default function Page() {
   return <div className=''>Account</div>
 }
 
-Account.getLayout = (page: ReactElement) => (
+Page.getLayout = (page: ReactElement) => (
   <Layout pageTitle='Tài khoản'>{page}</Layout>
 )

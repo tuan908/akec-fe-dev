@@ -1,13 +1,15 @@
 import { wrapper } from '@/app/store'
+import { Layout } from '@/component'
 import postApi from '@/features/post/post.api'
 import { useAdvancedScroll } from '@/hooks'
 import { m } from 'framer-motion'
 import { For } from 'million/react'
 import NextImage from 'next/image'
 import { useRef } from 'react'
+import { type NextPageWithLayout } from '../_app'
 import styles from './styles.module.scss'
 
-export default function PostDetailSample() {
+const Page: NextPageWithLayout = () =>  {
   const { data } = postApi.useGetImagesQuery()
   const ref = useRef<HTMLDivElement>(null)
   const { progress, scope } = useAdvancedScroll(ref)
@@ -257,6 +259,10 @@ export default function PostDetailSample() {
     </div>
   )
 }
+
+export default Page
+
+Page.getLayout = (page) => <Layout pageTitle='Post 1'>{page}</Layout>
 
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {

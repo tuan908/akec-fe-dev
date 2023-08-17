@@ -1,13 +1,12 @@
 import { wrapper } from '@/app/store'
-import dynamic from 'next/dynamic'
 import '@/styles/main.scss'
 import { createTheme, ThemeProvider } from '@mui/material'
 import type { NextPage } from 'next'
+import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
+import dynamic from 'next/dynamic'
 import { ReactElement, ReactNode, Suspense } from 'react'
 import { Provider } from 'react-redux'
-import { type Session } from 'next-auth'
-import { SessionProvider } from 'next-auth/react'
 
 const Loading = dynamic(() => import('@/component/shared/loading'))
 const CssBaseline = dynamic(() => import('@mui/material/CssBaseline'))
@@ -28,28 +27,27 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
-type AppInitProps = AppProps<{ session: Session }>
-
-export type AppPropsWithLayout = AppInitProps & {
+export type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-const App: React.FC<AppPropsWithLayout> = ({ Component, ...otherProps }) => {
+export default function App({
+  Component,
+  pageProps: { session, ...rest }
+}: AppPropsWithLayout) {
   const getLayout = Component.getLayout || (page => page)
-  const { store, props } = wrapper.useWrappedStore(otherProps)
+  const { store, props } = wrapper.useWrappedStore(rest)
 
   return (
     <Provider store={store}>
-      <SessionProvider session={otherProps.pageProps.session}>
+      <SessionProvider session={session}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Suspense fallback={<Loading />}>
-            {getLayout(<Component {...props.pageProps} />)}
+            {getLayout(<Component {...props} />)}
           </Suspense>
         </ThemeProvider>
       </SessionProvider>
     </Provider>
   )
 }
-
-export default App

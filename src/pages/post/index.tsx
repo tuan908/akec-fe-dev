@@ -3,10 +3,11 @@ import { wrapper } from '@/app/store'
 import { LoadingComponent } from '@/component'
 import postApi from '@/features/post/post.api'
 import { clearInput } from '@/features/post/post.slice'
+import { For } from 'million/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { ReactElement, useState } from 'react'
-import { For } from 'million/react'
+import { type NextPageWithLayout } from '../_app'
 
 const PlusIcon = dynamic(() => import('@mui/icons-material/Add'))
 const IconButton = dynamic(() => import('@mui/material/IconButton'))
@@ -14,7 +15,7 @@ const Layout = dynamic(() => import('@/component/shared/layout'))
 const PostCreator = dynamic(() => import('@/component/about/create-post'))
 const PostCard = dynamic(() => import('@/component/about/postcard'))
 
-export default function About() {
+const Page: NextPageWithLayout = () =>  {
   const [open, setOpen] = useState(false)
   const dispatch = useAppDispatch()
   const { data, isLoading } = postApi.useGetAllPostsQuery()
@@ -131,9 +132,11 @@ export default function About() {
   )
 }
 
-About.getLayout = (page: ReactElement) => (
+Page.getLayout = (page: ReactElement) => (
   <Layout pageTitle='Về chúng tôi'>{page}</Layout>
 )
+
+export default Page
 
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {

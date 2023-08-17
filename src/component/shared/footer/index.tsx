@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
     >
       <ul className='w-4/5 grid grid-cols-2 m-auto p-4 place-items-start md:hidden'>
         <li className='text-lg px-4 py-2'>
-          <Link href={Route.About}>Về AKEC</Link>
+          <Link href={Route.Post}>Về AKEC</Link>
         </li>
         <li className='text-lg px-4 py-2'>
           <Link href={Route.Products}>Sản phẩm</Link>

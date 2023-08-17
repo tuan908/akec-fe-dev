@@ -4,6 +4,7 @@ import postApi from '@/features/post/post.api'
 import productApi from '@/features/product/product.api'
 import dynamic from 'next/dynamic'
 import { ReactElement } from 'react'
+import { type NextPageWithLayout } from '../_app'
 
 const Layout = dynamic(() => import('@/component/shared/layout'))
 const BirdNestError = dynamic(() =>
@@ -20,7 +21,7 @@ const Loading = dynamic(() => import('@/component/shared/loading'), {
  *
  * @returns Product List
  */
-export default function ProductsPage() {
+const Page: NextPageWithLayout = () => {
   const { isLoading, isError } = productApi.useGetAllProductsQuery()
   const { data } = postApi.useGetImagesQuery()
 
@@ -49,7 +50,9 @@ export default function ProductsPage() {
   )
 }
 
-ProductsPage.getLayout = (page: ReactElement) => (
+export default Page
+
+Page.getLayout = (page: ReactElement) => (
   <Layout pageTitle='Danh sách sản phẩm'>{page}</Layout>
 )
 

@@ -2,19 +2,16 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { removeFromCart } from '@/features/order/order.slice'
 import type { TOrder } from '@/types'
 import { formatMoney } from '@/util'
+import { Check, Clear } from '@mui/icons-material'
+import { Box, Button, Modal, Typography } from '@mui/material'
 import dynamic from 'next/dynamic'
-
-import NextLink from 'next/link'
 import { useState, type ReactElement } from 'react'
+import { type NextPageWithLayout } from './_app'
 
 const CartComponent = dynamic(() => import('@/component/cart'))
 const Layout = dynamic(() => import('@/component/shared/layout'))
-const Check = dynamic(() => import('@mui/icons-material/Check'))
-const Clear = dynamic(() => import('@mui/icons-material/Clear'))
-const Box = dynamic(() => import('@mui/material/Box'))
-const Button = dynamic(() => import('@mui/material/Button'))
-const Modal = dynamic(() => import('@mui/material/Modal'))
-const Typography = dynamic(() => import('@mui/material/Typography'))
+const NextLink = dynamic(() => import('next/link'))
+
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -28,7 +25,7 @@ const style = {
   p: 4
 }
 
-const CartPage = () => {
+const Page: NextPageWithLayout = () => {
   const data = useAppSelector(state => state.order)
   const dispatch = useAppDispatch()
 
@@ -50,7 +47,7 @@ const CartPage = () => {
       {data.length > 0 &&
         data?.map(item => (
           <div
-            className='flex flex-row flex-1 w-[70%] mx-auto my-2 border-x-2 border-y-2 h-[50%]'
+            className='flex flex-row flex-1 w-[70%] mx-auto my-2 border-x-2 border-y-2 h-1/2'
             key={item.id}
           >
             <div className='flex flex-[0.29]'>
@@ -100,20 +97,20 @@ const CartPage = () => {
             </Modal>
           </div>
         ))}
-      <h1 className='text-right w-[80%] my-4 text-xl'></h1>
-      <div className='flex w-[80%] justify-end'>
+      <h1 className='text-right w-4/5 my-4 text-xl'></h1>
+      <div className='flex w-4/5 justify-end'>
         {data.length > 0 ? (
           <Button
             variant='outlined'
-            className=''
-            disableRipple
             onClick={handleOrder}
+            disableRipple
           >
             Đặt hàng
           </Button>
         ) : (
           <h1>
-            Giỏ hàng trống, <NextLink href='/product/list'>tiếp tục mua sắm</NextLink>
+            Giỏ hàng trống,
+            <NextLink href='/product/list'>tiếp tục mua sắm</NextLink>
           </h1>
         )}
       </div>
@@ -121,8 +118,8 @@ const CartPage = () => {
   )
 }
 
-export default CartPage
+export default Page
 
-CartPage.getLayout = (page: ReactElement) => (
+Page.getLayout = (page: ReactElement) => (
   <Layout pageTitle='Giỏ hàng'>{page}</Layout>
 )

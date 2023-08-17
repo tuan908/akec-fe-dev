@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/app/hooks'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { addToCart } from '@/features/order/order.slice'
 import type { TProduct } from '@/types'
 import { chonburi } from '@/util'
@@ -15,9 +15,16 @@ interface Props {
 }
 
 export default function DetailText({ data }: Props) {
+  const orders = useAppSelector(state => state.order)
   const dispatch = useAppDispatch()
+
+  let initQuantity =
+    orders.find(order => order.id === data.id) !== undefined
+      ? orders.find(order => order.id === data.id)?.quantity!
+      : 1
+
   const [state, setState] = useState({
-    currentQty: 1,
+    currentQty: initQuantity,
     position: 0
   })
 

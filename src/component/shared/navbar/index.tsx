@@ -51,9 +51,9 @@ export default function Navbar() {
     >
       <Sidebar />
       <Link
-        href={Route.About}
+        href={Route.Post}
         className={`hidden sm:block cursor-pointer ${
-          Route.About === router.pathname ? 'opacity-1' : 'opacity-60'
+          Route.Post === router.pathname ? 'opacity-1' : 'opacity-60'
         }`}
       >
         Tin tức
