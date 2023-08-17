@@ -1,37 +1,16 @@
 import { wrapper } from '@/app/store'
 import postApi from '@/features/post/post.api'
-import { m, useAnimate, useScroll } from 'framer-motion'
+import { useAdvancedScroll } from '@/hooks'
+import { m } from 'framer-motion'
 import { For } from 'million/react'
-import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import NextImage from 'next/image'
+import { useRef } from 'react'
 import styles from './styles.module.scss'
 
 export default function PostDetailSample() {
   const { data } = postApi.useGetImagesQuery()
   const ref = useRef<HTMLDivElement>(null)
-  const [scope, animate] = useAnimate()
-  const { scrollYProgress } = useScroll({ container: ref })
-  const [progress, setLatestProgressValue] = useState(0)
-
-  useEffect(() => {
-    scrollYProgress.on('change', latestValue => {
-      setLatestProgressValue(latestValue)
-      animate(
-        scope.current,
-        {
-          y: `-${
-            (scope.current as HTMLDivElement).scrollHeight * latestValue
-          }px`
-        },
-        {
-          ease: 'easeInOut',
-          type: 'tween'
-        }
-      )
-    })
-
-    return () => scrollYProgress.clearListeners()
-  }, [animate, scope, scrollYProgress])
+  const { progress, scope } = useAdvancedScroll(ref)
 
   const classes = `w-9/20 overflow-y-auto ${styles.styledScrollbar}`
 
@@ -43,7 +22,7 @@ export default function PostDetailSample() {
           <m.div className='w-9/20' ref={scope}>
             <For each={data!}>
               {d => (
-                <Image key={d.id} src={d.url} alt='' width={600} height={600} />
+                <NextImage key={d.id} src={d.url} alt='' width={600} height={600} />
               )}
             </For>
           </m.div>

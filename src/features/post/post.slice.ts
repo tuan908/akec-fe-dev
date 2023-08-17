@@ -1,6 +1,6 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { HYDRATE_ACTION } from '../hydrate/hydrate.action'
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { SliceName } from '../feature.constant'
+import { HYDRATE_ACTION } from '../hydrate/hydrate.action'
 
 export const addFileAsync = createAsyncThunk(
   'upload/addFileAsync',
@@ -40,7 +40,7 @@ const postSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(HYDRATE_ACTION, (state, action) => ({
       ...state,
-      ...action.payload
+      post: action.payload.post
     }))
     builder.addCase(addFileAsync.fulfilled, (state, action) => {
       state._file.push(action.payload)

@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { TOrder } from '@/types'
-import { HYDRATE_ACTION } from '../hydrate/hydrate.action'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { SliceName } from '../feature.constant'
+import { HYDRATE_ACTION } from '../hydrate/hydrate.action'
 
-const productSlice = createSlice({
-  name: SliceName.Product,
+const orderSlice = createSlice({
+  name: SliceName.Order,
   initialState: [] as TOrder[],
   reducers: {
     addToCart(state, action: PayloadAction<TOrder>) {
@@ -25,13 +25,13 @@ const productSlice = createSlice({
     }
   },
   extraReducers(builder) {
-    builder.addCase(HYDRATE_ACTION, (state, action) => ({
+    builder.addCase(HYDRATE_ACTION, (state, action) => [
       ...state,
-      ...action.payload
-    }))
+      ...action.payload.order
+    ])
   }
 })
 
-export default productSlice
+export default orderSlice
 
-export const { addToCart, removeFromCart } = productSlice.actions
+export const { addToCart, removeFromCart } = orderSlice.actions

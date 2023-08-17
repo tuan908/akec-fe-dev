@@ -1,8 +1,7 @@
 import { useAppSelector } from '@/app/hooks'
 import { Route } from '@/constant'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks'
 import styled from '@emotion/styled'
-
 import { signIn, signOut } from 'next-auth/react'
 import dynamic from 'next/dynamic'
 
@@ -11,7 +10,7 @@ const NextLink = dynamic(() => import('next/link'))
 const NextImage = dynamic(() => import('next/image'))
 
 const CSRNavbarItem = () => {
-  const items = useAppSelector(state => state.product).length
+  const items = useAppSelector(state => state.order).length
   const [session] = useAuth()
 
   return (

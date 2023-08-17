@@ -1,6 +1,6 @@
+import type { TAppState } from '@/app/types'
 import { createAction } from '@reduxjs/toolkit'
 import { HYDRATE } from 'next-redux-wrapper'
-import type { TAppState } from '@/app/store'
 
 /**
  * @see https://github.com/kirill-konshin/next-redux-wrapper/issues/509

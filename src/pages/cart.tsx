@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import { removeFromCart } from '@/features/product/product.slice'
+import { removeFromCart } from '@/features/order/order.slice'
 import type { TOrder } from '@/types'
 import { formatMoney } from '@/util'
 import dynamic from 'next/dynamic'
 
-import Link from 'next/link'
-import { ReactElement, useState } from 'react'
+import NextLink from 'next/link'
+import { useState, type ReactElement } from 'react'
 
 const CartComponent = dynamic(() => import('@/component/cart'))
 const Layout = dynamic(() => import('@/component/shared/layout'))
@@ -29,7 +29,7 @@ const style = {
 }
 
 const CartPage = () => {
-  const data = useAppSelector(state => state.product)
+  const data = useAppSelector(state => state.order)
   const dispatch = useAppDispatch()
 
   const [open, setOpen] = useState(false)
@@ -113,7 +113,7 @@ const CartPage = () => {
           </Button>
         ) : (
           <h1>
-            Giỏ hàng trống, <Link href='/product/list'>tiếp tục mua sắm</Link>
+            Giỏ hàng trống, <NextLink href='/product/list'>tiếp tục mua sắm</NextLink>
           </h1>
         )}
       </div>
