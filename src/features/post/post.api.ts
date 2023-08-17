@@ -1,7 +1,7 @@
 import baseApi from '@/app/base.api'
+import { TImage } from '@/db/image.repository'
 import type { TPost } from '@/db/post.repository'
 import { HttpMethod } from '../feature.constant'
-import { TImage } from '@/db/image.repository'
 
 const postApi = baseApi.injectEndpoints({
   endpoints: build => ({

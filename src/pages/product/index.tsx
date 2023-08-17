@@ -60,8 +60,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {
     store.dispatch(productApi.endpoints.getAllProducts.initiate())
     store.dispatch(postApi.endpoints.getImages.initiate())
-    await Promise.all(store.dispatch(productApi.util.getRunningQueriesThunk()))
-    await Promise.all(store.dispatch(postApi.util.getRunningQueriesThunk()))
+    await Promise.allSettled(store.dispatch(productApi.util.getRunningQueriesThunk()))
+    await Promise.allSettled(store.dispatch(postApi.util.getRunningQueriesThunk()))
     return {
       props: {}
     }

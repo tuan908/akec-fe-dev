@@ -13,6 +13,7 @@ const CarouselItem: FC<Props> = ({ imageUrl, active }) => {
         src={imageUrl}
         alt=''
         className='rounded-3xl object-fill h-[433px] w-full'
+        loading='lazy'
       />
     </CarouselItemWrapper>
   )

@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@/app/hooks'
-import type { FC } from 'react'
-import styled from '@emotion/styled'
 import { nextSlide, prevSlide } from '@/features/ui/carousel/carousel.slice'
+import styled from '@emotion/styled'
+import type { FC } from 'react'
 
 type CarouselNavigationProps = {
   currentSlideIndex: number

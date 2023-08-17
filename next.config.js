@@ -32,4 +32,8 @@ const nextConfig = {
   swcMinify: true
 }
 
-module.exports = million.next(nextConfig)
+const millionConfig = {
+  auto: true
+}
+
+module.exports = million.next(nextConfig, millionConfig)

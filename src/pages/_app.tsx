@@ -5,7 +5,7 @@ import type { NextPage } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import dynamic from 'next/dynamic'
-import { ReactElement, ReactNode, Suspense } from 'react'
+import { Suspense, type ReactElement, type ReactNode } from 'react'
 import { Provider } from 'react-redux'
 
 const Loading = dynamic(() => import('@/component/shared/loading'))

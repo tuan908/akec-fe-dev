@@ -8,7 +8,7 @@ type TImageEndpointResponse = {
   images: TImage[]
 }
 
-export default async function handler(_: NextApiRequest, res: NextApiResponse) {
+export default async function handler(_res: NextApiRequest, res: NextApiResponse) {
   try {
     let _images: TImage[] = (await kv.get<TImage[]>(`IMAGES`)) ?? []
 

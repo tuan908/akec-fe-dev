@@ -1,9 +1,9 @@
+import { type TImage } from '@/db/image.repository'
+import { chonburi } from '@/util'
 import styled from '@emotion/styled'
 import { For } from 'million/react'
-import { chonburi } from '@/util'
 import { useRouter } from 'next/router'
 import styles from './product-card.module.scss'
-import { type TImage } from '@/db/image.repository'
 
 type ProductCardProps = {
   previewImageUrl: string
@@ -49,7 +49,7 @@ export default function ProductCollection({ imgUrls }: { imgUrls: TImage[] }) {
 
   return (
     <Wrapper className='grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      <For each={imgUrls}>
+      <For each={imgUrls} memo>
         {(url, index) => (
           <ProductCard
             key={index}

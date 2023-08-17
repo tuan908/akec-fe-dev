@@ -267,7 +267,7 @@ Page.getLayout = (page) => <Layout pageTitle='Post 1'>{page}</Layout>
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {
     store.dispatch(postApi.endpoints.getImages.initiate())
-    await Promise.all(store.dispatch(postApi.util.getRunningQueriesThunk()))
+    await Promise.allSettled(store.dispatch(postApi.util.getRunningQueriesThunk()))
     return {
       props: {}
     }

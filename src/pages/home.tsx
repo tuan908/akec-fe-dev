@@ -50,7 +50,7 @@ const Slogan = styled.h1`
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {
     store.dispatch(postApi.endpoints.getImages.initiate())
-    await Promise.all(store.dispatch(postApi.util.getRunningQueriesThunk()))
+    await Promise.allSettled(store.dispatch(postApi.util.getRunningQueriesThunk()))
 
     return { props: {} }
   }

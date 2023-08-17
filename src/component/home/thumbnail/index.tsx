@@ -5,6 +5,7 @@ export default function HomeThumbnail() {
         src='/assets/image/background-home.webp'
         className='opacity-90 object-cover w-full sm:h-[20rem] md:h-[30rem]'
         alt=''
+        loading='lazy'
       />
 
       <div className='absolute top-1/3 left-[5%] text-white font-bold'>

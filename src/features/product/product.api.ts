@@ -1,5 +1,5 @@
-import type { TProduct } from '@/types'
 import api from '@/app/base.api'
+import type { TProduct } from '@/types'
 
 export default api.injectEndpoints({
   endpoints: builder => ({

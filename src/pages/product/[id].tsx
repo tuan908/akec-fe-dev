@@ -51,7 +51,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       )
     }
 
-    await Promise.all(store.dispatch(productApi.util.getRunningQueriesThunk()))
+    await Promise.allSettled(store.dispatch(productApi.util.getRunningQueriesThunk()))
 
     return { props: { id: Number.parseInt(id!?.toString()) } }
   }

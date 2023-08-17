@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       colors: {
         footer: '#00130F',
-        backgroundDark: '#333'
+        dark: '#333',
+        hover: '#eaeaea'
       },
       minWidth: { '1/3': 'calc(100% / 3)' },
       width: {

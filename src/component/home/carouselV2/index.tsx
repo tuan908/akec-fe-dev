@@ -60,6 +60,7 @@ export default function CarouselV2({ imgUrls }: { imgUrls: TImage[] }) {
               width={1920}
               height={3411}
               alt=''
+              loading='lazy'
             />
           </motion.div>
         ))}

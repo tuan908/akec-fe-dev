@@ -1,7 +1,7 @@
-import dynamic from 'next/dynamic'
-import { carouselIndexSelector } from '@/features/ui/carousel/carousel.slice'
 import { useAppSelector } from '@/app/hooks'
+import { carouselIndexSelector } from '@/features/ui/carousel/carousel.slice'
 import type { TProduct } from '@/types'
+import dynamic from 'next/dynamic'
 
 const CarouselItem = dynamic(() => import('./CarouselItem'))
 const CarouselNavigation = dynamic(() => import('./CarouselNavigation'))
