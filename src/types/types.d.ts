@@ -12,6 +12,8 @@ declare global {
       PROD_API_ENDPOINT: string
       GOOGLE_ID: string
       GOOGLE_SECRET: string
+      DEV_GOOGLE_DRIVE_API_KEY: string
+      PROD_GOOGLE_DRIVE_API_KEY: string
     }
   }
 }
