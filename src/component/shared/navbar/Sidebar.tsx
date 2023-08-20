@@ -1,4 +1,7 @@
 import { Route } from '@/constant'
+import { useAuth } from '@/hooks'
+import { signOut } from '@/util'
+import { signIn } from 'next-auth/react'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
@@ -13,6 +16,7 @@ export default function Sidebar() {
   const [isToggle, setToggle] = useState({
     left: false
   })
+  const [session] = useAuth()
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -47,7 +51,10 @@ export default function Sidebar() {
         disableBackdropTransition
       >
         <ul className='bg-white'>
-          <li className='w-full p-4 flex items-center justify-center' onClick={toggleDrawer('left', false)}>
+          <li
+            className='w-full p-4 flex items-center justify-center'
+            onClick={toggleDrawer('left', false)}
+          >
             <Link href={Route.Home}>
               <Image
                 src='/assets/image/logo.jpg'
@@ -75,6 +82,25 @@ export default function Sidebar() {
                 <Link href={route}>{route.replace('/', '').toUpperCase()}</Link>
               </li>
             )
+          )}
+          {session !== undefined && session !== null ? (
+            <li
+              onClick={() => {
+                toggleDrawer('left', false)
+                signOut()
+              }}
+            >
+              Sign out
+            </li>
+          ) : (
+            <li
+              onClick={() => {
+                toggleDrawer('left', false)
+                signIn()
+              }}
+            >
+              Sign in
+            </li>
           )}
         </ul>
       </SwipeableDrawer>
