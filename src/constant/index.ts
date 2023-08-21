@@ -14,7 +14,8 @@ export enum Route {
   Introduce = '/home',
   Login = '/auth/login',
   Post = '/post',
-  Account = '/account'
+  Account = '/account',
+  CustomerService = '/customer-service'
 }
 
 export const ACCESS_TOKEN = `access_token`

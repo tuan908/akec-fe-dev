@@ -2,7 +2,7 @@ import { wrapper } from '@/app/store'
 import postApi from '@/features/post/post.api'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
-import { ReactElement } from 'react'
+import { type ReactElement } from 'react'
 import { type NextPageWithLayout } from './_app'
 
 const CarouselV2 = dynamic(() => import('@/component/home/carouselV2'), {

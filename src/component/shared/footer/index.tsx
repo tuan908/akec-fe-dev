@@ -9,32 +9,31 @@ const LocalPhoneIcon = dynamic(() => import('@mui/icons-material/LocalPhone'))
 const LocationOnIcon = dynamic(() => import('@mui/icons-material/LocationOn'))
 const NearMeIcon = dynamic(() => import('@mui/icons-material/NearMe'))
 const YouTubeIcon = dynamic(() => import('@mui/icons-material/YouTube'))
-const Link = dynamic(() => import('next/link'))
+const NextLink = dynamic(() => import('next/link'))
 
 const Footer: React.FC = () => {
   return (
     <footer
-      className='bg-footer text-white lg:p-4 w-full'
-      style={{ gridArea: 'footer' }}
+      className={`bg-footer text-white lg:p-4 w-full ${styles.gridAreaFooter}`}
     >
       <ul className='w-4/5 grid grid-cols-2 m-auto p-4 place-items-start md:hidden'>
         <li className='text-lg px-4 py-2'>
-          <Link href={Route.Post}>Về AKEC</Link>
+          <NextLink href={Route.Post}>Về AKEC</NextLink>
         </li>
         <li className='text-lg px-4 py-2'>
-          <Link href={Route.Products}>Sản phẩm</Link>
+          <NextLink href={Route.Products}>Sản phẩm</NextLink>
         </li>
         <li className='text-lg px-4 py-2'>
-          <Link href={Route.Cart}>Đơn hàng của tôi</Link>
+          <NextLink href={Route.Cart}>Đơn hàng của tôi</NextLink>
         </li>
         <li className='text-lg px-4 py-2'>
-          <Link href={Route.Account}>Tài khoản của tôi</Link>
+          <NextLink href={Route.Account}>Tài khoản của tôi</NextLink>
         </li>
         <li className='text-lg px-4 py-2'>
-          <Link href={''}>Chính sách khách hàng</Link>
+          <NextLink href={''}>Chính sách khách hàng</NextLink>
         </li>
         <li className='text-lg px-4 py-2'>
-          <Link href={Route.Contact}>Liên hệ</Link>
+          <NextLink href={Route.Contact}>Liên hệ</NextLink>
         </li>
         <li className='col-span-2 text-center px-4 pt-2 w-full'>
           <h3 className='text-sm'>
@@ -47,7 +46,11 @@ const Footer: React.FC = () => {
       <div className='hidden md:grid md:grid-cols-9 md:font-semibold p-4'>
         <div className='logo'>
           <a href={facebook_url} className='flex items-center'>
-            <img src={LOGO_ABSOLUTE_PATH} className='h-40 mr-3' alt='AKEC Logo' />
+            <img
+              src={LOGO_ABSOLUTE_PATH}
+              className='h-40 mr-3'
+              alt='AKEC Logo'
+            />
           </a>
         </div>
         <div className='col-span-4 w-full'>
@@ -64,13 +67,13 @@ const Footer: React.FC = () => {
             </div>
             <div className='col-span-9'>
               Địa chỉ: {address}{' '}
-              <Link
+              <NextLink
                 className={styles.locationLink}
                 href={location_map}
                 target={'_blank'}
               >
                 (Xem trên bản đồ <NearMeIcon></NearMeIcon>)
-              </Link>
+              </NextLink>
             </div>
 
             {/* Phone */}
@@ -94,7 +97,7 @@ const Footer: React.FC = () => {
         <div className=''>
           <h2 className='uppercase text-xl mb-6 text-left'>hỗ trợ</h2>
           <div className='capitalize'>
-            <Link href={Route.Contact}>Nội Bộ</Link>
+            <NextLink href={Route.Contact}>Nội Bộ</NextLink>
           </div>
         </div>
 
@@ -102,16 +105,16 @@ const Footer: React.FC = () => {
         <div className=''>
           <h2 className='uppercase text-xl mb-6 text-left'>quick link</h2>
           <div className='capitalize'>
-            <Link href={Route.Contact}>Giới Thiệu</Link>
+            <NextLink href={Route.Contact}>Giới Thiệu</NextLink>
           </div>
           <div className='capitalize'>
-            <Link href={Route.Contact}>tin tức</Link>
+            <NextLink href={Route.Contact}>tin tức</NextLink>
           </div>
           <div className='capitalize'>
-            <Link href={Route.Contact}>tuyển dụng</Link>
+            <NextLink href={Route.Contact}>tuyển dụng</NextLink>
           </div>
           <div className='capitalize'>
-            <Link href={Route.Contact}>liên hệ</Link>
+            <NextLink href={Route.Contact}>liên hệ</NextLink>
           </div>
         </div>
 
@@ -119,15 +122,15 @@ const Footer: React.FC = () => {
         <div className='col-span-2 justify-items-start'>
           <h2 className='uppercase text-xl mb-6 text-left'>KẾT NỐI VỚI AKEC</h2>
           <div>
-            <Link href={facebook_url}>
+            <NextLink href={facebook_url}>
               <FacebookIcon className={styles.socialIcon}></FacebookIcon>
-            </Link>
-            <Link href={instagram_url}>
+            </NextLink>
+            <NextLink href={instagram_url}>
               <InstagramIcon className={styles.socialIcon}></InstagramIcon>
-            </Link>
-            <Link href={youtube_url}>
+            </NextLink>
+            <NextLink href={youtube_url}>
               <YouTubeIcon className={styles.socialIcon}></YouTubeIcon>
-            </Link>
+            </NextLink>
             <h3>@ 2022 AKEC Group</h3>
           </div>
         </div>
