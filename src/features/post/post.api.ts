@@ -23,7 +23,7 @@ const postApi = baseApi.injectEndpoints({
       }
     }),
     getImages: build.query<TImage[], void>({
-      query: () => `/image`,
+      query: () => `/api/image`,
       transformResponse: (
         baseQueryReturnValue: { images: TImage[] },
         _meta,

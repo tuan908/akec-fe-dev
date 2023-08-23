@@ -1,23 +1,19 @@
 import { HttpStatus } from '@/constant'
-import driveService from '@/lib/storage'
+import drive from '@/lib/drive'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import credentials from '../../../../token.json'
 
 export default async function handler(
-  _nextApiRequest: NextApiRequest,
-  nextApiResponse: NextApiResponse
+  _req: NextApiRequest,
+  res: NextApiResponse
 ) {
-  const res = await driveService.files.list({
+  const gapiRes = await drive.files.list({
+    access_token: credentials.access_token,
     pageSize: 10,
-    fields: 'nextPageToken, files(id, name, size)'
+    fields: `nextPageToken, files(id, name, createdTime, modifiedTime, size)`
   })
-
-  if (res.status === HttpStatus.OK) {
-    return nextApiResponse.json({
-      data: res.data,
-      ok: true
-    })
+  if (gapiRes.status !== HttpStatus.OK) {
+    return res.json({ ok: false, data: [] })
   }
-  return nextApiResponse.json({
-    ok: false
-  })
+  return res.json({ ok: true, data: gapiRes.data.files })
 }
