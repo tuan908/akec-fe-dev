@@ -1,6 +1,5 @@
 import { type TImage } from '@/db/image.repository'
 import { chonburi } from '@/util'
-import styled from '@emotion/styled'
 import { For } from 'million/react'
 import { useRouter } from 'next/router'
 import styles from './product-card.module.scss'
@@ -11,15 +10,6 @@ type ProductCardProps = {
   price: number
   onClick?: () => Promise<boolean>
 }
-
-const Wrapper = styled.div`
-  width: calc(100% / 12 * 11);
-  margin: auto;
-  padding: 2rem;
-  display: grid;
-  place-items: center;
-  gap: 1.25rem;
-`
 
 export const ProductCard: React.FunctionComponent<ProductCardProps> = ({
   previewImageUrl,
@@ -48,7 +38,7 @@ export default function ProductCollection({ imgUrls }: { imgUrls: TImage[] }) {
   const router = useRouter()
 
   return (
-    <Wrapper className='grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+    <div className='w-11/12 m-auto p-8 grid place-items-center gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
       <For each={imgUrls} memo>
         {(url, index) => (
           <ProductCard
@@ -60,6 +50,6 @@ export default function ProductCollection({ imgUrls }: { imgUrls: TImage[] }) {
           />
         )}
       </For>
-    </Wrapper>
+    </div>
   )
 }
