@@ -1,7 +1,7 @@
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constant'
 import type { TLogin } from '@/types'
 import { type TRefreshTokenResponse } from '@/types/auth'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import Cookies from 'js-cookie'
 import { SliceName } from '../feature.constant'
 import { HYDRATE_ACTION } from '../hydrate/hydrate.action'
