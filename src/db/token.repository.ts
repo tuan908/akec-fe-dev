@@ -11,6 +11,7 @@ const getAccessToken = async () =>
     .selectFrom(`token`)
     .where(`token.client_id`, `=`, process.env.GOOGLE_ID)
     .select(`token.access_token`)
+    .orderBy(`created_at`, `desc`)
     .executeTakeFirst()
 
 const create = async (tokenDto: TokenDto) =>
@@ -20,7 +21,8 @@ const create = async (tokenDto: TokenDto) =>
       ...tokenDto,
       client_id: process.env.GOOGLE_ID,
       client_secret: process.env.GOOGLE_SECRET,
-      type: 'authorized_user'
+      type: 'authorized_user',
+      update_at: new Date()
     })
     .executeTakeFirst()
 

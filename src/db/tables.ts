@@ -34,6 +34,8 @@ interface TokenTable {
   access_token: string
   refresh_token: string
   expires_at: number
+  created_at: ColumnType<Date, Date, never> | null
+  update_at: ColumnType<Date, Date, never>
 }
 
-export type { PostTable, ProductTable,ImageTable, TokenTable }
+export type { ImageTable, PostTable, ProductTable, TokenTable }
