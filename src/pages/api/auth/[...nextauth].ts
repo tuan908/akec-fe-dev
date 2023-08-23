@@ -1,10 +1,7 @@
-import fs from 'fs/promises'
+import tokenRepository from '@/db/token.repository'
 import { AuthOptions } from 'next-auth'
 import NextAuth from 'next-auth/next'
 import GoogleProvider from 'next-auth/providers/google'
-import path from 'path'
-
-const TOKEN_PATH = path.join(process.cwd(), 'token.json')
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -23,15 +20,12 @@ export const authOptions: AuthOptions = {
   callbacks: {
     jwt: async ({ token, account }) => {
       if (account) {
-        const payload = JSON.stringify({
-          type: 'authorized_user',
-          client_id: process.env.GOOGLE_ID,
-          client_secret: process.env.GOOGLE_SECRET,
+        const tokenDto = {
           access_token: account?.access_token!,
           expires_at: account?.expires_at!,
           refresh_token: account?.refresh_token!
-        })
-        await fs.writeFile(TOKEN_PATH, payload)
+        }
+        await tokenRepository.create(tokenDto)
       }
       return token
     }
