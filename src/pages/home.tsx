@@ -3,7 +3,7 @@ import postApi from '@/features/post/post.api'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 import { type ReactElement } from 'react'
-import { type NextPageWithLayout } from './_app'
+import { type NextPageWithLayout } from '@/types'
 
 const CarouselV2 = dynamic(() => import('@/component/home/carouselV2'), {
   ssr: false
