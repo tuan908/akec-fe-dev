@@ -1,5 +1,5 @@
 import { Roboto } from 'next/font/google'
-import { type NextPageWithLayout } from './_app'
+import { type NextPageWithLayout } from '@/types'
 
 const roboto = Roboto({
   weight: '400',

@@ -1,6 +1,6 @@
 import { Route } from '@/constant'
-import { useAuth } from '@/hooks'
 import { signOut } from '@/util'
+import { type Session } from 'next-auth'
 import { signIn } from 'next-auth/react'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
@@ -11,12 +11,12 @@ const Link = dynamic(() => import('next/link'))
 const Image = dynamic(() => import('next/image'))
 
 type Anchor = 'left'
+type SidebarProps = { session: Session | null }
 
-export default function Sidebar() {
+export default function Sidebar({ session }: SidebarProps) {
   const [isToggle, setToggle] = useState({
     left: false
   })
-  const [session] = useAuth()
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -83,27 +83,37 @@ export default function Sidebar() {
               </li>
             )
           )}
-          {session !== undefined && session !== null ? (
-            <li
-              onClick={() => {
-                toggleDrawer('left', false)
-                signOut()
-              }}
-            >
-              Sign out
-            </li>
-          ) : (
-            <li
-              onClick={() => {
-                toggleDrawer('left', false)
-                signIn()
-              }}
-            >
-              Sign in
-            </li>
-          )}
+          <Component2Render toggleFn={toggleDrawer} session={session} />
         </ul>
       </SwipeableDrawer>
     </>
   )
 }
+
+type RenderProps = {
+  toggleFn: (
+    anchor: Anchor,
+    open: boolean
+  ) => (event: React.KeyboardEvent | React.MouseEvent) => void
+  session: Session | null
+}
+const Component2Render = ({ toggleFn: fn, session }: RenderProps) =>
+  session !== null ? (
+    <li
+      onClick={() => {
+        fn('left', false)
+        signOut()
+      }}
+    >
+      Sign out
+    </li>
+  ) : (
+    <li
+      onClick={() => {
+        fn('left', false)
+        signIn()
+      }}
+    >
+      Sign in
+    </li>
+  )

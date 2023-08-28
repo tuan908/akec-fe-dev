@@ -12,8 +12,8 @@ const Logo = dynamic(() => import('./Logo'), { ssr: false })
 
 export default function Navbar() {
   const router = useRouter()
-  const items = useAppSelector(state => state.order).length
-  const [session] = useAuth()
+  const ordersCount = useAppSelector(state => state.order).length
+  const authProps = useAuth()
 
   return (
     <nav
@@ -23,7 +23,7 @@ export default function Navbar() {
         zIndex: '49'
       }}
     >
-      <Sidebar />
+      <Sidebar {...authProps}/>
       <Link
         href={Route.Post}
         className={`hidden sm:block cursor-pointer ${
@@ -78,7 +78,7 @@ export default function Navbar() {
       >
         Liên hệ
       </Link>
-      <CSRNavbarItem session={session} items={items} />
+      <CSRNavbarItem ordersCount={ordersCount} {...authProps}/>
     </nav>
   )
 }
