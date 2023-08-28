@@ -1,17 +1,20 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { removeFromCart } from '@/features/order/order.slice'
 import type { TOrder } from '@/types'
+import { type NextPageWithLayout } from '@/types'
 import { formatMoney } from '@/util'
-import { Check, Clear } from '@mui/icons-material'
-import { Box, Button, Modal, Typography } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { useState, type ReactElement } from 'react'
-import { type NextPageWithLayout } from './_app'
 
 const CartComponent = dynamic(() => import('@/component/cart'))
 const Layout = dynamic(() => import('@/component/shared/layout'))
 const NextLink = dynamic(() => import('next/link'))
-
+const CheckIcon = dynamic(() => import('@mui/icons-material/Check'))
+const ClearIcon = dynamic(() => import('@mui/icons-material/Clear'))
+const Box = dynamic(() => import('@mui/material/Box'))
+const Button = dynamic(() => import('@mui/material/Button'))
+const Modal = dynamic(() => import('@mui/material/Modal'))
+const Typography = dynamic(() => import('@mui/material/Typography'))
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -52,9 +55,7 @@ const Page: NextPageWithLayout = () => {
           >
             <div className='flex flex-[0.29]'>
               <img
-                src={
-                  'https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg'
-                }
+                src='https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg'
                 className='object-cover w-[240px] h-[240px] p-4'
                 loading='lazy'
               />
@@ -66,7 +67,7 @@ const Page: NextPageWithLayout = () => {
               </h1>
               <CartComponent item={item} />
             </div>
-            <Clear
+            <ClearIcon
               color='error'
               className='cursor-pointer'
               onClick={handleOpen}
@@ -79,7 +80,7 @@ const Page: NextPageWithLayout = () => {
                 <Button
                   variant='outlined'
                   color='error'
-                  startIcon={<Check color='error' />}
+                  startIcon={<CheckIcon color='error' />}
                   onClick={() => handleDelete(item)}
                 >
                   Yes
@@ -87,7 +88,7 @@ const Page: NextPageWithLayout = () => {
                 <Button
                   variant='outlined'
                   color='success'
-                  startIcon={<Clear color='success' />}
+                  startIcon={<ClearIcon color='success' />}
                   onClick={handleClose}
                   disableRipple
                 >
@@ -100,11 +101,7 @@ const Page: NextPageWithLayout = () => {
       <h1 className='text-right w-4/5 my-4 text-xl'></h1>
       <div className='flex w-4/5 justify-end'>
         {data.length > 0 ? (
-          <Button
-            variant='outlined'
-            onClick={handleOrder}
-            disableRipple
-          >
+          <Button variant='outlined' onClick={handleOrder} disableRipple>
             Đặt hàng
           </Button>
         ) : (

@@ -1,46 +1,54 @@
 import { Route } from '@/constant'
 import styled from '@emotion/styled'
-import { Badge } from '@mui/material'
 import { type Session } from 'next-auth'
 import { signIn, signOut } from 'next-auth/react'
-import NextImage from 'next/image'
-import NextLink from 'next/link'
+import dynamic from 'next/dynamic'
 import { type FC } from 'react'
 
+const NextImage = dynamic(() => import('next/image'))
+const NextLink = dynamic(() => import('next/link'))
+const Badge = dynamic(() => import('@mui/material/Badge'))
+const Skeleton = dynamic(() => import('@mui/material/Skeleton'))
+
 type Props = {
-  session: Session | null | undefined
-  items: number
+  session: Session | null
+  ordersCount: number
+  ready: boolean
 }
 
-const CSRNavbarItem: FC<Props> = ({ session, items }) => {
-  if (session)
-    return (
-      <Wrapper>
-        <Badge color='error' variant={`${items > 0 ? 'dot' : 'standard'}`}>
-          <NextImage
-            className='w-auto h-auto sm:w-9 sm:h-9 rounded-full hover:cursor-pointer'
-            src={session!?.user!?.image!}
-            alt=''
-            width={60}
-            height={60}
-          />
-          <ul>
-            {session!?.user!?.email}
-            <li>
-              <NextLink href={Route.Account}>Tài khoản</NextLink>
-            </li>
-            <li>
-              <NextLink href={Route.Cart}>Đơn mua</NextLink>
-            </li>
-            <li onClick={() => signOut()}>Đăng xuất</li>
-          </ul>
-        </Badge>
-      </Wrapper>
+const CSRNavbarItem: FC<Props> = ({ session, ordersCount, ready }) => {
+  if (!ready) {
+    return <Skeleton variant='circular' width={40} height={40} />
+  }
+
+  let Component2Render = () =>
+    session === null ? (
+      <span onClick={() => signIn('google', { redirect: true })}>Login</span>
+    ) : (
+      <Badge color='error' variant={`${ordersCount > 0 ? 'dot' : 'standard'}`}>
+        <NextImage
+          className='w-8 h-8 lg:w-10 lg:h-10 rounded-full hover:cursor-pointer'
+          src={session?.user?.image!}
+          alt=''
+          width={60}
+          height={60}
+        />
+        <ul>
+          {session!?.user!?.email}
+          <li>
+            <NextLink href={Route.Account}>Tài khoản</NextLink>
+          </li>
+          <li>
+            <NextLink href={Route.Cart}>Đơn mua</NextLink>
+          </li>
+          <li onClick={() => signOut()}>Đăng xuất</li>
+        </ul>
+      </Badge>
     )
 
   return (
     <Wrapper>
-      <span onClick={() => signIn('google', { redirect: true })}>Login</span>
+      <Component2Render />
     </Wrapper>
   )
 }

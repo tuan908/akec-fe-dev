@@ -21,7 +21,7 @@ export default function Layout({ children, pageTitle }: LayoutProps) {
         <link rel='icon' type='image/png' href='/assets/image/logo.jpg' />
       </Head>
       <main
-        className={`w-full max-w-screen h-full bg-[#f5ebc5] grid ${styles.layout}`}
+        className={`w-full max-w-screen h-full min-h-screen bg-[#f5ebc5] grid ${styles.layout}`}
       >
         <Navbar />
         <div

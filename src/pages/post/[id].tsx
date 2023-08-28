@@ -1,15 +1,17 @@
 import { wrapper } from '@/app/store'
-import { Layout } from '@/component'
 import postApi from '@/features/post/post.api'
 import { useAdvancedScroll } from '@/hooks'
 import { m } from 'framer-motion'
 import { For } from 'million/react'
-import NextImage from 'next/image'
+import dynamic from 'next/dynamic'
 import { useRef } from 'react'
-import { type NextPageWithLayout } from '../_app'
+import { type NextPageWithLayout } from '@/types'
 import styles from './styles.module.scss'
 
-const Page: NextPageWithLayout = () =>  {
+const Layout = dynamic(() => import('@/component/shared/layout'))
+const NextImage = dynamic(() => import('next/image'))
+
+const Page: NextPageWithLayout = () => {
   const { data } = postApi.useGetImagesQuery()
   const ref = useRef<HTMLDivElement>(null)
   const { progress, scope } = useAdvancedScroll(ref)
@@ -24,7 +26,13 @@ const Page: NextPageWithLayout = () =>  {
           <m.div className='w-9/20' ref={scope}>
             <For each={data!}>
               {d => (
-                <NextImage key={d.id} src={d.url} alt='' width={600} height={600} />
+                <NextImage
+                  key={d.id}
+                  src={d.url}
+                  alt=''
+                  width={600}
+                  height={600}
+                />
               )}
             </For>
           </m.div>
@@ -262,12 +270,14 @@ const Page: NextPageWithLayout = () =>  {
 
 export default Page
 
-Page.getLayout = (page) => <Layout pageTitle='Post 1'>{page}</Layout>
+Page.getLayout = page => <Layout pageTitle='Post 1'>{page}</Layout>
 
 export const getServerSideProps = wrapper.getServerSideProps(
   store => async () => {
     store.dispatch(postApi.endpoints.getImages.initiate())
-    await Promise.allSettled(store.dispatch(postApi.util.getRunningQueriesThunk()))
+    await Promise.allSettled(
+      store.dispatch(postApi.util.getRunningQueriesThunk())
+    )
     return {
       props: {}
     }

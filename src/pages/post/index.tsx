@@ -1,19 +1,20 @@
 import { useAppDispatch } from '@/app/hooks'
 import { wrapper } from '@/app/store'
-import { LoadingComponent } from '@/component'
 import postApi from '@/features/post/post.api'
 import { clearInput } from '@/features/post/post.slice'
 import { For } from 'million/react'
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import { ReactElement, useState } from 'react'
-import { type NextPageWithLayout } from '../_app'
+import { useState, type ReactElement } from 'react'
+import { type NextPageWithLayout } from '@/types'
 
 const PlusIcon = dynamic(() => import('@mui/icons-material/Add'))
 const IconButton = dynamic(() => import('@mui/material/IconButton'))
 const Layout = dynamic(() => import('@/component/shared/layout'))
 const PostCreator = dynamic(() => import('@/component/about/create-post'))
 const PostCard = dynamic(() => import('@/component/about/postcard'))
+const NextLink = dynamic(() => import('next/link'))
+const LoadingComponent = dynamic(() => import('@/component/shared/loading'))
+
 
 const Page: NextPageWithLayout = () => {
   const [open, setOpen] = useState(false)
@@ -37,13 +38,13 @@ const Page: NextPageWithLayout = () => {
           <div className='space-y-6 lg:space-y-2 border-l border-slate-100 w-full flex flex-col'>
             <For each={[1, 2, 3, 4, 5]}>
               {number => (
-                <Link
+                <NextLink
                   href={`/post/${number}`}
                   key={number}
                   className='px-3 py-4 hover:cursor-pointer hover:text-dark hover:bg-hover hover:rounded-lg'
                 >
                   Bài viết {number}
-                </Link>
+                </NextLink>
               )}
             </For>
           </div>

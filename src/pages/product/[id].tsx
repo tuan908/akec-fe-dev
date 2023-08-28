@@ -1,9 +1,9 @@
 import { wrapper } from '@/app/store'
 import productApi from '@/features/product/product.api'
-import { InferGetServerSidePropsType } from 'next'
+import { type InferGetServerSidePropsType } from 'next'
 import dynamic from 'next/dynamic'
 import type { ReactElement } from 'react'
-import { type NextPageWithLayout } from '../_app'
+import { type NextPageWithLayout } from '@/types'
 
 const Layout = dynamic(() => import('@/component/shared/layout'))
 const Loading = dynamic(() => import('@/component/shared/loading'), {

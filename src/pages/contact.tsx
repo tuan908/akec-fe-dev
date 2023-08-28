@@ -1,6 +1,6 @@
+import { type NextPageWithLayout } from '@/types'
 import dynamic from 'next/dynamic'
-import type { ReactElement } from 'react'
-import { type NextPageWithLayout } from './_app'
+import { type ReactElement } from 'react'
 
 const ContactForm = dynamic(() => import('@/component/contact/contact-form'))
 const Layout = dynamic(() => import('@/component/shared/layout'))

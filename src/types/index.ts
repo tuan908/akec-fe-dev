@@ -1,4 +1,7 @@
 import { type SelectQueryBuilder } from 'kysely'
+import type { NextPage } from 'next'
+import type { AppProps } from 'next/app'
+import type { ReactElement, ReactNode } from 'react'
 
 export type { TOrder, TProduct, TPaged } from './product'
 export type { TAboutPost } from './about'
@@ -18,3 +21,11 @@ export type KyselyQueryReturnType<
     unknown
   >
 > = Awaited<ReturnType<KyselyQuery['execute']>>[number]
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+export type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}

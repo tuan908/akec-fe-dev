@@ -1,9 +1,11 @@
 import { wrapper } from '@/app/store'
-import { LoadingComponent } from '@/component'
 import storageApi from '@/features/storage/storage.api'
+import { type NextPageWithLayout } from '@/types'
 import { Logger, convertFileSize } from '@/util'
 import { For } from 'million/react'
-import { type NextPageWithLayout } from '../_app'
+import dynamic from 'next/dynamic'
+
+const LoadingComponent = dynamic(() => import('@/component/shared/loading'))
 
 const Page: NextPageWithLayout = () => {
   const { data, isLoading } = storageApi.useListAllFilesQuery()

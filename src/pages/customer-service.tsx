@@ -1,5 +1,7 @@
-import { Layout } from '@/component'
-import { type NextPageWithLayout } from './_app'
+import dynamic from 'next/dynamic'
+import { type NextPageWithLayout } from '@/types'
+
+const Layout = dynamic(() => import('@/component/shared/layout'))
 
 const Page: NextPageWithLayout = () => {
   return (
