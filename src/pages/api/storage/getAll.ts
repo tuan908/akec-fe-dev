@@ -7,7 +7,7 @@ export default async function handler(
   _req: NextApiRequest,
   res: NextApiResponse
 ) {
-  let data = await tokenRepository.getAccessToken()
+  let data = await tokenRepository.findAccessToken()
   const gapiRes = await drive.files.list({
     access_token: data!.access_token,
     pageSize: 10,
