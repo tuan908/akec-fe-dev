@@ -1,45 +1,19 @@
+import { useAppSelector } from '@/app/hooks'
 import { Route } from '@/constant'
+import { useAuth } from '@/hooks'
 import dynamic from 'next/dynamic'
-import { Yeseva_One } from 'next/font/google'
 import { useRouter } from 'next/router'
-import { MouseEventHandler, useState } from 'react'
 import styles from './navbar.module.scss'
 
 const Link = dynamic(() => import('next/link'))
 const Sidebar = dynamic(() => import('./Sidebar'))
-const CSRNavbarItem = dynamic(() => import('./CSRNavbarItem'), {
-  ssr: false
-})
-
-const yesevaOneLocal = Yeseva_One({ weight: '400', subsets: ['latin'] })
+const CSRNavbarItem = dynamic(() => import('./CSRNavbarItem'))
+const Logo = dynamic(() => import('./Logo'), { ssr: false })
 
 export default function Navbar() {
   const router = useRouter()
-  const [animationClasses, setClasses] = useState({
-    logoPart1: '',
-    logoPart2: '',
-    logoPart3: ''
-  })
-
-  const handleOnMouseEnter: MouseEventHandler<HTMLAnchorElement> = e => {
-    e.preventDefault()
-    setClasses({
-      ...animationClasses,
-      logoPart1: styles.moveInLeft!,
-      logoPart2: styles.hideTxt!,
-      logoPart3: styles.moveInRight!
-    })
-  }
-
-  const handleOnMouseLeave: MouseEventHandler<HTMLAnchorElement> = e => {
-    e.preventDefault()
-    setClasses({
-      ...animationClasses,
-      logoPart1: styles.moveOutLeft!,
-      logoPart2: styles.showTxt!,
-      logoPart3: styles.moveOutRight!
-    })
-  }
+  const items = useAppSelector(state => state.order).length
+  const [session] = useAuth()
 
   return (
     <nav
@@ -89,26 +63,7 @@ export default function Navbar() {
           </li>
         </ul>
       </Link>
-      {/* Change from img => text */}
-      <Link
-        href={Route.Home}
-        className={`w-7/9 flex justify-center items-center sm:w-fit cursor-pointer text-2xl ${
-          Route.Home === router.pathname ? 'opacity-1' : 'opacity-60'
-        } ${yesevaOneLocal.className}`}
-        onMouseEnter={e => handleOnMouseEnter(e)}
-        onMouseLeave={e => handleOnMouseLeave(e)}
-      >
-        {/* <img src={LOGO} alt='AKEC Logo' className='w-10 h-10' /> */}
-        <span className='text-center text-3xl flex flex-row'>
-          <span className={animationClasses.logoPart1}>A</span>
-          <span className={animationClasses.logoPart2}>KEC</span>
-          <span
-            className={`text-lg text-right flex items-start justify-start ${animationClasses.logoPart3}`}
-          >
-            &#174;
-          </span>
-        </span>
-      </Link>
+      <Logo />
       {/* <Link href={Routes.CART} className='cursor-pointer hover:opacity-100'> */}
       {/* <Badge badgeContent={currentCartItems}>
           <ShoppingCart />
@@ -123,7 +78,7 @@ export default function Navbar() {
       >
         Liên hệ
       </Link>
-      <CSRNavbarItem />
+      <CSRNavbarItem session={session} items={items} />
     </nav>
   )
 }

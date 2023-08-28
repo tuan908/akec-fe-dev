@@ -1,4 +1,4 @@
-import { ColumnType, Generated, GeneratedAlways } from 'kysely'
+import type { ColumnType, Generated, GeneratedAlways } from 'kysely'
 
 interface ProductTable {
   id: Generated<number>
@@ -35,7 +35,7 @@ interface TokenTable {
   refresh_token: string
   expires_at: number
   created_at: ColumnType<Date, Date, never> | null
-  update_at: ColumnType<Date, Date, never>
+  updated_at: ColumnType<Date, Date, Date>
 }
 
 export type { ImageTable, PostTable, ProductTable, TokenTable }

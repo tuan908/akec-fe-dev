@@ -1,27 +1,22 @@
-import { useAppSelector } from '@/app/hooks'
 import { Route } from '@/constant'
-import { useAuth } from '@/hooks'
 import styled from '@emotion/styled'
+import { Badge } from '@mui/material'
+import { type Session } from 'next-auth'
 import { signIn, signOut } from 'next-auth/react'
-import dynamic from 'next/dynamic'
+import NextImage from 'next/image'
+import NextLink from 'next/link'
+import { type FC } from 'react'
 
-const Badge = dynamic(() => import('@mui/material/Badge'))
-const NextLink = dynamic(() => import('next/link'))
-const NextImage = dynamic(() => import('next/image'))
+type Props = {
+  session: Session | null | undefined
+  items: number
+}
 
-const CSRNavbarItem = () => {
-  const items = useAppSelector(state => state.order).length
-  const [session] = useAuth()
-
-  return (
-    <Wrapper>
-      {!session ? (
-        <span onClick={() => signIn('google', { redirect: true })}>Login</span>
-      ) : (
-        <Badge
-          color='error'
-          variant={`${items > 0 ? 'dot' : 'standard'}`}
-        >
+const CSRNavbarItem: FC<Props> = ({ session, items }) => {
+  if (session)
+    return (
+      <Wrapper>
+        <Badge color='error' variant={`${items > 0 ? 'dot' : 'standard'}`}>
           <NextImage
             className='w-auto h-auto sm:w-9 sm:h-9 rounded-full hover:cursor-pointer'
             src={session!?.user!?.image!}
@@ -40,7 +35,12 @@ const CSRNavbarItem = () => {
             <li onClick={() => signOut()}>Đăng xuất</li>
           </ul>
         </Badge>
-      )}
+      </Wrapper>
+    )
+
+  return (
+    <Wrapper>
+      <span onClick={() => signIn('google', { redirect: true })}>Login</span>
     </Wrapper>
   )
 }
