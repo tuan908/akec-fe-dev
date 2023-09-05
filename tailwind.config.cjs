@@ -6,7 +6,9 @@ module.exports = {
       colors: {
         footer: '#00130F',
         dark: '#333',
-        hover: '#eaeaea'
+        hover: '#eaeaea',
+        indicatorActive: 'rgb(116, 116, 116)',
+        indicatorInactive: 'rgb(187, 187, 187)'
       },
       minWidth: { '1/3': 'calc(100% / 3)' },
       width: {
@@ -28,6 +30,9 @@ module.exports = {
         '8/9': 'calc(100% / 9 * 8)',
         '9/10': '90%',
         '9/20': '45%'
+      },
+      zIndex: {
+        9999: 9999
       }
     }
   },

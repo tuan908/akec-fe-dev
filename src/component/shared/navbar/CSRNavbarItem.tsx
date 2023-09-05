@@ -21,35 +21,39 @@ const CSRNavbarItem: FC<Props> = ({ session, ordersCount, ready }) => {
     return <Skeleton variant='circular' width={40} height={40} />
   }
 
-  let Component2Render = () =>
-    session === null ? (
-      <span onClick={() => signIn('google', { redirect: true })}>Login</span>
-    ) : (
-      <Badge color='error' variant={`${ordersCount > 0 ? 'dot' : 'standard'}`}>
-        <NextImage
-          className='w-8 h-8 lg:w-10 lg:h-10 rounded-full hover:cursor-pointer'
-          src={session?.user?.image!}
-          alt=''
-          width={60}
-          height={60}
-        />
-        <ul>
-          {session!?.user!?.email}
-          <li>
-            <NextLink href={Route.Account}>Tài khoản</NextLink>
-          </li>
-          <li>
-            <NextLink href={Route.Cart}>Đơn mua</NextLink>
-          </li>
-          <li onClick={() => signOut()}>Đăng xuất</li>
-        </ul>
-      </Badge>
-    )
-
   return (
-    <Wrapper>
-      <Component2Render />
-    </Wrapper>
+    <>
+      {session === null ? (
+        <button onClick={() => signIn('google', { redirect: true })}>
+          Login
+        </button>
+      ) : (
+        <Wrapper>
+          <Badge
+            color='error'
+            variant={`${ordersCount > 0 ? 'dot' : 'standard'}`}
+          >
+            <NextImage
+              className='w-8 h-8 lg:w-10 lg:h-10 rounded-full hover:cursor-pointer'
+              src={session?.user?.image!}
+              alt=''
+              width={60}
+              height={60}
+            />
+            <ul>
+              {session!?.user!?.email}
+              <li>
+                <NextLink href={Route.Account}>Tài khoản</NextLink>
+              </li>
+              <li>
+                <NextLink href={Route.Cart}>Đơn mua</NextLink>
+              </li>
+              <li onClick={() => signOut()}>Đăng xuất</li>
+            </ul>
+          </Badge>
+        </Wrapper>
+      )}
+    </>
   )
 }
 
@@ -59,7 +63,7 @@ const Wrapper = styled.div`
   position: relative;
 
   :hover {
-    cursor: pointer hover:opacity-100;
+    cursor: pointer;
     opacity: 0.9;
   }
 

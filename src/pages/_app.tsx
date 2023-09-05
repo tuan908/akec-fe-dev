@@ -5,10 +5,12 @@ import { createTheme, ThemeProvider } from '@mui/material'
 import { SessionProvider } from 'next-auth/react'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
-import { Provider } from 'react-redux'
 
 const Loading = dynamic(() => import('@/component/shared/loading'))
 const CssBaseline = dynamic(() => import('@mui/material/CssBaseline'))
+const StateProvider = dynamic(() =>
+  import('react-redux').then(module => module.Provider)
+)
 
 const theme = createTheme({
   components: {
@@ -30,15 +32,15 @@ export default function App({
   const { store, props } = wrapper.useWrappedStore(rest)
 
   return (
-    <Provider store={store}>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <StateProvider store={store}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Suspense fallback={<Loading />}>
             {getLayout(<Component {...props} />)}
           </Suspense>
         </ThemeProvider>
-      </SessionProvider>
-    </Provider>
+      </StateProvider>
+    </SessionProvider>
   )
 }

@@ -1,13 +1,18 @@
 import { type TAppState } from '@/app/types'
-import { createSlice, prepareAutoBatched } from '@reduxjs/toolkit'
+import {
+  PayloadAction,
+  createSlice,
+  prepareAutoBatched
+} from '@reduxjs/toolkit'
 import { HYDRATE_ACTION } from '../../hydrate/hydrate.action'
 
 type TCarouselIndex = {
-  value: number
+  current: number
+  total?: number
 }
 
 const initialState: TCarouselIndex = {
-  value: 0
+  current: 0
 }
 
 const carouselSlice = createSlice({
@@ -16,27 +21,41 @@ const carouselSlice = createSlice({
   reducers: {
     nextSlide: {
       reducer: state => {
-        state.value === 0 ? state.value++ : state
+        state.current =
+          state.current + 1 === state.total ? 0 : state.current + 1
         return state
       },
       prepare: prepareAutoBatched<void>()
     },
     prevSlide: {
       reducer: state => {
-        state.value === 1 ? state.value-- : state
+        state.current =
+          state.current > 0 ? state.current - 1 : state?.total! - 1
         return state
       },
       prepare: prepareAutoBatched<void>()
+    },
+
+    toSlide(state, action: PayloadAction<number>) {
+      state.current = action.payload
+      return state
+    },
+
+    initTotal(state, action: PayloadAction<number>) {
+      state.total = action.payload
+      return state
     }
   },
   extraReducers(builder) {
     builder.addCase(HYDRATE_ACTION, (state, action) => ({
       ...state,
-      value: action.payload.carousel.value
+      current: action.payload.carousel.current
     }))
   }
 })
 
 export default carouselSlice
-export const { nextSlide, prevSlide } = carouselSlice.actions
-export const carouselIndexSelector = (state: TAppState) => state.carousel.value
+export const { nextSlide, prevSlide, toSlide, initTotal } =
+  carouselSlice.actions
+export const carouselIndexSelector = (state: TAppState) =>
+  state.carousel.current

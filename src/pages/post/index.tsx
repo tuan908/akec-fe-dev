@@ -14,7 +14,7 @@ const PostCreator = dynamic(() => import('@/component/about/create-post'))
 const PostCard = dynamic(() => import('@/component/about/postcard'))
 const NextLink = dynamic(() => import('next/link'))
 const LoadingComponent = dynamic(() => import('@/component/shared/loading'))
-
+const PostThumbnail = dynamic(() => import('@/component/about/thumbnail'))
 
 const Page: NextPageWithLayout = () => {
   const [open, setOpen] = useState(false)
@@ -30,6 +30,7 @@ const Page: NextPageWithLayout = () => {
 
   return (
     <>
+      <PostThumbnail />
       <div className='w-4/5 mx-auto flex flex-row'>
         <nav className='lg:text-sm lg:leading-6 relative mr-0 my-10 w-1/5'>
           <h5 className='mb-8 lg:mb-3 font-semibold text-dark text-xl'>
