@@ -1,6 +1,5 @@
 import { Logger } from '@/util'
 import db from './database'
-import { KyselyQueryReturnType } from '@/types'
 
 const getAllQuery = db.selectFrom('post').selectAll()
 
@@ -10,7 +9,7 @@ const getAll = async () => {
   return _resultSet
 }
 
-export type TPost = KyselyQueryReturnType<typeof getAllQuery>
+export type TPost = Awaited<typeof getAllQuery.execute>
 
 export const getById = async (id: number) =>
   await db

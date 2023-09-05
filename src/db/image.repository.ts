@@ -1,4 +1,3 @@
-import { type KyselyQueryReturnType } from '@/types'
 import db from './database'
 
 const queryAll = db.selectFrom(`image`).selectAll()
@@ -13,4 +12,4 @@ const imageEndpoint = {
 
 export default imageEndpoint
 
-export type TImage = KyselyQueryReturnType<typeof queryAll>
+export type TImage = Awaited<typeof queryAll.execute>

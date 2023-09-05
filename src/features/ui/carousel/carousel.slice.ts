@@ -1,8 +1,8 @@
 import { type TAppState } from '@/app/types'
 import {
-  PayloadAction,
   createSlice,
-  prepareAutoBatched
+  prepareAutoBatched,
+  type PayloadAction
 } from '@reduxjs/toolkit'
 import { HYDRATE_ACTION } from '../../hydrate/hydrate.action'
 

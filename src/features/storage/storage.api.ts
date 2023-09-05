@@ -1,5 +1,5 @@
-import { drive_v3 } from 'googleapis'
-import api from 'src/app/base.api'
+import { type drive_v3 } from 'googleapis';
+import api from 'src/app/base.api';
 
 export type TStorageApiResponse = { ok: boolean; data: drive_v3.Schema$File[] }
 

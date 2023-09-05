@@ -3,9 +3,9 @@ import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import type { ReactElement, ReactNode } from 'react'
 
-export type { TOrder, TProduct, TPaged } from './product'
 export type { TAboutPost } from './about'
 export type { TLogin, TLoginRequest } from './auth'
+export type { TOrder, TPaged, TProduct } from './product'
 
 export type TResponse<T> = {
   data: T
