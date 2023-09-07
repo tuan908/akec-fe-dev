@@ -1,5 +1,5 @@
 import { Logger } from '@/util'
-import { Component, ErrorInfo, PropsWithChildren } from 'react'
+import { Component, type ErrorInfo, type PropsWithChildren } from 'react'
 
 interface State {
   hasError: boolean

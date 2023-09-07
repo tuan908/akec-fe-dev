@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring } from 'framer-motion'
+import { m, useScroll, useSpring } from 'framer-motion'
 import styles from './progress-bar.module.scss'
 
 export default function ProgressBar() {
@@ -8,5 +8,5 @@ export default function ProgressBar() {
     damping: 30,
     restDelta: 0.001
   })
-  return <motion.div className={styles.progressBar} style={{ scaleX }} />
+  return <m.div className={styles.progressBar} style={{ scaleX }} />
 }

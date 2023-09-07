@@ -9,8 +9,6 @@ const getAll = async () => {
   return _resultSet
 }
 
-export type TPost = Awaited<typeof getAllQuery.execute>
-
 export const getById = async (id: number) =>
   await db
     .selectFrom(`post`)
@@ -24,3 +22,4 @@ const postEndpoint = {
 }
 
 export default postEndpoint
+export type TPost = Awaited<ReturnType<typeof getAllQuery.execute>>[number]

@@ -12,4 +12,4 @@ const imageEndpoint = {
 
 export default imageEndpoint
 
-export type TImage = Awaited<typeof queryAll.execute>
+export type TImage = Awaited<ReturnType<typeof queryAll.execute>>[number]

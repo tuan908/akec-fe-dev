@@ -1,7 +1,7 @@
-import { TImage } from '@/db/image.repository'
+import { type TImage } from '@/db/image.repository'
 import { motion, useAnimate } from 'framer-motion'
 import dynamic from 'next/dynamic'
-import { MouseEventHandler, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type MouseEventHandler } from 'react'
 
 const Image = dynamic(() => import('next/image'))
 const ChevronLeftIcon = dynamic(() => import('@mui/icons-material/ChevronLeft'))
@@ -33,7 +33,7 @@ export default function CarouselV2({ imgUrls }: { imgUrls: TImage[] }) {
       },
       { ease: 'easeInOut' }
     )
-  }, [carouselIndex])
+  }, [animate, carouselIndex])
 
   return (
     <div className='w-3/4 flex flex-row m-auto justify-center items-center'>

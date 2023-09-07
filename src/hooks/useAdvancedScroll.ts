@@ -1,8 +1,8 @@
 import { useAnimate, useScroll } from 'framer-motion'
-import { useState, type RefObject, useEffect } from 'react'
+import { useEffect, useState, type RefObject } from 'react'
 
 export function useAdvancedScroll(ref: RefObject<HTMLElement>) {
-  const [scope, animate] = useAnimate()
+  const [scope, animate] = useAnimate<HTMLDivElement>()
   const { scrollYProgress } = useScroll({ container: ref })
   const [progress, setLatestProgressValue] = useState(0)
 
@@ -10,11 +10,9 @@ export function useAdvancedScroll(ref: RefObject<HTMLElement>) {
     scrollYProgress.on('change', latestValue => {
       setLatestProgressValue(latestValue)
       animate(
-        scope.current,
+        scope?.current!,
         {
-          y: `-${
-            (scope.current as HTMLDivElement).scrollHeight * latestValue
-          }px`
+          y: `-${scope!?.current?.scrollHeight! * latestValue}px`
         },
         {
           ease: 'easeInOut',

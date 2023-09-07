@@ -1,6 +1,6 @@
 import baseApi from '@/app/base.api'
-import { TImage } from '@/db/image.repository'
-import type { TPost } from '@/db/post.repository'
+import { type TImage } from '@/db/image.repository'
+import { type TPost } from '@/db/post.repository'
 import { HttpMethod } from '../feature.constant'
 
 const postApi = baseApi.injectEndpoints({
@@ -12,7 +12,7 @@ const postApi = baseApi.injectEndpoints({
         body
       })
     }),
-    getById: build.query<TPost, string>({
+    getById: build.query<TPost[], string>({
       query: id => `/posts/${id}`
     }),
 

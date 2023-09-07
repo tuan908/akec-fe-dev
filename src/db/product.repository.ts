@@ -1,5 +1,6 @@
 import db from './database'
 
+const getAllQuery = db.selectFrom(`product`).selectAll()
 const getAll = async () => await db.selectFrom(`product`).selectAll().execute()
 
 const getById = async (id: number) =>
@@ -14,3 +15,5 @@ const productEndpoint = {
   getById
 }
 export default productEndpoint
+
+export type TProduct = Awaited<ReturnType<typeof getAllQuery['execute']>>[number]

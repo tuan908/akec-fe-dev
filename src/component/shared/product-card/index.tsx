@@ -1,8 +1,12 @@
 import { type TImage } from '@/db/image.repository'
 import { chonburi } from '@/util'
 import { For } from 'million/react'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import { type FunctionComponent } from 'react'
 import styles from './product-card.module.scss'
+
+const NextImage = dynamic(() => import('next/image'))
 
 type ProductCardProps = {
   previewImageUrl: string
@@ -11,7 +15,7 @@ type ProductCardProps = {
   onClick?: () => Promise<boolean>
 }
 
-export const ProductCard: React.FunctionComponent<ProductCardProps> = ({
+export const ProductCard: FunctionComponent<ProductCardProps> = ({
   previewImageUrl,
   name,
   price,
@@ -20,15 +24,17 @@ export const ProductCard: React.FunctionComponent<ProductCardProps> = ({
   return (
     <figure className={styles.productCard} onClick={onClick}>
       <div className={styles.productCardImage}>
-        <img
+        <NextImage
           className='w-full h-full rounded-md'
           src={previewImageUrl}
+          width={540}
+          height={960}
           alt=''
         />
       </div>
       <figcaption className={styles.productCardCaption}>
         <h2 className={`text-xl ${chonburi.className}`}>{name}</h2>
-        <h3 className='text-base font-thin py-1'>{`${price} VND`}</h3>
+        <h3 className='text-base font-thin py-1'>{price} VND</h3>
       </figcaption>
     </figure>
   )
