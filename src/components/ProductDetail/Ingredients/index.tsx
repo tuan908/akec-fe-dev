@@ -4,9 +4,7 @@ export default function ProductIngredients() {
       <div className='flex-[0.5]'>
         <img
           className='w-full rounded-xl'
-          src={
-            'https://images-assets.nasa.gov/image/carina_nebula/carina_nebula~small.jpg'
-          }
+          src='https://images-assets.nasa.gov/image/carina_nebula/carina_nebula~small.jpg'
           alt=''
         />
       </div>

@@ -2,10 +2,10 @@ import { type NextPageWithLayout } from '@/types'
 import dynamic from 'next/dynamic'
 import { type ReactElement } from 'react'
 
-const ContactForm = dynamic(() => import('@/component/contact/contact-form'))
-const Layout = dynamic(() => import('@/component/shared/layout'))
+const ContactForm = dynamic(() => import('@/components/Contact/Form'))
+const Layout = dynamic(() => import('@/components/shared/Layout'))
 const Grid = dynamic(() => import('@mui/material/Grid'))
-const CustomMap = dynamic(() => import('@/component/contact/map'), { ssr: false })
+const CustomMap = dynamic(() => import('@/components/Contact/GoogleMap'), { ssr: false })
 
 const Page: NextPageWithLayout = () => {
   return (

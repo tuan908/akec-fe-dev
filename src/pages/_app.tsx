@@ -6,7 +6,7 @@ import { SessionProvider } from 'next-auth/react'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 
-const Loading = dynamic(() => import('@/component/shared/loading'))
+const Loading = dynamic(() => import('@/components/shared/Loading'))
 const CssBaseline = dynamic(() => import('@mui/material/CssBaseline'))
 const StateProvider = dynamic(() =>
   import('react-redux').then(module => module.Provider)

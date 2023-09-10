@@ -1,21 +1,17 @@
 import { wrapper } from '@/app/store'
 import postApi from '@/features/post/post.api'
 import productApi from '@/features/product/product.api'
+import { type NextPageWithLayout } from '@/types'
 import dynamic from 'next/dynamic'
 import { type ReactElement } from 'react'
-import { type NextPageWithLayout } from '@/types'
 
-const Layout = dynamic(() => import('@/component/shared/layout'))
-const BirdNestError = dynamic(() =>
-  import('@/component').then(m => m.BirdNestError)
-)
-// const ProgressBar = dynamic(() => import('@/component/shared/progress-bar'), {
+const Layout = dynamic(() => import('@/components/shared/Layout'))
+const BirdNestError = dynamic(() => import('@/components/shared/Error'))
+// const ProgressBar = dynamic(() => import('@/components/shared/progress-bar'), {
 //   ssr: false
 // })
-const ProductCard = dynamic(() =>
-  import('@/component').then(m => m.ProductCard)
-)
-const Loading = dynamic(() => import('@/component/shared/loading'), {
+const ProductCard = dynamic(() => import('@/components/shared/ProductCardV1'))
+const Loading = dynamic(() => import('@/components/shared/Loading'), {
   ssr: false
 })
 

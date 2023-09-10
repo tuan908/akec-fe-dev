@@ -6,8 +6,8 @@ import { z } from 'zod'
 
 const IconButton = dynamic(() => import('@mui/material/IconButton'))
 const CancelIcon = dynamic(() => import('@mui/icons-material/Cancel'))
-const UploaderInput = dynamic(() => import('../../about/create-post/input'))
-const Preview = dynamic(() => import('./preview'))
+const UploaderInput = dynamic(() => import('../../About/CreatePost/Input'))
+const Preview = dynamic(() => import('./Preview'))
 
 const CreatePostSchema = z.object({
   title: z.string().min(1).max(255),

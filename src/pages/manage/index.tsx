@@ -5,7 +5,7 @@ import { Logger, convertFileSize } from '@/util'
 import { For } from 'million/react'
 import dynamic from 'next/dynamic'
 
-const LoadingComponent = dynamic(() => import('@/component/shared/loading'))
+const LoadingComponent = dynamic(() => import('@/components/shared/Loading'))
 
 const Page: NextPageWithLayout = () => {
   const { data, isLoading } = storageApi.useListAllFilesQuery()

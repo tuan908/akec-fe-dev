@@ -7,7 +7,7 @@ import { For } from 'million/react'
 import dynamic from 'next/dynamic'
 import styles from './styles.module.scss'
 
-const Layout = dynamic(() => import('@/component/shared/layout'))
+const Layout = dynamic(() => import('@/components/shared/Layout'))
 const NextImage = dynamic(() => import('next/image'))
 
 const Page: NextPageWithLayout = () => {

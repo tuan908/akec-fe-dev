@@ -1,16 +1,16 @@
 import { wrapper } from '@/app/store'
 import postApi from '@/features/post/post.api'
+import { type NextPageWithLayout } from '@/types'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 import { type ReactElement } from 'react'
-import { type NextPageWithLayout } from '@/types'
 
-const CarouselV2 = dynamic(() => import('@/component/home/carouselV2'), {
+const CarouselV2 = dynamic(() => import('@/components/Home/CarouselV2'), {
   ssr: false
 })
-const Layout = dynamic(() => import('@/component/shared/layout'))
-const ProductCards = dynamic(() => import('@/component/shared/product-card'))
-const Thumbnail = dynamic(() => import('@/component/home/thumbnail'))
+const Layout = dynamic(() => import('@/components/shared/Layout'))
+const ProductCards = dynamic(() => import('@/components/shared/ProductCardV1'))
+const Thumbnail = dynamic(() => import('@/components/Home/Thumbnail'))
 
 const Page: NextPageWithLayout = () => {
   const { data } = postApi.useGetImagesQuery()

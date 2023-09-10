@@ -1,21 +1,21 @@
 import { wrapper } from '@/app/store'
 import productApi from '@/features/product/product.api'
+import { type NextPageWithLayout } from '@/types'
 import { type InferGetServerSidePropsType } from 'next'
 import dynamic from 'next/dynamic'
 import type { ReactElement } from 'react'
-import { type NextPageWithLayout } from '@/types'
 
-const Layout = dynamic(() => import('@/component/shared/layout'))
-const Loading = dynamic(() => import('@/component/shared/loading'), {
+const Layout = dynamic(() => import('@/components/shared/Layout'))
+const Loading = dynamic(() => import('@/components/shared/Loading'), {
   ssr: false
 })
-const BirdNestError = dynamic(() => import('@/component/shared/error'), {
+const BirdNestError = dynamic(() => import('@/components/shared/Error'), {
   ssr: false
 })
-const ProductHeader = dynamic(() => import('@/component/product-detail/header'))
-const ProductHow = dynamic(() => import('@/component/product-detail/how'))
+const ProductHeader = dynamic(() => import('@/components/ProductDetail/Header'))
+const ProductHow = dynamic(() => import('@/components/ProductDetail/How'))
 const ProductIngredients = dynamic(
-  () => import('@/component/product-detail/ingredients')
+  () => import('@/components/ProductDetail/Ingredients')
 )
 
 const Page: NextPageWithLayout<
@@ -51,7 +51,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       )
     }
 
-    await Promise.allSettled(store.dispatch(productApi.util.getRunningQueriesThunk()))
+    await Promise.allSettled(
+      store.dispatch(productApi.util.getRunningQueriesThunk())
+    )
 
     return { props: { id: Number.parseInt(id!?.toString()) } }
   }

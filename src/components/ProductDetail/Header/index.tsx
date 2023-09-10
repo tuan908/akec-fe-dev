@@ -1,11 +1,11 @@
-import dynamic from 'next/dynamic'
 import type { TProduct } from '@/types'
+import dynamic from 'next/dynamic'
 import type { FunctionComponent } from 'react'
 
 const ProductDetailText = dynamic(() => import('./ProductDetailText'), {
   ssr: false
 })
-const Carousel = dynamic(() => import('@/component/product-detail/carousel'))
+const Carousel = dynamic(() => import('../Carousel'))
 
 interface Props {
   data: TProduct

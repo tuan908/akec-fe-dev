@@ -2,8 +2,8 @@ import dynamic from 'next/dynamic'
 import { type ReactNode } from 'react'
 import styles from './layout.module.scss'
 
-const Footer = dynamic(() => import('../footer'))
-const Navbar = dynamic(() => import('../navbar'))
+const Footer = dynamic(() => import('../Footer'))
+const Navbar = dynamic(() => import('../Navbar'))
 const Head = dynamic(() => import('next/head'))
 
 type LayoutProps = {

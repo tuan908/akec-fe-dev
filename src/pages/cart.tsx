@@ -6,8 +6,8 @@ import { formatMoney } from '@/util'
 import dynamic from 'next/dynamic'
 import { useState, type ReactElement } from 'react'
 
-const CartComponent = dynamic(() => import('@/component/cart'))
-const Layout = dynamic(() => import('@/component/shared/layout'))
+const CartComponent = dynamic(() => import('@/components/Cart'))
+const Layout = dynamic(() => import('@/components/shared/Layout'))
 const NextLink = dynamic(() => import('next/link'))
 const CheckIcon = dynamic(() => import('@mui/icons-material/Check'))
 const ClearIcon = dynamic(() => import('@mui/icons-material/Clear'))

@@ -9,12 +9,12 @@ import { useState, type ReactElement } from 'react'
 
 const PlusIcon = dynamic(() => import('@mui/icons-material/Add'))
 const IconButton = dynamic(() => import('@mui/material/IconButton'))
-const Layout = dynamic(() => import('@/component/shared/layout'))
-const PostCreator = dynamic(() => import('@/component/about/create-post'))
-const PostCard = dynamic(() => import('@/component/about/PostCard'))
+const Layout = dynamic(() => import('@/components/shared/Layout'))
+const PostCreator = dynamic(() => import('@/components/About/CreatePost'))
+const PostCard = dynamic(() => import('@/components/About/PostCard'))
 const NextLink = dynamic(() => import('next/link'))
-const LoadingComponent = dynamic(() => import('@/component/shared/loading'))
-const PostThumbnail = dynamic(() => import('@/component/about/thumbnail'))
+const LoadingComponent = dynamic(() => import('@/components/shared/Loading'))
+const PostThumbnail = dynamic(() => import('@/components/About/Thumbnail'))
 
 const Page: NextPageWithLayout = () => {
   const [open, setOpen] = useState(false)
