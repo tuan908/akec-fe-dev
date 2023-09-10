@@ -1,6 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+import { type Config } from 'tailwindcss'
+
+const config: Config = {
+  content: ['./index.html', './src/pages/**/*.tsx', './src/component/**/*.tsx'],
   theme: {
     extend: {
       colors: {
@@ -29,12 +30,15 @@ module.exports = {
         '7/9': 'calc(100% / 9 * 7)',
         '8/9': 'calc(100% / 9 * 8)',
         '9/10': '90%',
-        '9/20': '45%'
+        '9/20': '45%',
+        '19/20': '95%'
       },
       zIndex: {
-        9999: 9999
+        9999: '9999'
       }
     }
   },
   plugins: []
 }
+
+export default config

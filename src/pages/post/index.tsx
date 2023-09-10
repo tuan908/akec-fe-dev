@@ -2,16 +2,16 @@ import { useAppDispatch } from '@/app/hooks'
 import { wrapper } from '@/app/store'
 import postApi from '@/features/post/post.api'
 import { clearInput } from '@/features/post/post.slice'
+import { type NextPageWithLayout } from '@/types'
 import { For } from 'million/react'
 import dynamic from 'next/dynamic'
 import { useState, type ReactElement } from 'react'
-import { type NextPageWithLayout } from '@/types'
 
 const PlusIcon = dynamic(() => import('@mui/icons-material/Add'))
 const IconButton = dynamic(() => import('@mui/material/IconButton'))
 const Layout = dynamic(() => import('@/component/shared/layout'))
 const PostCreator = dynamic(() => import('@/component/about/create-post'))
-const PostCard = dynamic(() => import('@/component/about/postcard'))
+const PostCard = dynamic(() => import('@/component/about/PostCard'))
 const NextLink = dynamic(() => import('next/link'))
 const LoadingComponent = dynamic(() => import('@/component/shared/loading'))
 const PostThumbnail = dynamic(() => import('@/component/about/thumbnail'))

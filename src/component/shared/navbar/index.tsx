@@ -7,7 +7,7 @@ import styles from './navbar.module.scss'
 
 const Link = dynamic(() => import('next/link'))
 const Sidebar = dynamic(() => import('./Sidebar'))
-const CSRNavbarItem = dynamic(() => import('./CSRNavbarItem'))
+const Avatar = dynamic(() => import('./Avatar'))
 const Logo = dynamic(() => import('./Logo'), { ssr: false })
 
 export default function Navbar() {
@@ -78,7 +78,7 @@ export default function Navbar() {
       >
         Liên hệ
       </Link>
-      <CSRNavbarItem ordersCount={ordersCount} {...authProps}/>
+      <Avatar ordersCount={ordersCount} {...authProps}/>
     </nav>
   )
 }

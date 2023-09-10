@@ -1,31 +1,24 @@
-import { useAnimate, useScroll } from 'framer-motion'
-import { useEffect, useState, type RefObject } from 'react'
+import { useScroll } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
-export function useAdvancedScroll(ref: RefObject<HTMLElement>) {
-  const [scope, animate] = useAnimate<HTMLDivElement>()
-  const { scrollYProgress } = useScroll({ container: ref })
-  const [progress, setLatestProgressValue] = useState(0)
+export default function useAdvancedScroll() {
+  const sourceRef = useRef<HTMLDivElement>(null)
+  const targetRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    container: sourceRef,
+    layoutEffect: false
+  })
 
   useEffect(() => {
-    scrollYProgress.on('change', latestValue => {
-      setLatestProgressValue(latestValue)
-      animate(
-        scope?.current!,
-        {
-          y: `-${scope!?.current?.scrollHeight! * latestValue}px`
-        },
-        {
-          ease: 'easeInOut',
-          type: 'tween'
-        }
-      )
+    scrollYProgress.on('change', sourceScrollProgress => {
+      if (sourceRef.current && targetRef.current) {
+        let scrollPosition = targetRef.current.scrollHeight
+        targetRef?.current.scrollTo(0, scrollPosition * sourceScrollProgress)
+      }
     })
 
     return () => scrollYProgress.clearListeners()
-  }, [animate, scope, scrollYProgress])
+  }, [sourceRef, targetRef, scrollYProgress])
 
-  return {
-    progress,
-    scope
-  }
+  return { sourceRef, targetRef }
 }

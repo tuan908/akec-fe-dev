@@ -1,4 +1,5 @@
 import { Route } from '@/constant'
+import useHasMounted from '@/hooks/useMountState'
 import styled from '@emotion/styled'
 import { type Session } from 'next-auth'
 import { signIn, signOut } from 'next-auth/react'
@@ -17,8 +18,13 @@ type Props = {
 }
 
 const CSRNavbarItem: FC<Props> = ({ session, ordersCount, ready }) => {
+  const isMounted = useHasMounted()
   if (!ready) {
     return <Skeleton variant='circular' width={40} height={40} />
+  }
+
+  if (!isMounted) {
+    return null
   }
 
   return (

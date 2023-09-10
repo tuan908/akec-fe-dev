@@ -2,7 +2,7 @@ import { type Session } from 'next-auth'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
-export function useAuth() {
+export default function useAuth() {
   const { data } = useSession()
   const [ready, setReady] = useState(false)
   const [session, setSession] = useState<Session | null>(null)
