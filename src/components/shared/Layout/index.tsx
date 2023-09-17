@@ -1,3 +1,5 @@
+import scrollStyles from '@/styles/scrollbar.module.scss'
+import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import { type ReactNode } from 'react'
 import styles from './layout.module.scss'
@@ -21,7 +23,11 @@ export default function Layout({ children, pageTitle }: LayoutProps) {
         <link rel='icon' type='image/png' href='/assets/image/logo.jpg' />
       </Head>
       <main
-        className={`w-full max-w-screen h-full min-h-screen bg-[#f5ebc5] grid ${styles.layout}`}
+        className={clsx(
+          'w-full max-w-screen h-full min-h-screen bg-[#f5ebc5] grid',
+          styles.layout,
+          scrollStyles.styledScrollbar
+        )}
       >
         <Navbar />
         <div

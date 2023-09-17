@@ -10,9 +10,14 @@ import clsx from 'clsx'
 import { AnimatePresence, m } from 'framer-motion'
 import { For } from 'million/react'
 import dynamic from 'next/dynamic'
-import { useEffect, type FC, type MouseEventHandler } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  type FC,
+  type MouseEventHandler
+} from 'react'
 
-const Image = dynamic(() => import('next/image'))
 const ChevronLeftIcon = dynamic(() => import('@mui/icons-material/ChevronLeft'))
 const ChevronRightIcon = dynamic(
   () => import('@mui/icons-material/ChevronRight')
@@ -32,21 +37,30 @@ for (let index = 0; index < sample.length; index++) {
 }
 
 export default function Thumbnail() {
+  const timerIntervalRef = useRef<NodeJS.Timeout>()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(initTotal(colors.length))
+    return () => clearInterval(timerIntervalRef.current)
   }, [])
 
   const slideIndex = useAppSelector(carouselIndexSelector)
 
-  useEffect(() => {
-    let timer = setTimeout(() => {
+  const startTimer = useCallback(() => {
+    timerIntervalRef.current = setInterval(() => {
       dispatch(nextSlide())
-    }, 3000)
+    }, 5000)
+  }, [])
 
-    return () => clearTimeout(timer)
-  }, [slideIndex, dispatch])
+  const stopTimer = useCallback(() => {
+    clearInterval(timerIntervalRef.current)
+    timerIntervalRef.current = undefined
+  }, [])
+
+  useEffect(() => {
+    startTimer()
+  }, [startTimer])
 
   return (
     <div className='w-full px-2'>
@@ -60,8 +74,10 @@ export default function Thumbnail() {
                   backgroundColor: color,
                   display: index === slideIndex ? 'block' : 'none'
                 }}
+                onMouseEnter={() => stopTimer()}
+                onMouseLeave={() => startTimer()}
               >
-                <Slide src={''} />
+                <Slide src='' index={index + 1} />
               </m.div>
             </NextLink>
           )}
@@ -94,8 +110,9 @@ export default function Thumbnail() {
 
 function Slide(props: ThumbnailSlideProps) {
   return (
-    <div className='block relative'>
-      <Image src={props.src} fill alt='' />
+    <div className='relative flex justify-center items-center'>
+      <h1 className='text-white text-3xl text-center'>Slide {props.index}</h1>
+      {/* <Image src={props.src} fill alt='' /> */}
     </div>
   )
 }
@@ -111,7 +128,7 @@ const Indicator: FC<ThumbnailIndicatorProps> = props => {
   return <button className={classes} onClick={props.onClick} />
 }
 
-type ThumbnailSlideProps = { src: string }
+type ThumbnailSlideProps = { src: string; index: number }
 
 type ThumbnailIndicatorProps = {
   active: boolean
