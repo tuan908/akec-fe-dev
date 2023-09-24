@@ -1,38 +1,24 @@
-import { useAppDispatch } from '@/app/hooks'
 import { wrapper } from '@/app/store'
+import Post from '@/components/About/Post'
 import postApi from '@/features/post/post.api'
-import { clearInput } from '@/features/post/post.slice'
 import { type NextPageWithLayout } from '@/types'
-import { For } from 'million/react'
 import dynamic from 'next/dynamic'
-import { useState, type ReactElement } from 'react'
+import { type ReactElement } from 'react'
 
-const PlusIcon = dynamic(() => import('@mui/icons-material/Add'))
-const IconButton = dynamic(() => import('@mui/material/IconButton'))
 const Layout = dynamic(() => import('@/components/shared/Layout'))
-const PostCreator = dynamic(() => import('@/components/About/CreatePost'))
-const PostCard = dynamic(() => import('@/components/About/PostCard'))
-const NextLink = dynamic(() => import('next/link'))
 const LoadingComponent = dynamic(() => import('@/components/shared/Loading'))
 const PostThumbnail = dynamic(() => import('@/components/About/Thumbnail'))
 
 const Page: NextPageWithLayout = () => {
-  const [open, setOpen] = useState(false)
-  const dispatch = useAppDispatch()
-  const { data, isLoading } = postApi.useGetAllPostsQuery()
+  const { isLoading } = postApi.useGetAllPostsQuery()
 
   if (isLoading) return <LoadingComponent />
-
-  function handleCreate() {
-    setOpen(false)
-    dispatch(clearInput())
-  }
 
   return (
     <>
       <PostThumbnail />
-      <div className='w-4/5 mx-auto flex flex-row'>
-        <nav className='lg:text-sm lg:leading-6 relative mr-0 my-10 w-1/5'>
+      <div className='w-4/5 mx-auto flex flex-col'>
+        {/* <nav className='lg:text-sm lg:leading-6 relative mr-0 my-10 w-1/5'>
           <h5 className='mb-8 lg:mb-3 font-semibold text-dark text-xl'>
             Danh sách bài viết
           </h5>
@@ -55,9 +41,11 @@ const Page: NextPageWithLayout = () => {
             {post => <PostCard key={post?.id} {...post} />}
           </For>
         </div>
-        <div className='w-1/5'></div>
+        <div className='w-1/5'></div> */}
+        <Post imagePosition='left' />
+        <Post imagePosition ='right' />
       </div>
-      {!open && (
+      {/* {!open && (
         <IconButton
           className='fixed bottom-8 right-8 z-50'
           onClick={() => setOpen(!open)}
@@ -65,7 +53,7 @@ const Page: NextPageWithLayout = () => {
           <PlusIcon />
         </IconButton>
       )}
-      <PostCreator open={open} setOpen={handleCreate} />
+      <PostCreator open={open} setOpen={handleCreate} /> */}
     </>
   )
 }

@@ -1,10 +1,10 @@
 import { useAppDispatch } from '@/app/hooks'
 import {
-  addFileAsync,
-  addPreviewImageData,
-  updateImageUploadStatus
+    addFileAsync,
+    addPreviewImageData,
+    updateImageUploadStatus
 } from '@/features/post/post.slice'
-import { toBase64 } from '@/util'
+import { toBase64 } from '@/utils'
 import { type ChangeEventHandler } from 'react'
 
 export default function UploaderInput() {

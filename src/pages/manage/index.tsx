@@ -1,7 +1,7 @@
 import { wrapper } from '@/app/store'
 import storageApi from '@/features/storage/storage.api'
 import { type NextPageWithLayout } from '@/types'
-import { Logger, convertFileSize } from '@/util'
+import { Logger, convertFileSize } from '@/utils'
 import { For } from 'million/react'
 import dynamic from 'next/dynamic'
 

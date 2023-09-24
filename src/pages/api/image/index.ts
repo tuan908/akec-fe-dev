@@ -1,6 +1,6 @@
 import { HttpStatus } from '@/constant'
 import imageEndpoint, { type TImage } from '@/db/image.repository'
-import { Logger } from '@/util'
+import { Logger } from '@/utils'
 import { kv } from '@vercel/kv'
 import type { NextApiRequest, NextApiResponse } from 'next'
 

@@ -1,4 +1,4 @@
-import { currentEnvironment } from '@/util'
+import { currentEnvironment } from '@/utils'
 
 export const baseApiUrl =
   currentEnvironment === `development` || currentEnvironment === `test`

@@ -1,9 +1,9 @@
 import { HttpStatus } from '@/constant'
 import productEndpoint from '@/db/product.repository'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { kv } from '@vercel/kv'
-import { Logger } from '@/util'
 import type { TProduct } from '@/types'
+import { Logger } from '@/utils'
+import { kv } from '@vercel/kv'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(_: NextApiRequest, res: NextApiResponse) {
   try {

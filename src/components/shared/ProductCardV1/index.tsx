@@ -1,5 +1,5 @@
 import { type TImage } from '@/db/image.repository'
-import { chonburi } from '@/util'
+import { chonburi } from '@/utils'
 import { For } from 'million/react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'

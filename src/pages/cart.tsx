@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { removeFromCart } from '@/features/order/order.slice'
 import type { TOrder } from '@/types'
 import { type NextPageWithLayout } from '@/types'
-import { formatMoney } from '@/util'
+import { formatMoney } from '@/utils'
 import dynamic from 'next/dynamic'
 import { useState, type ReactElement } from 'react'
 

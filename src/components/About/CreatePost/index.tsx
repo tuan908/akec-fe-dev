@@ -1,5 +1,5 @@
 import { useAppSelector } from '@/app/hooks'
-import { Logger } from '@/util'
+import { Logger } from '@/utils'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { z } from 'zod'
