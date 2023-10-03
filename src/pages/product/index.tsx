@@ -1,4 +1,5 @@
 import { wrapper } from '@/app/store'
+import Thumbnail from '@/components/About/Thumbnail'
 import postApi from '@/features/post/post.api'
 import productApi from '@/features/product/product.api'
 import { type NextPageWithLayout } from '@/types'
@@ -41,6 +42,8 @@ const Page: NextPageWithLayout = () => {
               onClick={() => router.push(`/product/${index}`)}
             />
           ))} */}
+          <Thumbnail />
+
           <ProductCard imgUrls={data!} />
         </>
       )}
