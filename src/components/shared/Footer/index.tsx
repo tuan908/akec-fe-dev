@@ -1,4 +1,5 @@
 import { LOGO_ABSOLUTE_PATH, Route } from '@/constant'
+import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import styles from './Footer.module.scss'
 
@@ -14,7 +15,10 @@ const NextLink = dynamic(() => import('next/link'))
 const Footer: React.FC = () => {
   return (
     <footer
-      className={`bg-footer text-white lg:p-4 w-full ${styles.gridAreaFooter}`}
+      className={clsx(
+        'text-slate-500 lg:p-4 w-full m-auto bg-[#F8F0EC] shadow-2xl',
+        styles.gridAreaFooter
+      )}
     >
       <ul className='w-4/5 grid grid-cols-2 m-auto p-4 place-items-start md:hidden'>
         <li className='text-lg px-4 py-2'>
@@ -43,7 +47,7 @@ const Footer: React.FC = () => {
       </ul>
 
       {/* Logo */}
-      <div className='hidden md:grid md:grid-cols-9 md:font-semibold p-4'>
+      <div className='hidden md:grid md:grid-cols-9 md:font-semibold w-4/5 py-16 px-12 m-auto shadow-2xl bg-white text-black rounded-xl'>
         <div className='logo'>
           <a href={facebook_url} className='flex items-center'>
             <img
@@ -135,6 +139,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
+      <div className='h-16 w-full' />
     </footer>
   )
 }

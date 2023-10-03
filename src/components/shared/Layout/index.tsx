@@ -20,18 +20,18 @@ export default function Layout({ children, pageTitle }: LayoutProps) {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <link rel='icon' type='image/png' href='/assets/image/logo.jpg' />
       </Head>
+      <Navbar />
       <main
         className={`w-full max-w-screen h-full min-h-screen bg-[#f5ebc5] grid ${styles.layout}`}
       >
-        <Navbar />
         <div
           className='w-full h-full max-w-screen'
           style={{ gridArea: 'main' }}
         >
           {children}
         </div>
-        <Footer />
       </main>
+      <Footer />
     </>
   )
 }

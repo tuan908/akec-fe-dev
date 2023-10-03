@@ -1,6 +1,5 @@
 import { type TImage } from '@/db/image.repository'
 import { chonburi } from '@/utils'
-import { For } from 'million/react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { type FunctionComponent } from 'react'
@@ -45,17 +44,15 @@ export default function ProductCollection({ imgUrls }: { imgUrls: TImage[] }) {
 
   return (
     <div className='w-11/12 m-auto p-8 grid place-items-center gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      <For each={imgUrls} memo>
-        {(url, index) => (
-          <ProductCard
-            key={index}
-            name={`Product ${index}`}
-            price={1000}
-            previewImageUrl={url.url}
-            onClick={() => router.push(`/product/${index}`)}
-          />
-        )}
-      </For>
+      {imgUrls.map((url, index) => (
+        <ProductCard
+          key={index}
+          name={`Product ${index}`}
+          price={1000}
+          previewImageUrl={url.url}
+          onClick={() => router.push(`/product/${index}`)}
+        />
+      ))}
     </div>
   )
 }

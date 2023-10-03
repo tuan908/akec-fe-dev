@@ -6,11 +6,11 @@ import {
   prevSlide,
   toSlide
 } from '@/features/ui/carousel/carousel.slice'
-import clsx from 'clsx'
 import { AnimatePresence, m } from 'framer-motion'
-import { For } from 'million/react'
 import dynamic from 'next/dynamic'
-import { useEffect, type FC, type MouseEventHandler } from 'react'
+import { useEffect } from 'react'
+import Indicator from './Indicator'
+import Slide from './Slide'
 
 const Image = dynamic(() => import('next/image'))
 const ChevronLeftIcon = dynamic(() => import('@mui/icons-material/ChevronLeft'))
@@ -51,21 +51,19 @@ export default function Thumbnail() {
   return (
     <div className='w-full px-2'>
       <AnimatePresence>
-        <For each={colors}>
-          {(color, index) => (
-            <NextLink href={`/post/${index}`} key={index}>
-              <m.div
-                className='h-[536px]'
-                style={{
-                  backgroundColor: color,
-                  display: index === slideIndex ? 'block' : 'none'
-                }}
-              >
-                <Slide src={''} />
-              </m.div>
-            </NextLink>
-          )}
-        </For>
+        {colors.map((color, index) => (
+          <NextLink href={`/post/${index}`} key={index}>
+            <m.div
+              className='h-[536px]'
+              style={{
+                backgroundColor: color,
+                display: index === slideIndex ? 'block' : 'none'
+              }}
+            >
+              <Slide src={''} />
+            </m.div>
+          </NextLink>
+        ))}
       </AnimatePresence>
       <div className='m-auto flex justify-center p-6 items-center'>
         <ChevronLeftIcon
@@ -73,15 +71,13 @@ export default function Thumbnail() {
           onClick={() => dispatch(prevSlide())}
         />
         <div className='px-4 flex justify-center items-center'>
-          <For each={sample}>
-            {num => (
-              <Indicator
-                key={num}
-                active={slideIndex === num}
-                onClick={() => dispatch(toSlide(num))}
-              />
-            )}
-          </For>
+          {sample.map(num => (
+            <Indicator
+              key={num}
+              active={slideIndex === num}
+              onClick={() => dispatch(toSlide(num))}
+            />
+          ))}
         </div>
         <ChevronRightIcon
           className='text-4xl md:text-4xl cursor-pointer outline-none'
@@ -90,30 +86,4 @@ export default function Thumbnail() {
       </div>
     </div>
   )
-}
-
-function Slide(props: ThumbnailSlideProps) {
-  return (
-    <div className='block relative'>
-      <Image src={props.src} fill alt='' />
-    </div>
-  )
-}
-
-const Indicator: FC<ThumbnailIndicatorProps> = props => {
-  const classes = clsx(
-    'w-4 h-4 z-9999 inline-block mx-2 rounded-full hover:cursor-pointer',
-    props.active
-      ? 'bg-indicatorActive hover:bg-indicatorInactive'
-      : 'bg-indicatorInactive hover:bg-indicatorActive'
-  )
-
-  return <button className={classes} onClick={props.onClick} />
-}
-
-type ThumbnailSlideProps = { src: string }
-
-type ThumbnailIndicatorProps = {
-  active: boolean
-  onClick: MouseEventHandler<HTMLButtonElement> | undefined
 }

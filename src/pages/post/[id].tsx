@@ -3,7 +3,6 @@ import postApi from '@/features/post/post.api'
 import { useAdvancedScroll } from '@/hooks'
 import { type NextPageWithLayout } from '@/types'
 import clsx from 'clsx'
-import { For } from 'million/react'
 import dynamic from 'next/dynamic'
 import styles from './styles.module.scss'
 
@@ -18,11 +17,16 @@ const Page: NextPageWithLayout = () => {
     <div className='w-full h-full min-h-screen grid place-items-center'>
       <div className='w-4/5 m-auto h-[600px] grid grid-cols-2'>
         <div className='overflow-y-hidden' ref={targetRef}>
-          <For each={data!}>
-            {({ id, url }) => (
-              <NextImage key={id} src={url} alt='' width={600} height={600} className='m-auto'/>
-            )}
-          </For>
+          {data?.map(({ id, url }) => (
+            <NextImage
+              key={id}
+              src={url}
+              alt=''
+              width={600}
+              height={600}
+              className='m-auto'
+            />
+          ))}
         </div>
         <div
           className={clsx(`overflow-y-auto`, styles.styledScrollbar)}
