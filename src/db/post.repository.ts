@@ -1,4 +1,4 @@
-import { Logger } from '@/util'
+import { Logger } from '@/utils'
 import db from './database'
 
 const getAllQuery = db.selectFrom('post').selectAll()

@@ -1,8 +1,7 @@
 import { wrapper } from '@/app/store'
 import storageApi from '@/features/storage/storage.api'
 import { type NextPageWithLayout } from '@/types'
-import { Logger, convertFileSize } from '@/util'
-import { For } from 'million/react'
+import { Logger, convertFileSize } from '@/utils'
 import dynamic from 'next/dynamic'
 
 const LoadingComponent = dynamic(() => import('@/components/shared/Loading'))
@@ -15,15 +14,13 @@ const Page: NextPageWithLayout = () => {
 
   return (
     <>
-      <For each={data!}>
-        {file => (
-          <ul key={file.id!}>
-            <li>Name: {file.name}</li>
-            <li>Size: {convertFileSize(Number.parseInt(file.size!))}</li>
-            <li>Owned by: Tuanna</li>
-          </ul>
-        )}
-      </For>
+      {data?.map(file => (
+        <ul key={file.id!}>
+          <li>Name: {file.name}</li>
+          <li>Size: {convertFileSize(Number.parseInt(file.size!))}</li>
+          <li>Owned by: Tuanna</li>
+        </ul>
+      ))}
     </>
   )
 }

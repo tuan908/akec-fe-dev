@@ -1,4 +1,4 @@
-import { currentEnvironment } from '@/util'
+import { currentEnvironment } from '@/utils'
 import { autoBatchEnhancer, configureStore } from '@reduxjs/toolkit'
 import { createWrapper, type Context } from 'next-redux-wrapper'
 import { apiMiddleware } from './base.api'

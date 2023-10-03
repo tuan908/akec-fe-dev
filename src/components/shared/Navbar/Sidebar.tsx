@@ -1,5 +1,5 @@
 import { Route } from '@/constant'
-import { signOut } from '@/util'
+import { signOut } from '@/utils'
 import { type Session } from 'next-auth'
 import { signIn } from 'next-auth/react'
 import dynamic from 'next/dynamic'

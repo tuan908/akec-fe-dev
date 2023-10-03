@@ -1,6 +1,6 @@
 import { HttpStatus } from '@/constant'
 import postEndpoint, { type TPost } from '@/db/post.repository'
-import { Logger } from '@/util'
+import { Logger } from '@/utils'
 import { kv } from '@vercel/kv'
 import type { NextApiRequest, NextApiResponse } from 'next'
 

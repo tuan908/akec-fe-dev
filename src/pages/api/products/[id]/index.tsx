@@ -1,7 +1,7 @@
 import { HttpStatus } from '@/constant'
 import productEndpoint from '@/db/product.repository'
 import type { TProduct } from '@/types'
-import { Logger } from '@/util'
+import { Logger } from '@/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(

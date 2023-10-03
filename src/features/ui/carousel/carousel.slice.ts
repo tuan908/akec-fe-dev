@@ -9,10 +9,14 @@ import { HYDRATE_ACTION } from '../../hydrate/hydrate.action'
 type TCarouselIndex = {
   current: number
   total?: number
+  page: number
+  direction: number
 }
 
 const initialState: TCarouselIndex = {
-  current: 0
+  current: 0,
+  page: 0,
+  direction: 0
 }
 
 const carouselSlice = createSlice({
@@ -23,7 +27,9 @@ const carouselSlice = createSlice({
       reducer: state => {
         state.current =
           state.current + 1 === state.total ? 0 : state.current + 1
-        return state
+        state.page = state.current + 1 === state.total ? 0 : (state.page += 1)
+        state.direction =
+          state.current + 1 === state.total ? 0 : (state.direction += 1)
       },
       prepare: prepareAutoBatched<void>()
     },
@@ -31,19 +37,19 @@ const carouselSlice = createSlice({
       reducer: state => {
         state.current =
           state.current > 0 ? state.current - 1 : state?.total! - 1
-        return state
+        state.page = state.current > 0 ? state.page - 1 : state?.total! - 1
+        state.direction =
+          state.current > 0 ? state.direction - 1 : state?.total! - 1
       },
       prepare: prepareAutoBatched<void>()
     },
 
     toSlide(state, action: PayloadAction<number>) {
       state.current = action.payload
-      return state
     },
 
     initTotal(state, action: PayloadAction<number>) {
       state.total = action.payload
-      return state
     }
   },
   extraReducers(builder) {

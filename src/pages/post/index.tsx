@@ -1,72 +1,27 @@
-import { useAppDispatch } from '@/app/hooks'
 import { wrapper } from '@/app/store'
+import Posts from '@/components/About/Posts'
 import postApi from '@/features/post/post.api'
-import { clearInput } from '@/features/post/post.slice'
 import { type NextPageWithLayout } from '@/types'
-import { For } from 'million/react'
 import dynamic from 'next/dynamic'
-import { useState, type ReactElement } from 'react'
+import { type ReactElement } from 'react'
 
-const PlusIcon = dynamic(() => import('@mui/icons-material/Add'))
-const IconButton = dynamic(() => import('@mui/material/IconButton'))
 const Layout = dynamic(() => import('@/components/shared/Layout'))
-const PostCreator = dynamic(() => import('@/components/About/CreatePost'))
-const PostCard = dynamic(() => import('@/components/About/PostCard'))
-const NextLink = dynamic(() => import('next/link'))
 const LoadingComponent = dynamic(() => import('@/components/shared/Loading'))
 const PostThumbnail = dynamic(() => import('@/components/About/Thumbnail'))
 
 const Page: NextPageWithLayout = () => {
-  const [open, setOpen] = useState(false)
-  const dispatch = useAppDispatch()
-  const { data, isLoading } = postApi.useGetAllPostsQuery()
+  const { isLoading } = postApi.useGetAllPostsQuery()
 
   if (isLoading) return <LoadingComponent />
 
-  function handleCreate() {
-    setOpen(false)
-    dispatch(clearInput())
-  }
-
   return (
-    <>
+    <div className="bg-[#F8F0EC]">
       <PostThumbnail />
-      <div className='w-4/5 mx-auto flex flex-row'>
-        <nav className='lg:text-sm lg:leading-6 relative mr-0 my-10 w-1/5'>
-          <h5 className='mb-8 lg:mb-3 font-semibold text-dark text-xl'>
-            Danh sách bài viết
-          </h5>
-          <div className='space-y-6 lg:space-y-2 border-l border-slate-100 w-full flex flex-col'>
-            <For each={[1, 2, 3, 4, 5]}>
-              {number => (
-                <NextLink
-                  href={`/post/${number}`}
-                  key={number}
-                  className='px-3 py-4 hover:cursor-pointer hover:text-dark hover:bg-hover hover:rounded-lg'
-                >
-                  Bài viết {number}
-                </NextLink>
-              )}
-            </For>
-          </div>
-        </nav>
-        <div className='w-3/5'>
-          <For each={data!}>
-            {post => <PostCard key={post?.id} {...post} />}
-          </For>
-        </div>
-        <div className='w-1/5'></div>
+
+      <div className='w-4/5 mx-auto grid grid-cols-1'>
+        <Posts />
       </div>
-      {!open && (
-        <IconButton
-          className='fixed bottom-8 right-8 z-50'
-          onClick={() => setOpen(!open)}
-        >
-          <PlusIcon />
-        </IconButton>
-      )}
-      <PostCreator open={open} setOpen={handleCreate} />
-    </>
+    </div>
   )
 }
 
