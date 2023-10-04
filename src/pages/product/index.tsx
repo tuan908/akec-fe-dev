@@ -26,27 +26,14 @@ const Page: NextPageWithLayout = () => {
 
   if (isError) return <BirdNestError />
 
+  if (isLoading) {
+    return <Loading />
+  }
+
   return (
     <div className='mx-auto h-full mb-12'>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          {/* <ProgressBar /> */}
-          {/* {data!?.map((product, index) => (
-            <ProductCardV2
-              key={index}
-              name={product.name}
-              price={product.price}
-              previewImageUrl='https://pbs.twimg.com/media/FT_xI0jVsAIhdF1?format=jpg&name=4096x4096'
-              onClick={() => router.push(`/product/${index}`)}
-            />
-          ))} */}
-          <Thumbnail />
-
-          <ProductCard imgUrls={data!} />
-        </>
-      )}
+      <Thumbnail />
+      <ProductCard imgUrls={data!} />
     </div>
   )
 }

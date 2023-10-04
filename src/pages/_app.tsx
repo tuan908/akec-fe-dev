@@ -4,7 +4,7 @@ import { type AppPropsWithLayout } from '@/types'
 import { createTheme, ThemeProvider } from '@mui/material'
 import { SessionProvider } from 'next-auth/react'
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
+import { Suspense, type FC } from 'react'
 
 const Loading = dynamic(() => import('@/components/shared/Loading'))
 const CssBaseline = dynamic(() => import('@mui/material/CssBaseline'))
@@ -24,10 +24,10 @@ const theme = createTheme({
   }
 })
 
-export default function App({
+const App: FC<AppPropsWithLayout> = ({
   Component,
   pageProps: { session, ...rest }
-}: AppPropsWithLayout) {
+}) => {
   const getLayout = Component.getLayout || (page => page)
   const { store, props } = wrapper.useWrappedStore(rest)
 
@@ -44,3 +44,5 @@ export default function App({
     </SessionProvider>
   )
 }
+
+export default App
