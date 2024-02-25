@@ -1,4 +1,4 @@
-export { default as useAdvancedScroll } from './useAdvancedScroll'
-export { default as useAuth } from './useAuth'
-export { default as useMountedState } from './useMountState'
-export { default as useParallax } from './useParallax'
+export { useAdvancedScroll } from './useAdvancedScroll'
+export { useAuth } from './useAuth'
+export { useHasMounted } from './useHasMounted'
+export { useParallax } from './useParallax'

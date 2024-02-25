@@ -1,4 +1,4 @@
-import type { TProduct } from '@/types'
+import type { TProduct } from '@/lib/types'
 import dynamic from 'next/dynamic'
 import type { FunctionComponent } from 'react'
 

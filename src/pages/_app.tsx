@@ -1,6 +1,6 @@
 import { wrapper } from '@/app/store'
+import { type AppPropsWithLayout } from '@/lib/types'
 import '@/styles/main.scss'
-import { type AppPropsWithLayout } from '@/types'
 import { createTheme, ThemeProvider } from '@mui/material'
 import { SessionProvider } from 'next-auth/react'
 import dynamic from 'next/dynamic'

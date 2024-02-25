@@ -1,11 +1,15 @@
-export default function HomeThumbnail() {
+import Image from 'next/image'
+
+export function Thumbnail() {
   return (
     <div className='relative w-full'>
-      <img
+      <Image
         src='/assets/image/background-home.webp'
         className='opacity-90 object-cover w-full sm:h-[20rem] md:h-[30rem]'
         alt=''
         loading='lazy'
+        width={400}
+        height={400}
       />
 
       <div className='absolute top-1/3 left-[5%] text-white font-bold'>

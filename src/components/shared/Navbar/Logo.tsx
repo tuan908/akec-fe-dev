@@ -1,4 +1,4 @@
-import { Route } from '@/constant'
+import { Route } from '@/constants'
 import { Yeseva_One } from 'next/font/google'
 import Link from 'next/link'
 import router from 'next/router'

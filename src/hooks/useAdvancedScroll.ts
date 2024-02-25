@@ -1,7 +1,7 @@
 import { useScroll } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 
-export default function useAdvancedScroll() {
+export function useAdvancedScroll() {
   const sourceRef = useRef<HTMLDivElement>(null)
   const targetRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({

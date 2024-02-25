@@ -7,6 +7,6 @@ export default function Page() {
   return <div className=''>Account</div>
 }
 
-Page.getLayout = (page: ReactElement) => (
+ = (page: ReactElement) => (
   <Layout pageTitle='Tài khoản'>{page}</Layout>
 )

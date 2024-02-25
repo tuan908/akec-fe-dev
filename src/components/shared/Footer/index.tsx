@@ -1,4 +1,4 @@
-import { LOGO_ABSOLUTE_PATH, Route } from '@/constant'
+import { LOGO_ABSOLUTE_PATH, Route } from '@/constants'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import styles from './Footer.module.scss'

@@ -1,6 +1,6 @@
+import type { TOrder } from '@/lib/types'
 import dynamic from 'next/dynamic'
 import { FC, useState } from 'react'
-import type { TOrder } from '@/types'
 
 const Add = dynamic(() => import('@mui/icons-material/Add'))
 const Remove = dynamic(() => import('@mui/icons-material/Remove'))

@@ -1,4 +1,4 @@
-import { Logger } from '@/utils'
+import { Logger } from '@/lib/utils'
 import { Component, type ErrorInfo, type PropsWithChildren } from 'react'
 
 interface State {

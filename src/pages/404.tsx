@@ -1,4 +1,4 @@
-import { Route } from '@/constant'
+import { Route } from '@/constants'
 import dynamic from 'next/dynamic'
 
 const NextLink = dynamic(() => import('next/link'))

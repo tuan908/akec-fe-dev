@@ -1,3 +1,2 @@
 export { default as ContactForm } from './Form'
-export { default as CustomMap } from './GoogleMap'
-
+export { default as Map } from './Map'

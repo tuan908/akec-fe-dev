@@ -1,5 +1,5 @@
-import { type TImage } from '@/db/image.repository'
-import { chonburi } from '@/utils'
+import { type TImage } from '@/lib/database/image.repository'
+import { chonburi } from '@/lib/utils'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { type FunctionComponent } from 'react'

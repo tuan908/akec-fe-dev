@@ -1,5 +1,5 @@
-import { Route } from '@/constant'
-import useHasMounted from '@/hooks/useMountState'
+import { Route } from '@/constants'
+import useHasMounted from '@/hooks/useHasMounted'
 import styled from '@emotion/styled'
 import { type Session } from 'next-auth'
 import { signIn, signOut } from 'next-auth/react'

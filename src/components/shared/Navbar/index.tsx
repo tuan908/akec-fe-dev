@@ -1,5 +1,5 @@
 import { useAppSelector } from '@/app/hooks'
-import { Route } from '@/constant'
+import { Route } from '@/constants'
 import { useAuth } from '@/hooks'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -23,7 +23,7 @@ export default function Navbar() {
         zIndex: '49'
       }}
     >
-      <Sidebar {...authProps}/>
+      <Sidebar {...authProps} />
       <Link
         href={Route.Post}
         className={`hidden sm:block cursor-pointer ${
@@ -78,7 +78,7 @@ export default function Navbar() {
       >
         Liên hệ
       </Link>
-      <Avatar ordersCount={ordersCount} {...authProps}/>
+      <Avatar ordersCount={ordersCount} {...authProps} />
     </nav>
   )
 }

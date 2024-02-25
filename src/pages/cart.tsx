@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { removeFromCart } from '@/features/order/order.slice'
-import type { TOrder } from '@/types'
-import { type NextPageWithLayout } from '@/types'
-import { formatMoney } from '@/utils'
+import type { TOrder } from '@/lib/types'
+import { formatMoney } from '@/lib/utils'
 import dynamic from 'next/dynamic'
 import { useState, type ReactElement } from 'react'
 
@@ -28,7 +27,7 @@ const style = {
   p: 4
 }
 
-const Page: NextPageWithLayout = () => {
+const Page = async () => {
   const data = useAppSelector(state => state.order)
   const dispatch = useAppDispatch()
 
@@ -115,8 +114,6 @@ const Page: NextPageWithLayout = () => {
   )
 }
 
-export default Page
-
-Page.getLayout = (page: ReactElement) => (
+export default Page = (page: ReactElement) => (
   <Layout pageTitle='Giỏ hàng'>{page}</Layout>
 )
