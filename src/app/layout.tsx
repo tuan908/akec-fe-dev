@@ -1,3 +1,4 @@
+import {Footer, Navbar} from "@/components/shared";
 import ReduxProvider from "./ReduxProvider";
 import "./main.css";
 
@@ -16,12 +17,14 @@ export default function RootLayout({
       <body>
         <ReduxProvider>
           <main className="w-full max-w-screen h-full min-h-screen bg-[#F8F0EC] grid layout">
+            <Navbar />
             <div
               className="w-full h-full max-w-screen"
               style={{gridArea: "main"}}
             >
               {children}
             </div>
+            <Footer />
           </main>
         </ReduxProvider>
       </body>

@@ -1,21 +1,18 @@
 "use client";
 
 import {Route} from "@/constants";
-import {useAuth} from "@/hooks";
 import {useAppSelector} from "@/lib/redux/hooks";
 import {orderList} from "@/lib/redux/order/order.slice";
-import dynamic from "next/dynamic";
-import {usePathname} from "next/navigation";
-import styles from "./navbar.module.scss";
 import Link from "next/link";
-import Sidebar from "./Sidebar";
+import {usePathname} from "next/navigation";
 import Avatar from "./Avatar";
 import Logo from "./Logo";
+import styles from "./navbar.module.scss";
 
 export default function Navbar() {
   const pathname = usePathname();
   const ordersCount = useAppSelector(orderList).length;
-  const authProps = useAuth();
+  // const authProps = useAuth();
 
   return (
     <nav
@@ -25,7 +22,7 @@ export default function Navbar() {
         zIndex: "49"
       }}
     >
-      <Sidebar {...authProps} />
+      {/* <Sidebar {...authProps} /> */}
       <Link
         href={Route.Post}
         className={`hidden sm:block cursor-pointer ${
@@ -37,7 +34,7 @@ export default function Navbar() {
       <Link
         href={Route.Products}
         className={`hidden sm:block ${styles.productMenu} ${
-          pathname.includes("product") ? "opacity-1" : "opacity-60"
+          pathname.includes("products") ? "opacity-1" : "opacity-60"
         }`}
       >
         Sản phẩm
@@ -80,7 +77,7 @@ export default function Navbar() {
       >
         Liên hệ
       </Link>
-      <Avatar ordersCount={ordersCount} {...authProps} />
+      <Avatar ordersCount={ordersCount} session={null} ready={false} />
     </nav>
   );
 }
