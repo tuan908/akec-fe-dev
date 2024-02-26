@@ -1,61 +1,64 @@
-import FacebookIcon from '@mui/icons-material/Facebook';
-import { Link } from '@mui/material';
-import styles from './contact-form.module.scss';
+"use client";
+
+import Facebook from "@mui/icons-material/Facebook";
+import Link from "next/link";
+import styles from "./contact-form.module.scss";
 
 const ContactForm = () => {
-    const facebook_url = 'https://www.facebook.com/AKECsince2021'
-    return (
-        <div className={styles.ContactForm}>
+  const facebook_url = "https://www.facebook.com/AKECsince2021";
+  return (
+    <div className={styles.ContactForm}>
       <section className="text-gray-700 body-font relative">
         <div className="container px-5 py-6 mx-auto">
           <div className="flex flex-col text-start w-full pt-4">
             <h1 className="sm:text-3xl text-2xl font-medium mb-4 title-font text-gray-900">
-                Liên Lạc Với AKEC
+              Liên Lạc Với AKEC
             </h1>
 
-            <div className='grid grid-cols-10' >
-                <div className='col-span-2'>
-                    <h4>Địa chỉ</h4>
-                </div>
-                <div className='col-span-7'>
-                    <p>An Bình, Phú Giáo, Bình Dương</p>
-                </div>
+            <div className="grid grid-cols-10">
+              <div className="col-span-2">
+                <h4>Địa chỉ</h4>
+              </div>
+              <div className="col-span-7">
+                <p>An Bình, Phú Giáo, Bình Dương</p>
+              </div>
 
-                <div className='col-span-2'>
-                    <h4>Điện thoại</h4>
-                </div>
-                <div className='col-span-7'>
-                    <p>+84 37 223 8379</p>
-                </div>
+              <div className="col-span-2">
+                <h4>Điện thoại</h4>
+              </div>
+              <div className="col-span-7">
+                <p>+84 37 223 8379</p>
+              </div>
 
-                <div className='col-span-2'>
-                    <h4>Email</h4>
-                </div>
-                <div className='col-span-7'>
-                    <p>info@akec.com</p>
-                </div>
+              <div className="col-span-2">
+                <h4>Email</h4>
+              </div>
+              <div className="col-span-7">
+                <p>info@akec.com</p>
+              </div>
 
-                <div className='col-span-2'>
-                    {/* <h4>Facebook</h4> */}
-                </div>
-                <div className='col-span-7'>
-                    <Link href={facebook_url}>
-                        <FacebookIcon className={styles.socialIcon}></FacebookIcon>
-                    </Link>
-                </div>
+              <div className="col-span-2">{/* <h4>Facebook</h4> */}</div>
+              <div className="col-span-7">
+                <Link href={facebook_url}>
+                  <Facebook className={styles.socialIcon}></Facebook>
+                </Link>
+              </div>
             </div>
           </div>
 
           <div className="flex flex-col text-start w-full mt-[1em] pt-[1em] border-t border-gray-200">
             <h1 className="sm:text-3xl text-2xl font-medium mb-4 title-font text-gray-900 capitalize">
-                Gửi thắc mắc cho AKEC
+              Gửi thắc mắc cho AKEC
             </h1>
           </div>
           <div className="mx-auto">
             <div className="flex flex-wrap -m-2">
               <div className="p-2 w-1/2">
                 <div className="relative">
-                  <label htmlFor="name" className="leading-7 text-sm text-gray-600">
+                  <label
+                    htmlFor="name"
+                    className="leading-7 text-sm text-gray-600"
+                  >
                     Tên
                   </label>
                   <input
@@ -106,8 +109,8 @@ const ContactForm = () => {
           </div>
         </div>
       </section>
-        </div>
-      )
+    </div>
+  );
 };
 
 export default ContactForm;

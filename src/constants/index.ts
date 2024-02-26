@@ -1,34 +1,34 @@
-export const REQUEST_PARAM_SORT_ASC = 'asc'
-export const REQUEST_PARAM_SORT_DESC = 'desc'
-export const REQUEST_PARAM_PAGE = 'page'
-export const REQUEST_PARAM_SIZE = 'size'
-export const REQUEST_PARAM_SORT = 'sort'
+export const REQUEST_PARAM_SORT_ASC = "asc";
+export const REQUEST_PARAM_SORT_DESC = "desc";
+export const REQUEST_PARAM_PAGE = "page";
+export const REQUEST_PARAM_SIZE = "size";
+export const REQUEST_PARAM_SORT = "sort";
 
-export const LOGO_ABSOLUTE_PATH = '/assets/image/logo.jpg'
+export const LOGO_ABSOLUTE_PATH = "/assets/image/logo.jpg";
 
 export enum Route {
-  Home = '/home',
-  Products = '/product',
-  Contact = '/contact',
-  Cart = '/cart',
-  Introduce = '/home',
-  Login = '/auth/login',
-  Post = '/post',
-  Account = '/account',
-  CustomerService = '/customer-service'
+  Home = "/home",
+  Products = "/product",
+  Contact = "/contact",
+  Cart = "/cart",
+  Introduce = "/home",
+  Login = "/auth/login",
+  Post = "/post",
+  Account = "/account",
+  CustomerService = "/customer-service"
 }
 
-export const ACCESS_TOKEN = `access_token`
-export const REFRESH_TOKEN = `refresh_token`
-export const USER_INFO = `user_info`
+export const ACCESS_TOKEN = `access_token`;
+export const REFRESH_TOKEN = `refresh_token`;
+export const USER_INFO = `user_info`;
 
 export enum LoggerNamespace {
-  Trace = 'TRACE',
-  Debug = 'DEBUG',
-  Info = 'INFO',
-  Warn = 'WARN',
-  Error = 'ERROR',
-  Fatal = 'FATAL'
+  Trace = "TRACE",
+  Debug = "DEBUG",
+  Info = "INFO",
+  Warn = "WARN",
+  Error = "ERROR",
+  Fatal = "FATAL"
 }
 
 export enum HttpStatus {

@@ -1,33 +1,35 @@
-import { useAppSelector } from '@/app/hooks'
-import { Route } from '@/constants'
-import { useAuth } from '@/hooks'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-import styles from './navbar.module.scss'
+"use client";
 
-const Link = dynamic(() => import('next/link'))
-const Sidebar = dynamic(() => import('./Sidebar'))
-const Avatar = dynamic(() => import('./Avatar'))
-const Logo = dynamic(() => import('./Logo'), { ssr: false })
+import {Route} from "@/constants";
+import {useAuth} from "@/hooks";
+import {useAppSelector} from "@/lib/redux/hooks";
+import {orderList} from "@/lib/redux/order/order.slice";
+import dynamic from "next/dynamic";
+import {usePathname} from "next/navigation";
+import styles from "./navbar.module.scss";
+import Link from "next/link";
+import Sidebar from "./Sidebar";
+import Avatar from "./Avatar";
+import Logo from "./Logo";
 
 export default function Navbar() {
-  const router = useRouter()
-  const ordersCount = useAppSelector(state => state.order).length
-  const authProps = useAuth()
+  const pathname = usePathname();
+  const ordersCount = useAppSelector(orderList).length;
+  const authProps = useAuth();
 
   return (
     <nav
-      className='p-2 w-full sticky top-0 left-0 flex sm:inline-grid sm:grid-cols-5 place-items-center mx-auto shadow-2xl font-medium text-lg text-white bg-[#2c2519]'
+      className="p-2 w-full sticky top-0 left-0 flex sm:inline-grid sm:grid-cols-5 place-items-center mx-auto shadow-2xl font-medium text-lg text-white bg-[#2c2519]"
       style={{
-        gridArea: 'navbar',
-        zIndex: '49'
+        gridArea: "navbar",
+        zIndex: "49"
       }}
     >
       <Sidebar {...authProps} />
       <Link
         href={Route.Post}
         className={`hidden sm:block cursor-pointer ${
-          Route.Post === router.pathname ? 'opacity-1' : 'opacity-60'
+          Route.Post === pathname ? "opacity-1" : "opacity-60"
         }`}
       >
         Tin tức
@@ -35,29 +37,29 @@ export default function Navbar() {
       <Link
         href={Route.Products}
         className={`hidden sm:block ${styles.productMenu} ${
-          router.pathname.includes('product') ? 'opacity-1' : 'opacity-60'
+          pathname.includes("product") ? "opacity-1" : "opacity-60"
         }`}
       >
         Sản phẩm
         <ul className={`hidden ${styles.submenu}`}>
-          <li id={styles.liTest} className='px-4 py-2 w-full relative'>
+          <li id={styles.liTest} className="px-4 py-2 w-full relative">
             Thường
-            <ul id={styles.ulTest} className='hidden'>
-              <li className='px-4 py-2'>Sản phẩm 1</li>
-              <li className='px-4 py-2'>Sản phẩm 1</li>
-              <li className='px-4 py-2'>Sản phẩm 1</li>
+            <ul id={styles.ulTest} className="hidden">
+              <li className="px-4 py-2">Sản phẩm 1</li>
+              <li className="px-4 py-2">Sản phẩm 1</li>
+              <li className="px-4 py-2">Sản phẩm 1</li>
             </ul>
           </li>
-          <li className='px-4 py-2 w-full'>
+          <li className="px-4 py-2 w-full">
             <span>Trung bình</span>
-            <ul id='submenu-2' className='hidden'>
+            <ul id="submenu-2" className="hidden">
               <li>Sản phẩm 1</li>
               <li>Sản phẩm 1</li>
             </ul>
           </li>
-          <li className='px-8 py-2'>
+          <li className="px-8 py-2">
             Cao cấp
-            <ul id='submenu-1' className='hidden'>
+            <ul id="submenu-1" className="hidden">
               <li>Sản phẩm 1</li>
             </ul>
           </li>
@@ -73,12 +75,12 @@ export default function Navbar() {
       <Link
         href={Route.Contact}
         className={`hidden sm:block cursor-pointer ${
-          Route.Contact === router.pathname ? 'opacity-1' : 'opacity-60'
+          Route.Contact === pathname ? "opacity-1" : "opacity-60"
         }`}
       >
         Liên hệ
       </Link>
       <Avatar ordersCount={ordersCount} {...authProps} />
     </nav>
-  )
+  );
 }

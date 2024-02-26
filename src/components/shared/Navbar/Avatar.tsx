@@ -1,48 +1,46 @@
-import { Route } from '@/constants'
-import useHasMounted from '@/hooks/useHasMounted'
-import styled from '@emotion/styled'
-import { type Session } from 'next-auth'
-import { signIn, signOut } from 'next-auth/react'
-import dynamic from 'next/dynamic'
-import { type FC } from 'react'
-
-const NextImage = dynamic(() => import('next/image'))
-const NextLink = dynamic(() => import('next/link'))
-const Badge = dynamic(() => import('@mui/material/Badge'))
-const Skeleton = dynamic(() => import('@mui/material/Skeleton'))
+import {Route} from "@/constants";
+import {useHasMounted} from "@/hooks";
+import styled from "@emotion/styled";
+import Badge from "@mui/material/Badge";
+import Skeleton from "@mui/material/Skeleton";
+import {type Session} from "next-auth";
+import {signIn, signOut} from "next-auth/react";
+import NextImage from "next/image";
+import NextLink from "next/link";
+import {type FC} from "react";
 
 type Props = {
-  session: Session | null
-  ordersCount: number
-  ready: boolean
-}
+  session: Session | null;
+  ordersCount: number;
+  ready: boolean;
+};
 
-const CSRNavbarItem: FC<Props> = ({ session, ordersCount, ready }) => {
-  const isMounted = useHasMounted()
+const CSRNavbarItem: FC<Props> = ({session, ordersCount, ready}) => {
+  const isMounted = useHasMounted();
   if (!ready) {
-    return <Skeleton variant='circular' width={40} height={40} />
+    return <Skeleton variant="circular" width={40} height={40} />;
   }
 
   if (!isMounted) {
-    return null
+    return null;
   }
 
   return (
     <>
       {session === null ? (
-        <button onClick={() => signIn('google', { redirect: true })}>
+        <button onClick={() => signIn("google", {redirect: true})}>
           Login
         </button>
       ) : (
         <Wrapper>
           <Badge
-            color='error'
-            variant={`${ordersCount > 0 ? 'dot' : 'standard'}`}
+            color="error"
+            variant={`${ordersCount > 0 ? "dot" : "standard"}`}
           >
             <NextImage
-              className='w-8 h-8 lg:w-10 lg:h-10 rounded-full hover:cursor-pointer'
+              className="w-8 h-8 lg:w-10 lg:h-10 rounded-full hover:cursor-pointer"
               src={session?.user?.image!}
-              alt=''
+              alt=""
               width={60}
               height={60}
             />
@@ -60,10 +58,10 @@ const CSRNavbarItem: FC<Props> = ({ session, ordersCount, ready }) => {
         </Wrapper>
       )}
     </>
-  )
-}
+  );
+};
 
-export default CSRNavbarItem
+export default CSRNavbarItem;
 
 const Wrapper = styled.div`
   position: relative;
@@ -99,4 +97,4 @@ const Wrapper = styled.div`
       background-color: rgb(110, 116, 139);
     }
   }
-`
+`;

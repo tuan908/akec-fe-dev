@@ -1,34 +1,26 @@
-import { useState, type FC } from 'react'
-import dynamic from 'next/dynamic'
-import styled from '@emotion/styled'
+"use client";
 
-const MuiRating = dynamic(() => import('@mui/material/Rating'))
+import MuiRating from "@mui/material/Rating";
+import {useState, type FC} from "react";
 
 const Rating: FC = () => {
-  const [value, setVal] = useState<number | null>(5)
+  const [value, setVal] = useState<number | null>(5);
 
   return (
-    <Wrapper>
-      <ChildWrapper slot='number'>{value}</ChildWrapper>
-      <ChildWrapper slot='star'>
+    <div
+      className="grid place-items-center"
+      style={{gridTemplateAreas: "star number"}}
+    >
+      <div style={{gridArea: "number"}}>{value}</div>
+      <div style={{gridArea: "star"}}>
         <MuiRating
           value={value}
-          size='small'
+          size="small"
           onChange={(_, newValue) => setVal(newValue)}
         />
-      </ChildWrapper>
-    </Wrapper>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default Rating
-
-const Wrapper = styled.div`
-  display: grid;
-  place-items: center;
-  grid-template-areas: 'star number';
-`
-
-const ChildWrapper = styled.div<{ slot: 'star' | 'number' }>`
-  grid-area: ${props => props.slot};
-`
+export default Rating;

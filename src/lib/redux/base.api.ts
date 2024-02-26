@@ -1,13 +1,10 @@
-import { isProd } from '@/lib/utils/env'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 export const baseApi = createApi({
-  reducerPath: 'baseApi',
+  reducerPath: "API",
   baseQuery: fetchBaseQuery({
-    baseUrl: isProd
-      ? process.env.DEV_API_ENDPOINT
-      : process.env.PROD_API_ENDPOINT
+    baseUrl: process.env.NEXT_PUBLIC_BN_SPRING_API
   }),
   refetchOnMountOrArgChange: 900,
   endpoints: () => ({})
-})
+});

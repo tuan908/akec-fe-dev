@@ -1,74 +1,72 @@
-import { Route } from '@/constants'
-import { signOut } from '@/lib/utils'
-import { type Session } from 'next-auth'
-import { signIn } from 'next-auth/react'
-import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import {Route} from "@/constants";
+import {signOut} from "@/lib/utils";
+import MenuIcon from "@mui/icons-material/Menu";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import {type Session} from "next-auth";
+import {signIn} from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import {useState} from "react";
 
-const MenuIcon = dynamic(() => import('@mui/icons-material/Menu'))
-const SwipeableDrawer = dynamic(() => import('@mui/material/SwipeableDrawer'))
-const Link = dynamic(() => import('next/link'))
-const Image = dynamic(() => import('next/image'))
+type Anchor = "left";
+type SidebarProps = {session: Session | null};
 
-type Anchor = 'left'
-type SidebarProps = { session: Session | null }
-
-export default function Sidebar({ session }: SidebarProps) {
+export default function Sidebar({session}: SidebarProps) {
   const [isToggle, setToggle] = useState({
     left: false
-  })
+  });
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event &&
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
       ) {
-        return
+        return;
       }
 
-      setToggle({ ...isToggle, [anchor]: open })
-    }
+      setToggle({...isToggle, [anchor]: open});
+    };
   return (
     <>
       <div
-        className='w-1/8 flex justify-start items-center sm:hidden'
-        onClick={toggleDrawer('left', true)}
-        onKeyDown={toggleDrawer('left', true)}
+        className="w-1/8 flex justify-start items-center sm:hidden"
+        onClick={toggleDrawer("left", true)}
+        onKeyDown={toggleDrawer("left", true)}
       >
-        <MenuIcon fontSize='large' />
+        <MenuIcon fontSize="large" />
       </div>
 
       <SwipeableDrawer
-        sx={{ width: 300 }}
-        anchor={'left'}
-        open={isToggle['left']}
-        onClose={toggleDrawer('left', false)}
-        onOpen={toggleDrawer('left', true)}
+        sx={{width: 300}}
+        anchor={"left"}
+        open={isToggle["left"]}
+        onClose={toggleDrawer("left", false)}
+        onOpen={toggleDrawer("left", true)}
         disableBackdropTransition
       >
-        <ul className='bg-white'>
+        <ul className="bg-white">
           <li
-            className='w-full p-4 flex items-center justify-center'
-            onClick={toggleDrawer('left', false)}
+            className="w-full p-4 flex items-center justify-center"
+            onClick={toggleDrawer("left", false)}
           >
             <Link href={Route.Home}>
               <Image
-                src='/assets/image/logo.jpg'
-                alt='logo'
+                src="/assets/image/logo.jpg"
+                alt="logo"
                 width={300}
                 height={24}
-                className='w-full hover:opacity-90'
+                className="w-full hover:opacity-90"
                 priority
               />
             </Link>
           </li>
           <li
-            className='pb-4 px-8 font-bold'
-            onClick={toggleDrawer('left', false)}
+            className="pb-4 px-8 font-bold"
+            onClick={toggleDrawer("left", false)}
           >
             <Link href={Route.Home}>HOME</Link>
           </li>
@@ -76,10 +74,10 @@ export default function Sidebar({ session }: SidebarProps) {
             (route, index) => (
               <li
                 key={index}
-                className='py-4 px-8 font-bold'
-                onClick={toggleDrawer('left', false)}
+                className="py-4 px-8 font-bold"
+                onClick={toggleDrawer("left", false)}
               >
-                <Link href={route}>{route.replace('/', '').toUpperCase()}</Link>
+                <Link href={route}>{route.replace("/", "").toUpperCase()}</Link>
               </li>
             )
           )}
@@ -87,22 +85,22 @@ export default function Sidebar({ session }: SidebarProps) {
         </ul>
       </SwipeableDrawer>
     </>
-  )
+  );
 }
 
 type RenderProps = {
   toggleFn: (
     anchor: Anchor,
     open: boolean
-  ) => (event: React.KeyboardEvent | React.MouseEvent) => void
-  session: Session | null
-}
-const Component2Render = ({ toggleFn: fn, session }: RenderProps) =>
+  ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+  session: Session | null;
+};
+const Component2Render = ({toggleFn: fn, session}: RenderProps) =>
   session !== null ? (
     <li
       onClick={() => {
-        fn('left', false)
-        signOut()
+        fn("left", false);
+        signOut();
       }}
     >
       Sign out
@@ -110,10 +108,10 @@ const Component2Render = ({ toggleFn: fn, session }: RenderProps) =>
   ) : (
     <li
       onClick={() => {
-        fn('left', false)
-        signIn()
+        fn("left", false);
+        signIn();
       }}
     >
       Sign in
     </li>
-  )
+  );

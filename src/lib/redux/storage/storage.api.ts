@@ -1,11 +1,11 @@
-import { type drive_v3 } from 'googleapis'
-import { baseApi } from '../base.api'
+import {type drive_v3} from "googleapis";
+import {baseApi} from "../base.api";
 
-type DriveFile = drive_v3.Schema$File
+type DriveFile = drive_v3.Schema$File;
 export type DriveApiResponse = {
-  ok: boolean
-  data: DriveFile[]
-}
+  ok: boolean;
+  data: DriveFile[];
+};
 
 const storageApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -14,6 +14,6 @@ const storageApi = baseApi.injectEndpoints({
       transformResponse: (res: DriveApiResponse) => res.data
     })
   })
-})
+});
 
-export default storageApi
+export default storageApi;

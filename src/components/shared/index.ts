@@ -1,17 +1,6 @@
-import BirdNestError from './Error'
-import ErrorBoundary from './ErrorBoundary'
-import Footer from './Footer'
-import Layout from './Layout'
-import LoadingComponent from './Loading'
-import Navbar from './Navbar'
-import ProductCard from './ProductCardV1'
+import Footer from "./Footer";
+import LoadingComponent from "./Loading";
+import Navbar from "./Navbar";
+import ProductCard from "./ProductCard";
 
-export {
-    BirdNestError,
-    ErrorBoundary,
-    Footer,
-    Layout,
-    LoadingComponent,
-    Navbar,
-    ProductCard
-}
+export {Footer, LoadingComponent, Navbar, ProductCard};

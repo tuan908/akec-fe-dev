@@ -1,28 +1,28 @@
-import { type Session } from 'next-auth'
-import { useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
+import {type Session} from "next-auth";
+import {useSession} from "next-auth/react";
+import {useEffect, useState} from "react";
 
 export function useAuth() {
-  const { data } = useSession()
-  const [ready, setReady] = useState(false)
-  const [session, setSession] = useState<Session | null>(null)
+  const {data} = useSession();
+  const [ready, setReady] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    if (typeof data === 'undefined') {
-      setSession(null)
-      setReady(false)
+    if (typeof data === "undefined") {
+      setSession(null);
+      setReady(false);
     }
 
     if (data === null) {
-      setSession(null)
-      setReady(true)
+      setSession(null);
+      setReady(true);
     }
 
     if (data !== null) {
-      setSession(data)
-      setReady(true)
+      setSession(data);
+      setReady(true);
     }
-  }, [data])
+  }, [data]);
 
-  return { ready, session }
+  return {ready, session};
 }

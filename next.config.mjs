@@ -24,6 +24,16 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
         pathname: '/**'
+      },
+      {
+        protocol: 'http',
+        hostname: "dummyimage.com",
+        pathname: "/**"
+      },
+      {
+        protocol: "https",
+        hostname: "images-assets.nasa.gov",
+        pathname: "/image/**"
       }
     ]
   },

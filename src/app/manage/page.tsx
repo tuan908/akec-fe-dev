@@ -1,14 +1,14 @@
-import storageApi from '@/features/storage/storage.api'
-import { Logger, convertFileSize } from '@/lib/utils'
-import dynamic from 'next/dynamic'
+"use client";
 
-const LoadingComponent = dynamic(() => import('@/components/shared/Loading'))
+import Loader from "@/components/shared/Loading";
+import storageApi from "@/lib/redux/storage/storage.api";
+import {Logger, convertFileSize} from "@/lib/utils";
 
-const Page = async () => {
-  const { data, isLoading } = storageApi.useListAllFilesQuery()
-  Logger.info(`Drive Api Response:`, data)
+const Page = () => {
+  const {data, isLoading} = storageApi.useListAllFilesQuery();
+  Logger.info(`Drive Api Response:`, data);
 
-  if (isLoading) return <LoadingComponent />
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -20,7 +20,7 @@ const Page = async () => {
         </ul>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

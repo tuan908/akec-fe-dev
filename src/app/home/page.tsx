@@ -1,41 +1,36 @@
-import postApi from '@/features/post/post.api'
-import styled from '@emotion/styled'
-import dynamic from 'next/dynamic'
+"use client";
 
-const CarouselV2 = dynamic(() => import('@/components/Home/Carousel'), {
-  ssr: false
-})
-const Layout = dynamic(() => import('@/components/shared/Layout'))
-const ProductCards = dynamic(() => import('@/components/shared/ProductCardV1'))
-const Thumbnail = dynamic(() => import('@/components/Home/Thumbnail'))
+import {Carousel, Thumbnail} from "@/components/Home";
+import {useGetImageListQuery} from "@/lib/redux/post/post.api";
 
-const Page = async () => {
-  const { data } = postApi.useGetImagesQuery()
+const Page = () => {
+  const {data} = useGetImageListQuery();
 
   return (
     <>
       <Thumbnail />
 
-      <ProductCards imgUrls={data!} />
-
       <Slogan>Chúng mình biết bạn có rất nhiều sự lựa chọn</Slogan>
       <Slogan>Cảm ơn bạn đã đặt niềm tin nơi AKEC</Slogan>
 
-      <CarouselV2 imgUrls={data!} />
+      <Carousel imageUrls={data!} />
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
 
-const Slogan = styled.h1`
-  width: 60%;
-
-  margin: 2rem auto;
-
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-  text-align: center;
-
-  font-family: 'Brush Script MT Italic';
-`
+const Slogan = ({children}: Readonly<{children: React.ReactNode}>) => {
+  return (
+    <h1
+      className="w-3/5 leading-10 text-center"
+      style={{
+        fontFamily: "Brush Script MT Italic",
+        margin: "2rem auto",
+        fontSize: "2.25rem"
+      }}
+    >
+      {children}
+    </h1>
+  );
+};

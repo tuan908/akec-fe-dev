@@ -1,2 +1,2 @@
-export { Carousel } from './Carousel'
-export { Thumbnail } from './Thumbnail'
+export {Carousel} from "./Carousel";
+export {Thumbnail} from "./Thumbnail";
