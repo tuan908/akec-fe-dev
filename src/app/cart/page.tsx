@@ -1,7 +1,9 @@
+"use client";
+
 import Cart from "@/components/Cart";
 import {useAppDispatch, useAppSelector} from "@/lib/redux/hooks";
 import {orderList, removeFromCart} from "@/lib/redux/order/order.slice";
-import type {Order} from "@/lib/types";
+import type {OrderDto} from "@/lib/types";
 import {formatMoney} from "@/lib/utils";
 import Check from "@mui/icons-material/Check";
 import Clear from "@mui/icons-material/Clear";
@@ -25,7 +27,7 @@ const style = {
   p: 4
 };
 
-const Page = async () => {
+const Page = () => {
   const data = useAppSelector(orderList);
   const dispatch = useAppDispatch();
 
@@ -34,7 +36,7 @@ const Page = async () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleDelete = (item: Order) => {
+  const handleDelete = (item: OrderDto) => {
     dispatch(removeFromCart(item));
     handleClose();
   };

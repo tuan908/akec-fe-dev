@@ -1,13 +1,13 @@
 "use client";
 
 import {useAdvancedScroll} from "@/hooks";
-import postApi from "@/lib/redux/post/post.api";
-import clsx from "clsx";
+import {useGetImageListQuery} from "@/lib/redux/post/post.api";
+import {cn} from "@/lib/utils";
 import Image from "next/image";
 import styles from "./post.module.scss";
 
 const Page = () => {
-  const {data} = postApi.useGetImagesQuery();
+  const {data} = useGetImageListQuery();
   const {sourceRef, targetRef} = useAdvancedScroll();
 
   return (
@@ -26,7 +26,7 @@ const Page = () => {
           ))}
         </div>
         <div
-          className={clsx(`overflow-y-auto`, styles.styledScrollbar)}
+          className={cn(`overflow-y-auto`, styles.styledScrollbar)}
           ref={sourceRef}
         >
           <h1 className="text-2xl">Big data, Personal Food</h1>

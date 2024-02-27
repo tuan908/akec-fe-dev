@@ -1,5 +1,6 @@
 "use client";
 
+import {useHasMounted} from "@/hooks";
 import {type ImageDto} from "@/lib/redux/post/post.api";
 import {cn} from "@/lib/utils";
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
@@ -16,6 +17,7 @@ export function Carousel({imageUrls}: CarouselProps) {
   const [scope, animate] = useAnimate();
   const [carouselIndex, setIndex] = useState(0);
   const itemRef = useRef<HTMLDivElement>(null);
+  const isMounted = useHasMounted();
 
   const handleDecrement: MouseEventHandler<HTMLButtonElement> = e => {
     e.preventDefault();
@@ -28,22 +30,24 @@ export function Carousel({imageUrls}: CarouselProps) {
     setIndex(prevIndex => (prevIndex < 9 ? prevIndex + 1 : prevIndex));
   };
 
-  // useEffect(() => {
-  //   animate(
-  //     'div',
-  //     {
-  //       x: `calc(-${itemRef?.current?.offsetWidth}px * ${carouselIndex})`
-  //     },
-  //     { ease: 'easeInOut' }
-  //   )
-  // }, [animate, carouselIndex])
+  useEffect(() => {
+    if (isMounted) {
+      animate(
+        scope.current,
+        {
+          x: `calc(-${itemRef?.current?.offsetWidth}px * ${carouselIndex})`
+        },
+        {ease: "easeInOut"}
+      );
+    }
+  }, [animate, carouselIndex, isMounted, scope]);
 
   return (
     <div className="w-3/4 flex flex-row m-auto justify-center items-center">
-      <motion.button onClick={handleDecrement}>
+      <button onClick={handleDecrement}>
         <ChevronLeft className="text-4xl md:text-6xl cursor-pointer outline-none" />
-      </motion.button>
-      <motion.div
+      </button>
+      <div
         className="cursor-grab overflow-hidden w-3/5 mx-auto touch-none my-10 relative flex flex-row"
         ref={scope}
       >
@@ -68,11 +72,11 @@ export function Carousel({imageUrls}: CarouselProps) {
             />
           </motion.div>
         ))}
-      </motion.div>
+      </div>
 
-      <motion.button onClick={handleIncrement}>
+      <button onClick={handleIncrement}>
         <ChevronRight className="text-4xl md:text-6xl cursor-pointer outline-none" />
-      </motion.button>
+      </button>
     </div>
   );
 }

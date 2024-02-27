@@ -1,15 +1,15 @@
-import type {Product, SuccessResponseDto} from "@/lib/types";
+import type {ProductDto, SuccessResponseDto} from "@/lib/types";
 import {baseApi} from "../base.api";
 
 const productApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getProductById: builder.query<Product, string>({
+    getProductById: builder.query<ProductDto, string>({
       query: id => `/products/${id}`,
-      transformResponse: (response: {product: Product}) => response.product
+      transformResponse: (response: {product: ProductDto}) => response.product
     }),
-    getProductList: builder.query<Product[], void>({
+    getProductList: builder.query<ProductDto[], void>({
       query: () => `/products/list`,
-      transformResponse: (response: SuccessResponseDto<Product>) =>
+      transformResponse: (response: SuccessResponseDto<ProductDto>) =>
         response.data
     })
   })

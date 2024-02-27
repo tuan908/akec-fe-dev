@@ -1,56 +1,40 @@
-import type {ImageDto} from "@/lib/redux/post/post.api";
-import {chonburi} from "@/lib/utils";
-import Link from "next/link";
-import {type FunctionComponent} from "react";
-import styles from "./product-card.module.scss";
+import {chonburi, cn, formatMoney} from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
+import styles from "./product-card.module.scss";
 
 type ProductCardProps = {
-  previewImageUrl: string;
+  previewImageUrl?: string;
   name: string;
   price: number;
   href: string;
 };
 
-export const ProductCard: FunctionComponent<ProductCardProps> = ({
+export function ProductCard({
   previewImageUrl,
   name,
   price,
   href
-}) => {
+}: ProductCardProps) {
   return (
-    <Link href={href}>
+    <Link href={href} className="w-full h-full">
       <figure className={styles.productCard}>
         <div className={styles.productCardImage}>
           <Image
             className="w-full h-full rounded-md"
-            src={previewImageUrl}
+            src={previewImageUrl ?? ""}
             width={540}
             height={960}
             alt=""
           />
         </div>
         <figcaption className={styles.productCardCaption}>
-          <h2 className={`text-xl ${chonburi.className}`}>{name}</h2>
-          <h3 className="text-base font-thin py-1">{price} VND</h3>
+          <h2 className={cn("text-xl", chonburi.className)}>{name}</h2>
+          <h3 className="text-base font-thin py-1">
+            {formatMoney(price.toString())}
+          </h3>
         </figcaption>
       </figure>
     </Link>
-  );
-};
-
-export default function ProductCollection({imgUrls}: {imgUrls?: ImageDto[]}) {
-  return (
-    <div className="w-11/12 m-auto p-8 grid place-items-center gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {imgUrls?.map((url, index) => (
-        <ProductCard
-          key={index}
-          name={`Product ${index}`}
-          price={1000}
-          previewImageUrl={url.url}
-          href={`/products/${index}`}
-        />
-      ))}
-    </div>
   );
 }

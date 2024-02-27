@@ -6,13 +6,13 @@ import {
   prevSlide
 } from "@/lib/redux/carousel/carousel.slice";
 import {useAppDispatch, useAppSelector} from "@/lib/redux/hooks";
-import {Product} from "@/lib/types";
+import {ProductDto} from "@/lib/types";
 import {cn} from "@/lib/utils";
 import Image from "next/image";
 
 export default function ProductCarousel({
   preview_image_urls
-}: Pick<Product, "preview_image_urls">) {
+}: Pick<ProductDto, "preview_image_urls">) {
   const dispatch = useAppDispatch();
   const slideIndex = useAppSelector(carouselSlice.selectSlice);
   return (

@@ -1,6 +1,11 @@
 import ContactForm from "@/components/Contact/Form";
 import CustomMap from "@/components/Contact/Map";
 import Grid from "@mui/material/Grid";
+import {type Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "Liên hệ"
+};
 
 const Page = async () => {
   return (

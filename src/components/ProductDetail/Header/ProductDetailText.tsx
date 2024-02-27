@@ -3,7 +3,7 @@
 import {useHasMounted} from "@/hooks";
 import {useAppDispatch, useAppSelector} from "@/lib/redux/hooks";
 import {addToCart, orderList} from "@/lib/redux/order/order.slice";
-import type {Product} from "@/lib/types";
+import type {ProductDto} from "@/lib/types";
 import {chonburi, cn} from "@/lib/utils";
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
@@ -12,7 +12,7 @@ import {useCallback, useEffect, useState, type ChangeEvent} from "react";
 import styles from "./header.module.scss";
 
 interface Props {
-  data: Omit<Product, "previewImageUrls">;
+  data: Omit<ProductDto, "previewImageUrls">;
 }
 
 export default function DetailText({data}: Props) {

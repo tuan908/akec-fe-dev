@@ -1,13 +1,13 @@
 "use client";
 
-import type {Order} from "@/lib/types";
+import type {OrderDto} from "@/lib/types";
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
 import IconButton from "@mui/material/IconButton";
 import {FC, useState} from "react";
 
 interface Props {
-  item: Order;
+  item: OrderDto;
 }
 
 const CartQuantity: FC<Props> = ({item}) => {

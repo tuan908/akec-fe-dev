@@ -1,4 +1,9 @@
 import {Thumbnail} from "@/components/Home";
+import {type Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "Bài đăng"
+};
 
 const Page = () => {
   return (

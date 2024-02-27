@@ -1,11 +1,11 @@
 "use client";
 
 import {Carousel} from "@/components/Home";
-import type {Product} from "@/lib/types";
+import type {ProductDto} from "@/lib/types";
 import ProductDetailText from "./ProductDetailText";
 
 interface Props {
-  data: Product;
+  data: ProductDto;
 }
 
 const urls = [

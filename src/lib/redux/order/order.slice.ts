@@ -1,14 +1,14 @@
 import {SliceName} from "@/constants";
-import {type Order} from "@/lib/types";
+import {type OrderDto} from "@/lib/types";
 import {type PayloadAction} from "@reduxjs/toolkit";
 import {createAppSlice} from "../base.slice";
 import {rootReducer} from "../reducer";
 
 const orderSlice = createAppSlice({
   name: SliceName.Order,
-  initialState: [] as Order[],
+  initialState: [] as OrderDto[],
   reducers: {
-    addToCart(state, action: PayloadAction<Order>) {
+    addToCart(state, action: PayloadAction<OrderDto>) {
       const itemExisted = state.find(item => item.id === action.payload.id);
       if (itemExisted) {
         itemExisted.quantity = action.payload.quantity;
@@ -18,7 +18,7 @@ const orderSlice = createAppSlice({
 
       return state;
     },
-    removeFromCart: (state, action: PayloadAction<Order>) => {
+    removeFromCart: (state, action: PayloadAction<OrderDto>) => {
       const itemExistedIndex = state.findIndex(
         item => item.id === action.payload.id
       );

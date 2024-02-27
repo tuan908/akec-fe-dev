@@ -1,5 +1,5 @@
 import {HttpMethod} from "@/constants";
-import {Post, SuccessResponseDto} from "@/lib/types";
+import {PostDto, SuccessResponseDto} from "@/lib/types";
 import {baseApi} from "../base.api";
 
 export type ImageDto = {
@@ -16,19 +16,17 @@ const postApi = baseApi.injectEndpoints({
         body
       })
     }),
-    getById: build.query<Post[], string>({
+    getById: build.query<PostDto[], string>({
       query: id => `/posts/${id}`
     }),
-    getAllPosts: build.query<Post[], void>({
+    getAllPosts: build.query<PostDto[], void>({
       query: () => `/posts`,
-      transformResponse: (response: {posts: Post[]}) => response.posts
+      transformResponse: (response: {posts: PostDto[]}) => response.posts
     }),
     getImageList: build.query<ImageDto[], void>({
       query: () => `/common/images/list`,
-      transformResponse(response: SuccessResponseDto<ImageDto>) {
-        console.log(response.data);
-        return response.data;
-      }
+      transformResponse: (response: SuccessResponseDto<ImageDto[]>) =>
+        response.data
     })
   })
 });

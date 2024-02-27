@@ -5,7 +5,7 @@ export type ToBoolean<T> = {
   [TKey in keyof T]: boolean;
 };
 
-export type Post = {
+export type PostDto = {
   id: number;
   text: string;
   imgUrl: string;
@@ -25,7 +25,7 @@ export type LoginPayload = {
 };
 
 export type SuccessResponseDto<T> = {
-  data: T[];
+  data: T;
   success: boolean;
   message: string | null;
   status: number;
@@ -50,9 +50,10 @@ const ProductSchema = z.object({
   id: z.number(),
   name: z.string(),
   price: z.number(),
-  preview_image_urls: z.string().array(),
-  created_time: z.date(),
-  updated_time: z.date()
+  images: z.string().array().optional(),
+  previewImage: z.string().optional(),
+  createdTime: z.date(),
+  updatedTime: z.date()
 });
 
 const OrderSchema = ProductSchema.pick({
@@ -62,8 +63,8 @@ const OrderSchema = ProductSchema.pick({
   userId: true
 }).merge(z.object({orderId: z.string(), quantity: z.number()}));
 
-export type Product = z.infer<typeof ProductSchema>;
-export type Order = z.infer<typeof OrderSchema>;
+export type ProductDto = z.infer<typeof ProductSchema>;
+export type OrderDto = z.infer<typeof OrderSchema>;
 
 export type Paged<T> = {
   content: T[];

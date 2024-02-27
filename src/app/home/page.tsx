@@ -1,10 +1,24 @@
-"use client";
-
 import {Carousel, Thumbnail} from "@/components/Home";
-import {useGetImageListQuery} from "@/lib/redux/post/post.api";
+import {ImageDto} from "@/lib/redux/post/post.api";
+import {SuccessResponseDto} from "@/lib/types";
+import clsx from "clsx";
+import {type Metadata} from "next";
 
-const Page = () => {
-  const {data} = useGetImageListQuery();
+export const metadata: Metadata = {
+  title: "Trang chủ"
+};
+
+async function getImageList() {
+  const res = await fetch(
+    clsx(process.env.NEXT_PUBLIC_BN_SPRING_API, "/common/images/list"),
+    {cache: "no-cache"}
+  );
+  const responseBody = (await res.json()) as SuccessResponseDto<ImageDto[]>;
+  return responseBody.data;
+}
+
+const Page = async () => {
+  const data = await getImageList();
 
   return (
     <>
