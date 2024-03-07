@@ -1,4 +1,4 @@
-import {Route} from "@/constants";
+import {Route} from "@/routes";
 import {signOut} from "@/lib/utils";
 import MenuIcon from "@mui/icons-material/Menu";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";

@@ -2,9 +2,7 @@
 
 import {useAdvancedScroll} from "@/hooks";
 import {useGetImageListQuery} from "@/lib/redux/post/post.api";
-import {cn} from "@/lib/utils";
 import Image from "next/image";
-import styles from "./post.module.scss";
 
 const Page = () => {
   const {data} = useGetImageListQuery();
@@ -25,10 +23,7 @@ const Page = () => {
             />
           ))}
         </div>
-        <div
-          className={cn(`overflow-y-auto`, styles.styledScrollbar)}
-          ref={sourceRef}
-        >
+        <div className="overflow-y-auto styledScrollbar" ref={sourceRef}>
           <h1 className="text-2xl">Big data, Personal Food</h1>
           <p className="my-4 w-9/10">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,

@@ -1,4 +1,4 @@
-import {Route} from "@/constants";
+import {Route} from "@/routes";
 import {cn} from "@/lib/utils";
 import {Yeseva_One} from "next/font/google";
 import Link from "next/link";

@@ -1,6 +1,6 @@
 "use client";
 
-import {Route} from "@/constants";
+import {Route} from "@/routes";
 import {useAppSelector} from "@/lib/redux/hooks";
 import {orderList} from "@/lib/redux/order/order.slice";
 import Link from "next/link";

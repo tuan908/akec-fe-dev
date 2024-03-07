@@ -1,5 +1,5 @@
-import {Route} from "@/constants";
 import {useHasMounted} from "@/hooks";
+import { Route } from "@/routes";
 import styled from "@emotion/styled";
 import Badge from "@mui/material/Badge";
 import Skeleton from "@mui/material/Skeleton";

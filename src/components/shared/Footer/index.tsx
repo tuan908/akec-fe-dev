@@ -1,5 +1,6 @@
-import {LOGO_ABSOLUTE_PATH, Route} from "@/constants";
+import {LOGO_ABSOLUTE_PATH} from "@/constants";
 import {cn} from "@/lib/utils";
+import {Route} from "@/routes";
 import Email from "@mui/icons-material/Email";
 import Facebook from "@mui/icons-material/Facebook";
 import Instagram from "@mui/icons-material/Instagram";

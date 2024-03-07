@@ -1,4 +1,5 @@
-import {ACCESS_TOKEN, REFRESH_TOKEN, Route, USER_INFO} from "@/constants";
+import {ACCESS_TOKEN, REFRESH_TOKEN, USER_INFO} from "@/constants";
+import {Route} from "@/routes";
 import Cookies from "js-cookie";
 
 export function signOut() {

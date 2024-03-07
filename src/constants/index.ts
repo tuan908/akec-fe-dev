@@ -6,18 +6,6 @@ export const REQUEST_PARAM_SORT = "sort";
 
 export const LOGO_ABSOLUTE_PATH = "/assets/image/logo.jpg";
 
-export enum Route {
-  Home = "/home",
-  Products = "/products/list",
-  Contact = "/contact",
-  Cart = "/cart",
-  Introduce = "/home",
-  Login = "/auth/login",
-  Post = "/post",
-  Account = "/account",
-  CustomerService = "/customer-service"
-}
-
 export const ACCESS_TOKEN = `access_token`;
 export const REFRESH_TOKEN = `refresh_token`;
 export const USER_INFO = `user_info`;
